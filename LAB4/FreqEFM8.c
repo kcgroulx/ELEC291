@@ -11,6 +11,8 @@
 
 #define SYSCLK      72000000L  // SYSCLK frequency in Hz
 #define BAUDRATE      115200L  // Baud rate of UART in bps
+#define res_A     1000		
+#define res_B     2000
 
 unsigned char overflow_count;
 
@@ -127,6 +129,10 @@ void TIMER0_Init(void)
 	TR0=0; // Stop Timer/Counter 0
 }
 
+inline float F2C(frequency)
+{
+	return 1/(log(2)*frequency*(res_A+2*res_B))
+}
 void main (void) 
 {
 	unsigned long F;
