@@ -7,6 +7,7 @@
   
 #include <EFM8LB1.h>
 #include <stdio.h>
+#include <math.h>
 
 #define SYSCLK      72000000L  // SYSCLK frequency in Hz
 #define BAUDRATE      115200L  // Baud rate of UART in bps

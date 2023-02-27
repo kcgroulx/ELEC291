@@ -34,11 +34,12 @@ char _c51_external_startup (void)
 	TMOD |=  0x20;                       
 	TR1 = 1; // START Timer1
 	TI = 1;  // Indicate TX0 ready
-	
 	return 0;
 }
 
 void main (void) 
 {
-	printf( "Hello, world!\r\n" );
+	while(1){
+		printf( "Hello, world!\r\n" );
+	}
 }
