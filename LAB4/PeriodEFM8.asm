@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by C51
 ; Version 1.0.0 #1170 (Feb 16 2022) (MSVC)
-; This file was generated Tue Feb 28 14:59:27 2023
+; This file was generated Wed Mar 01 13:06:01 2023
 ;--------------------------------------------------------
 $name PeriodEFM8
 $optc51 --model-small
@@ -503,7 +503,9 @@ _getsn_sloc0_1_0:
 	ds 2
 _writeOutputBuffer_PARM_2:
 	ds 4
-_main_output_buffer_1_57:
+_main_mode_1_59:
+	ds 2
+_main_output_buffer_1_59:
 	ds 20
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
@@ -1145,7 +1147,7 @@ _writeOutputBuffer:
 	mov	r4,b
 ;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:227: char suffix = 'n';
 	mov	r5,#0x6E
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:229: if(cap > 100.0)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:228: if(cap < 1.5)
 	push	ar2
 	push	ar3
 	push	ar4
@@ -1153,15 +1155,15 @@ _writeOutputBuffer:
 	clr	a
 	push	acc
 	push	acc
-	mov	a,#0xC8
+	mov	a,#0xC0
 	push	acc
-	mov	a,#0x42
+	mov	a,#0x3F
 	push	acc
 	mov	dpl,_writeOutputBuffer_PARM_2
 	mov	dph,(_writeOutputBuffer_PARM_2 + 1)
 	mov	b,(_writeOutputBuffer_PARM_2 + 2)
 	mov	a,(_writeOutputBuffer_PARM_2 + 3)
-	lcall	___fsgt
+	lcall	___fslt
 	mov	r6,dpl
 	mov	a,sp
 	add	a,#0xfc
@@ -1172,38 +1174,24 @@ _writeOutputBuffer:
 	pop	ar2
 	mov	a,r6
 	jz	L014002?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:231: suffix = 'u';
-	mov	r5,#0x75
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:232: cap = cap/1000.0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:230: sprintf(buffer, "Insert Capacitor");
+	mov	a,#__str_0
+	push	acc
+	mov	a,#(__str_0 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
 	push	ar2
 	push	ar3
 	push	ar4
-	push	ar5
-	clr	a
-	push	acc
-	push	acc
-	mov	a,#0x7A
-	push	acc
-	mov	a,#0x44
-	push	acc
-	mov	dpl,_writeOutputBuffer_PARM_2
-	mov	dph,(_writeOutputBuffer_PARM_2 + 1)
-	mov	b,(_writeOutputBuffer_PARM_2 + 2)
-	mov	a,(_writeOutputBuffer_PARM_2 + 3)
-	lcall	___fsdiv
-	mov	_writeOutputBuffer_PARM_2,dpl
-	mov	(_writeOutputBuffer_PARM_2 + 1),dph
-	mov	(_writeOutputBuffer_PARM_2 + 2),b
-	mov	(_writeOutputBuffer_PARM_2 + 3),a
+	lcall	_sprintf
 	mov	a,sp
-	add	a,#0xfc
+	add	a,#0xfa
 	mov	sp,a
-	pop	ar5
-	pop	ar4
-	pop	ar3
-	pop	ar2
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:231: return;
+	ret
 L014002?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:234: if(cap > 100.0)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:233: if(cap > 100.0)
 	push	ar2
 	push	ar3
 	push	ar4
@@ -1230,9 +1218,9 @@ L014002?:
 	pop	ar2
 	mov	a,r6
 	jz	L014004?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:236: suffix = 'm';
-	mov	r5,#0x6D
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:237: cap = cap/1000.0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:235: suffix = 'u';
+	mov	r5,#0x75
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:236: cap = cap/1000.0;
 	push	ar2
 	push	ar3
 	push	ar4
@@ -1261,7 +1249,123 @@ L014002?:
 	pop	ar3
 	pop	ar2
 L014004?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:239: sprintf(buffer, "C = %.4f%cF", cap, suffix);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:238: if(cap > 100.0)
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	clr	a
+	push	acc
+	push	acc
+	mov	a,#0xC8
+	push	acc
+	mov	a,#0x42
+	push	acc
+	mov	dpl,_writeOutputBuffer_PARM_2
+	mov	dph,(_writeOutputBuffer_PARM_2 + 1)
+	mov	b,(_writeOutputBuffer_PARM_2 + 2)
+	mov	a,(_writeOutputBuffer_PARM_2 + 3)
+	lcall	___fsgt
+	mov	r6,dpl
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+	mov	a,r6
+	jz	L014006?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:240: suffix = 'm';
+	mov	r5,#0x6D
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:241: cap = cap/1000.0;
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	clr	a
+	push	acc
+	push	acc
+	mov	a,#0x7A
+	push	acc
+	mov	a,#0x44
+	push	acc
+	mov	dpl,_writeOutputBuffer_PARM_2
+	mov	dph,(_writeOutputBuffer_PARM_2 + 1)
+	mov	b,(_writeOutputBuffer_PARM_2 + 2)
+	mov	a,(_writeOutputBuffer_PARM_2 + 3)
+	lcall	___fsdiv
+	mov	_writeOutputBuffer_PARM_2,dpl
+	mov	(_writeOutputBuffer_PARM_2 + 1),dph
+	mov	(_writeOutputBuffer_PARM_2 + 2),b
+	mov	(_writeOutputBuffer_PARM_2 + 3),a
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+L014006?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:243: if(cap > 100.0)
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	clr	a
+	push	acc
+	push	acc
+	mov	a,#0xC8
+	push	acc
+	mov	a,#0x42
+	push	acc
+	mov	dpl,_writeOutputBuffer_PARM_2
+	mov	dph,(_writeOutputBuffer_PARM_2 + 1)
+	mov	b,(_writeOutputBuffer_PARM_2 + 2)
+	mov	a,(_writeOutputBuffer_PARM_2 + 3)
+	lcall	___fsgt
+	mov	r6,dpl
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+	mov	a,r6
+	jz	L014008?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:245: suffix = ' ';
+	mov	r5,#0x20
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:246: cap = cap/1000.0;
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	clr	a
+	push	acc
+	push	acc
+	mov	a,#0x7A
+	push	acc
+	mov	a,#0x44
+	push	acc
+	mov	dpl,_writeOutputBuffer_PARM_2
+	mov	dph,(_writeOutputBuffer_PARM_2 + 1)
+	mov	b,(_writeOutputBuffer_PARM_2 + 2)
+	mov	a,(_writeOutputBuffer_PARM_2 + 3)
+	lcall	___fsdiv
+	mov	_writeOutputBuffer_PARM_2,dpl
+	mov	(_writeOutputBuffer_PARM_2 + 1),dph
+	mov	(_writeOutputBuffer_PARM_2 + 2),b
+	mov	(_writeOutputBuffer_PARM_2 + 3),a
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+L014008?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:248: sprintf(buffer, "C = %.4f%cF", cap, suffix);
 	mov	a,r5
 	rlc	a
 	subb	a,acc
@@ -1272,9 +1376,9 @@ L014004?:
 	push	(_writeOutputBuffer_PARM_2 + 1)
 	push	(_writeOutputBuffer_PARM_2 + 2)
 	push	(_writeOutputBuffer_PARM_2 + 3)
-	mov	a,#__str_0
+	mov	a,#__str_1
 	push	acc
-	mov	a,#(__str_0 >> 8)
+	mov	a,#(__str_1 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1290,24 +1394,29 @@ L014004?:
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
 ;period                    Allocated to registers r2 r3 r4 r5 
-;output_buffer             Allocated with name '_main_output_buffer_1_57'
+;mode                      Allocated with name '_main_mode_1_59'
+;output_buffer             Allocated with name '_main_output_buffer_1_59'
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:242: void main (void) 
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:251: void main (void) 
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:249: TIMER0_Init();
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:255: int mode = 0;
+	clr	a
+	mov	_main_mode_1_59,a
+	mov	(_main_mode_1_59 + 1),a
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:258: TIMER0_Init();
 	lcall	_TIMER0_Init
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:251: LCD_4BIT();
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:260: LCD_4BIT();
 	lcall	_LCD_4BIT
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:253: waitms(500); // Give PuTTY a chance to start.
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:262: waitms(500); // Give PuTTY a chance to start.
 	mov	dptr,#0x01F4
 	lcall	_waitms
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:254: printf("\x1b[2J"); // Clear screen using ANSI escape sequence.
-	mov	a,#__str_1
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:263: printf("\x1b[2J"); // Clear screen using ANSI escape sequence.
+	mov	a,#__str_2
 	push	acc
-	mov	a,#(__str_1 >> 8)
+	mov	a,#(__str_2 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1315,8 +1424,14 @@ _main:
 	dec	sp
 	dec	sp
 	dec	sp
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:259: __FILE__, __DATE__, __TIME__);
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:258: "Compiled: %s, %s\n\n",
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:268: __FILE__, __DATE__, __TIME__);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:267: "Compiled: %s, %s\n\n",
+	mov	a,#__str_6
+	push	acc
+	mov	a,#(__str_6 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
 	mov	a,#__str_5
 	push	acc
 	mov	a,#(__str_5 >> 8)
@@ -1335,118 +1450,112 @@ _main:
 	push	acc
 	mov	a,#0x80
 	push	acc
-	mov	a,#__str_2
-	push	acc
-	mov	a,#(__str_2 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
 	lcall	_printf
 	mov	a,sp
 	add	a,#0xf4
 	mov	sp,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:261: while (1)
-L015018?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:264: TL0=0; 
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:270: while (1)
+L015034?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:273: TL0=0; 
 	mov	_TL0,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:265: TH0=0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:274: TH0=0;
 	mov	_TH0,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:266: TF0=0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:275: TF0=0;
 	clr	_TF0
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:267: overflow_count=0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:276: overflow_count=0;
 	mov	_overflow_count,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:269: while(P0_1!=0); // Wait for the signal to be zero
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:278: while(P0_1!=0); // Wait for the signal to be zero
 L015001?:
 	jb	_P0_1,L015001?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:270: while(P0_1!=1); // Wait for the signal to be one
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:279: while(P0_1!=1); // Wait for the signal to be one
 L015004?:
 	jnb	_P0_1,L015004?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:271: TR0=1; // Start the timer
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:280: TR0=1; // Start the timer
 	setb	_TR0
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:272: while(P0_1!=0) // Wait for the signal to be zero
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:281: while(P0_1!=0) // Wait for the signal to be zero
 L015009?:
 	jnb	_P0_1,L015014?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:274: if(TF0==1) // Did the 16-bit timer overflow?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:276: TF0=0;
-	jbc	_TF0,L015035?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:283: if(TF0==1) // Did the 16-bit timer overflow?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:285: TF0=0;
+	jbc	_TF0,L015058?
 	sjmp	L015009?
-L015035?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:277: overflow_count++;
+L015058?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:286: overflow_count++;
 	inc	_overflow_count
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:280: while(P0_1!=1) // Wait for the signal to be one
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:289: while(P0_1!=1) // Wait for the signal to be one
 	sjmp	L015009?
 L015014?:
 	jb	_P0_1,L015016?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:282: if(TF0==1) // Did the 16-bit timer overflow?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:284: TF0=0;
-	jbc	_TF0,L015037?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:291: if(TF0==1) // Did the 16-bit timer overflow?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:293: TF0=0;
+	jbc	_TF0,L015060?
 	sjmp	L015014?
-L015037?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:285: overflow_count++;
+L015060?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:294: overflow_count++;
 	inc	_overflow_count
 	sjmp	L015014?
 L015016?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:288: TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period!
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:297: TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period!
 	clr	_TR0
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:289: period=(overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:298: period=(overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK);
 	mov	dpl,_overflow_count
 	lcall	___uchar2fs
-	mov	r2,dpl
-	mov	r3,dph
-	mov	r4,b
-	mov	r5,a
-	push	ar2
-	push	ar3
+	mov	r4,dpl
+	mov	r5,dph
+	mov	r6,b
+	mov	r7,a
 	push	ar4
 	push	ar5
+	push	ar6
+	push	ar7
 	mov	dptr,#0x0000
 	mov	b,#0x80
 	mov	a,#0x47
 	lcall	___fsmul
-	mov	r2,dpl
-	mov	r3,dph
-	mov	r4,b
-	mov	r5,a
+	mov	r4,dpl
+	mov	r5,dph
+	mov	r6,b
+	mov	r7,a
 	mov	a,sp
 	add	a,#0xfc
 	mov	sp,a
 	mov	dpl,_TH0
-	push	ar2
-	push	ar3
 	push	ar4
 	push	ar5
-	lcall	___uchar2fs
-	mov	r6,dpl
-	mov	r7,dph
-	mov	r0,b
-	mov	r1,a
 	push	ar6
 	push	ar7
+	lcall	___uchar2fs
+	mov	r0,dpl
+	mov	r1,dph
+	mov	r2,b
+	mov	r3,a
 	push	ar0
 	push	ar1
+	push	ar2
+	push	ar3
 	mov	dptr,#0x0000
 	mov	b,#0x80
 	mov	a,#0x43
 	lcall	___fsmul
-	mov	r6,dpl
-	mov	r7,dph
+	mov	r2,dpl
+	mov	r3,dph
 	mov	r0,b
 	mov	r1,a
 	mov	a,sp
 	add	a,#0xfc
 	mov	sp,a
+	pop	ar7
+	pop	ar6
 	pop	ar5
 	pop	ar4
-	pop	ar3
-	pop	ar2
-	push	ar6
-	push	ar7
+	push	ar2
+	push	ar3
 	push	ar0
 	push	ar1
-	mov	dpl,r2
-	mov	dph,r3
-	mov	b,r4
-	mov	a,r5
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	mov	a,r7
 	lcall	___fsadd
 	mov	r2,dpl
 	mov	r3,dph
@@ -1503,39 +1612,203 @@ L015016?:
 	mov	a,sp
 	add	a,#0xfc
 	mov	sp,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:292: writeOutputBuffer(output_buffer, PtoC(period));
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:301: if(P1_1 == 0)
+	jb	_P1_1,L015023?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:303: printf("button2 pressed\n");
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	mov	a,#__str_7
+	push	acc
+	mov	a,#(__str_7 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:304: mode++;
+	inc	_main_mode_1_59
+	clr	a
+	cjne	a,_main_mode_1_59,L015062?
+	inc	(_main_mode_1_59 + 1)
+L015062?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:305: if(mode > 1)
+	clr	c
+	mov	a,#0x01
+	subb	a,_main_mode_1_59
+	clr	a
+	xrl	a,#0x80
+	mov	b,(_main_mode_1_59 + 1)
+	xrl	b,#0x80
+	subb	a,b
+	jnc	L015019?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:306: mode = 0;
+	clr	a
+	mov	_main_mode_1_59,a
+	mov	(_main_mode_1_59 + 1),a
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:307: while(P1_1 == 0)
+L015019?:
+	jnb	_P1_1,L015019?
+L015023?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:312: if(P1_3 == 0)
+	jb	_P1_3,L015028?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:314: writeOutputBuffer(output_buffer, PtoC(period));
 	mov	dpl,r2
 	mov	dph,r3
 	mov	b,r4
 	mov	a,r5
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
 	lcall	_PtoC
 	mov	_writeOutputBuffer_PARM_2,dpl
 	mov	(_writeOutputBuffer_PARM_2 + 1),dph
 	mov	(_writeOutputBuffer_PARM_2 + 2),b
 	mov	(_writeOutputBuffer_PARM_2 + 3),a
-	mov	dptr,#_main_output_buffer_1_57
+	mov	dptr,#_main_output_buffer_1_59
 	mov	b,#0x40
 	lcall	_writeOutputBuffer
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:295: LCDprint(output_buffer, 1, 1);
-	mov	_LCDprint_PARM_2,#0x01
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:315: LCDprint(output_buffer, 2, 1);
+	mov	_LCDprint_PARM_2,#0x02
 	setb	_LCDprint_PARM_3
-	mov	dptr,#_main_output_buffer_1_57
+	mov	dptr,#_main_output_buffer_1_59
 	mov	b,#0x40
 	lcall	_LCDprint
-	ljmp	L015018?
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:316: while(P1_3 == 0)
+L015024?:
+	jnb	_P1_3,L015024?
+L015028?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:321: if(mode == 0)
+	mov	a,_main_mode_1_59
+	orl	a,(_main_mode_1_59 + 1)
+	jnz	L015030?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:323: writeOutputBuffer(output_buffer, PtoC(period));
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	mov	a,r5
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	lcall	_PtoC
+	mov	_writeOutputBuffer_PARM_2,dpl
+	mov	(_writeOutputBuffer_PARM_2 + 1),dph
+	mov	(_writeOutputBuffer_PARM_2 + 2),b
+	mov	(_writeOutputBuffer_PARM_2 + 3),a
+	mov	dptr,#_main_output_buffer_1_59
+	mov	b,#0x40
+	lcall	_writeOutputBuffer
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:324: printf("\r%s", output_buffer);
+	mov	a,#_main_output_buffer_1_59
+	push	acc
+	mov	a,#(_main_output_buffer_1_59 >> 8)
+	push	acc
+	mov	a,#0x40
+	push	acc
+	mov	a,#__str_8
+	push	acc
+	mov	a,#(__str_8 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfa
+	mov	sp,a
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:325: LCDprint(output_buffer, 1, 1);	
+	mov	_LCDprint_PARM_2,#0x01
+	setb	_LCDprint_PARM_3
+	mov	dptr,#_main_output_buffer_1_59
+	mov	b,#0x40
+	lcall	_LCDprint
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+L015030?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:327: if(mode == 1)
+	mov	a,#0x01
+	cjne	a,_main_mode_1_59,L015068?
+	clr	a
+	cjne	a,(_main_mode_1_59 + 1),L015068?
+	sjmp	L015069?
+L015068?:
+	ljmp	L015034?
+L015069?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:329: sprintf(output_buffer, "T=%lfs", period);
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	mov	a,#__str_9
+	push	acc
+	mov	a,#(__str_9 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	mov	a,#_main_output_buffer_1_59
+	push	acc
+	mov	a,#(_main_output_buffer_1_59 >> 8)
+	push	acc
+	mov	a,#0x40
+	push	acc
+	lcall	_sprintf
+	mov	a,sp
+	add	a,#0xf6
+	mov	sp,a
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:330: printf("\r%s", output_buffer);
+	mov	a,#_main_output_buffer_1_59
+	push	acc
+	mov	a,#(_main_output_buffer_1_59 >> 8)
+	push	acc
+	mov	a,#0x40
+	push	acc
+	mov	a,#__str_8
+	push	acc
+	mov	a,#(__str_8 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfa
+	mov	sp,a
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:331: LCDprint(output_buffer, 1, 1);	
+	mov	_LCDprint_PARM_2,#0x01
+	setb	_LCDprint_PARM_3
+	mov	dptr,#_main_output_buffer_1_59
+	mov	b,#0x40
+	lcall	_LCDprint
+	ljmp	L015034?
 	rseg R_CSEG
 
 	rseg R_XINIT
 
 	rseg R_CONST
 __str_0:
-	db 'C = %.4f%cF'
+	db 'Insert Capacitor'
 	db 0x00
 __str_1:
+	db 'C = %.4f%cF'
+	db 0x00
+__str_2:
 	db 0x1B
 	db '[2J'
 	db 0x00
-__str_2:
+__str_3:
 	db 'EFM8 Period measurement at pin P0.1 using Timer 0.'
 	db 0x0A
 	db 'File: %s'
@@ -1544,7 +1817,7 @@ __str_2:
 	db 0x0A
 	db 0x0A
 	db 0x00
-__str_3:
+__str_4:
 	db 'C:'
 	db 0x5C
 	db 'Users'
@@ -1561,11 +1834,22 @@ __str_3:
 	db 0x5C
 	db 'PeriodEFM8.c'
 	db 0x00
-__str_4:
-	db 'Feb 28 2023'
-	db 0x00
 __str_5:
-	db '14:59:27'
+	db 'Mar  1 2023'
+	db 0x00
+__str_6:
+	db '13:06:00'
+	db 0x00
+__str_7:
+	db 'button2 pressed'
+	db 0x0A
+	db 0x00
+__str_8:
+	db 0x0D
+	db '%s'
+	db 0x00
+__str_9:
+	db 'T=%lfs'
 	db 0x00
 
 	CSEG

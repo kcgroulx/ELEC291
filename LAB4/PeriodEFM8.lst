@@ -1,7 +1,7 @@
 0000              1   ;--------------------------------------------------------
 0000              2   ; File Created by C51
 0000              3   ; Version 1.0.0 #1170 (Feb 16 2022) (MSVC)
-0000              4   ; This file was generated Tue Feb 28 14:59:27 2023
+0000              4   ; This file was generated Wed Mar 01 13:06:01 2023
 0000              5   ;--------------------------------------------------------
                   5   $name PeriodEFM8
                   6   $optc51 --model-small
@@ -503,1042 +503,1318 @@
 0007            503            ds 2
 0009            504   _writeOutputBuffer_PARM_2:
 0009            505            ds 4
-000D            506   _main_output_buffer_1_57:
-000D            507            ds 20
-0021            508   ;--------------------------------------------------------
-0021            509   ; overlayable items in internal ram 
-0021            510   ;--------------------------------------------------------
-0000            511            rseg    R_OSEG
-0000            512   ;--------------------------------------------------------
-0000            513   ; indirectly addressable internal ram data
+000D            506   _main_mode_1_59:
+000D            507            ds 2
+000F            508   _main_output_buffer_1_59:
+000F            509            ds 20
+0023            510   ;--------------------------------------------------------
+0023            511   ; overlayable items in internal ram 
+0023            512   ;--------------------------------------------------------
+0000            513            rseg    R_OSEG
 0000            514   ;--------------------------------------------------------
-0000            515            rseg R_ISEG
+0000            515   ; indirectly addressable internal ram data
 0000            516   ;--------------------------------------------------------
-0000            517   ; absolute internal ram data
+0000            517            rseg R_ISEG
 0000            518   ;--------------------------------------------------------
-0000            519            DSEG
+0000            519   ; absolute internal ram data
 0000            520   ;--------------------------------------------------------
-0000            521   ; bit data
+0000            521            DSEG
 0000            522   ;--------------------------------------------------------
-0000            523            rseg R_BSEG
-0000            524   _LCDprint_PARM_3:
-0000            525            DBIT    1
-0001            526   ;--------------------------------------------------------
-0001            527   ; paged external ram data
+0000            523   ; bit data
+0000            524   ;--------------------------------------------------------
+0000            525            rseg R_BSEG
+0000            526   _LCDprint_PARM_3:
+0000            527            DBIT    1
 0001            528   ;--------------------------------------------------------
-0000            529            rseg R_PSEG
-0000            530   ;--------------------------------------------------------
-0000            531   ; external ram data
+0001            529   ; paged external ram data
+0001            530   ;--------------------------------------------------------
+0000            531            rseg R_PSEG
 0000            532   ;--------------------------------------------------------
-0000            533            rseg R_XSEG
+0000            533   ; external ram data
 0000            534   ;--------------------------------------------------------
-0000            535   ; absolute external ram data
+0000            535            rseg R_XSEG
 0000            536   ;--------------------------------------------------------
-0000            537            XSEG
+0000            537   ; absolute external ram data
 0000            538   ;--------------------------------------------------------
-0000            539   ; external initialized ram data
+0000            539            XSEG
 0000            540   ;--------------------------------------------------------
-0000            541            rseg R_IXSEG
-0000            542            rseg R_HOME
-0000            543            rseg R_GSINIT
-0000            544            rseg R_CSEG
-0000            545   ;--------------------------------------------------------
-0000            546   ; Reset entry point and interrupt vectors
+0000            541   ; external initialized ram data
+0000            542   ;--------------------------------------------------------
+0000            543            rseg R_IXSEG
+0000            544            rseg R_HOME
+0000            545            rseg R_GSINIT
+0000            546            rseg R_CSEG
 0000            547   ;--------------------------------------------------------
-0000            548            CSEG at 0x0000
-0000 020000     549            ljmp    _crt0
-0003            550   ;--------------------------------------------------------
-0003            551   ; global & static initialisations
+0000            548   ; Reset entry point and interrupt vectors
+0000            549   ;--------------------------------------------------------
+0000            550            CSEG at 0x0000
+0000 020000     551            ljmp    _crt0
 0003            552   ;--------------------------------------------------------
-0000            553            rseg R_HOME
-0000            554            rseg R_GSINIT
-0000            555            rseg R_GSINIT
-0000            556   ;--------------------------------------------------------
-0000            557   ; data variables initialization
+0003            553   ; global & static initialisations
+0003            554   ;--------------------------------------------------------
+0000            555            rseg R_HOME
+0000            556            rseg R_GSINIT
+0000            557            rseg R_GSINIT
 0000            558   ;--------------------------------------------------------
-0000            559            rseg R_DINIT
-0000            560            ; The linker places a 'ret' at the end of segment R_DINIT.
-0000            561   ;--------------------------------------------------------
-0000            562   ; code
+0000            559   ; data variables initialization
+0000            560   ;--------------------------------------------------------
+0000            561            rseg R_DINIT
+0000            562            ; The linker places a 'ret' at the end of segment R_DINIT.
 0000            563   ;--------------------------------------------------------
-0000            564            rseg R_CSEG
-0000            565   ;------------------------------------------------------------
-0000            566   ;Allocation info for local variables in function '_c51_external_startup'
+0000            564   ; code
+0000            565   ;--------------------------------------------------------
+0000            566            rseg R_CSEG
 0000            567   ;------------------------------------------------------------
-0000            568   ;------------------------------------------------------------
-0000            569   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:25: char _c51_external_startup (void)
-0000            570   ;        -----------------------------------------
-0000            571   ;         function _c51_external_startup
+0000            568   ;Allocation info for local variables in function '_c51_external_startup'
+0000            569   ;------------------------------------------------------------
+0000            570   ;------------------------------------------------------------
+0000            571   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:25: char _c51_external_startup (void)
 0000            572   ;        -----------------------------------------
-0000            573   __c51_external_startup:
-0000            574            using   0
-0000            575   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:28: SFRPAGE = 0x00;
-0000 75A700     576            mov     _SFRPAGE,#0x00
-0003            577   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:29: WDTCN = 0xDE; //First key
-0003 7597DE     578            mov     _WDTCN,#0xDE
-0006            579   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:30: WDTCN = 0xAD; //Second key
-0006 7597AD     580            mov     _WDTCN,#0xAD
-0009            581   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:32: VDM0CN |= 0x80;
-0009 43FF80     582            orl     _VDM0CN,#0x80
-000C            583   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:33: RSTSRC = 0x02;
-000C 75EF02     584            mov     _RSTSRC,#0x02
-000F            585   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:40: SFRPAGE = 0x10;
-000F 75A710     586            mov     _SFRPAGE,#0x10
-0012            587   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:41: PFE0CN  = 0x20; // SYSCLK < 75 MHz.
-0012 75C120     588            mov     _PFE0CN,#0x20
-0015            589   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:42: SFRPAGE = 0x00;
-0015 75A700     590            mov     _SFRPAGE,#0x00
-0018            591   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:63: CLKSEL = 0x00;
-0018 75A900     592            mov     _CLKSEL,#0x00
-001B            593   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:64: CLKSEL = 0x00;
-001B 75A900     594            mov     _CLKSEL,#0x00
-001E            595   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:65: while ((CLKSEL & 0x80) == 0);
-001E            596   L002001?:
-001E E5A9       597            mov     a,_CLKSEL
-0020 30E730     598            jnb     acc.7,L002001?
-0023            599   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:66: CLKSEL = 0x03;
-0023 75A903     600            mov     _CLKSEL,#0x03
-0026            601   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:67: CLKSEL = 0x03;
-0026 75A903     602            mov     _CLKSEL,#0x03
-0029            603   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:68: while ((CLKSEL & 0x80) == 0);
-0029            604   L002004?:
-0029 E5A9       605            mov     a,_CLKSEL
-002B 30E7B0     606            jnb     acc.7,L002004?
-002E            607   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:73: P0MDOUT |= 0x10; // Enable UART0 TX as push-pull output
-002E 43A410     608            orl     _P0MDOUT,#0x10
-0031            609   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:74: XBR0     = 0x01; // Enable UART0 on P0.4(TX) and P0.5(RX)                     
-0031 75E101     610            mov     _XBR0,#0x01
-0034            611   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:75: XBR1     = 0X00;
-0034 75E200     612            mov     _XBR1,#0x00
-0037            613   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:76: XBR2     = 0x40; // Enable crossbar and weak pull-ups
-0037 75E340     614            mov     _XBR2,#0x40
-003A            615   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:82: SCON0 = 0x10;
-003A 759810     616            mov     _SCON0,#0x10
-003D            617   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:83: CKCON0 |= 0b_0000_0000 ; // Timer 1 uses the system clock divided by 12.
-003D 858E8E     618            mov     _CKCON0,_CKCON0
-0040            619   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:84: TH1 = 0x100-((SYSCLK/BAUDRATE)/(2L*12L));
-0040 758DE6     620            mov     _TH1,#0xE6
-0043            621   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:85: TL1 = TH1;      // Init Timer1
-0043 858D8B     622            mov     _TL1,_TH1
-0046            623   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:86: TMOD &= ~0xf0;  // TMOD: timer 1 in 8-bit auto-reload
-0046 53890F     624            anl     _TMOD,#0x0F
-0049            625   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:87: TMOD |=  0x20;                       
-0049 438920     626            orl     _TMOD,#0x20
-004C            627   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:88: TR1 = 1; // START Timer1
-004C D28E       628            setb    _TR1
-004E            629   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:89: TI = 1;  // Indicate TX0 ready
-004E D299       630            setb    _TI
-0050            631   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:91: return 0;
-0050 758200     632            mov     dpl,#0x00
-0053 22         633            ret
-0054            634   ;------------------------------------------------------------
-0054            635   ;Allocation info for local variables in function 'Timer3us'
+0000            573   ;         function _c51_external_startup
+0000            574   ;        -----------------------------------------
+0000            575   __c51_external_startup:
+0000            576            using   0
+0000            577   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:28: SFRPAGE = 0x00;
+0000 75A700     578            mov     _SFRPAGE,#0x00
+0003            579   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:29: WDTCN = 0xDE; //First key
+0003 7597DE     580            mov     _WDTCN,#0xDE
+0006            581   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:30: WDTCN = 0xAD; //Second key
+0006 7597AD     582            mov     _WDTCN,#0xAD
+0009            583   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:32: VDM0CN |= 0x80;
+0009 43FF80     584            orl     _VDM0CN,#0x80
+000C            585   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:33: RSTSRC = 0x02;
+000C 75EF02     586            mov     _RSTSRC,#0x02
+000F            587   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:40: SFRPAGE = 0x10;
+000F 75A710     588            mov     _SFRPAGE,#0x10
+0012            589   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:41: PFE0CN  = 0x20; // SYSCLK < 75 MHz.
+0012 75C120     590            mov     _PFE0CN,#0x20
+0015            591   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:42: SFRPAGE = 0x00;
+0015 75A700     592            mov     _SFRPAGE,#0x00
+0018            593   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:63: CLKSEL = 0x00;
+0018 75A900     594            mov     _CLKSEL,#0x00
+001B            595   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:64: CLKSEL = 0x00;
+001B 75A900     596            mov     _CLKSEL,#0x00
+001E            597   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:65: while ((CLKSEL & 0x80) == 0);
+001E            598   L002001?:
+001E E5A9       599            mov     a,_CLKSEL
+0020 30E770     600            jnb     acc.7,L002001?
+0023            601   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:66: CLKSEL = 0x03;
+0023 75A903     602            mov     _CLKSEL,#0x03
+0026            603   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:67: CLKSEL = 0x03;
+0026 75A903     604            mov     _CLKSEL,#0x03
+0029            605   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:68: while ((CLKSEL & 0x80) == 0);
+0029            606   L002004?:
+0029 E5A9       607            mov     a,_CLKSEL
+002B 30E7F0     608            jnb     acc.7,L002004?
+002E            609   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:73: P0MDOUT |= 0x10; // Enable UART0 TX as push-pull output
+002E 43A410     610            orl     _P0MDOUT,#0x10
+0031            611   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:74: XBR0     = 0x01; // Enable UART0 on P0.4(TX) and P0.5(RX)                     
+0031 75E101     612            mov     _XBR0,#0x01
+0034            613   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:75: XBR1     = 0X00;
+0034 75E200     614            mov     _XBR1,#0x00
+0037            615   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:76: XBR2     = 0x40; // Enable crossbar and weak pull-ups
+0037 75E340     616            mov     _XBR2,#0x40
+003A            617   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:82: SCON0 = 0x10;
+003A 759810     618            mov     _SCON0,#0x10
+003D            619   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:83: CKCON0 |= 0b_0000_0000 ; // Timer 1 uses the system clock divided by 12.
+003D 858E8E     620            mov     _CKCON0,_CKCON0
+0040            621   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:84: TH1 = 0x100-((SYSCLK/BAUDRATE)/(2L*12L));
+0040 758DE6     622            mov     _TH1,#0xE6
+0043            623   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:85: TL1 = TH1;      // Init Timer1
+0043 858D8B     624            mov     _TL1,_TH1
+0046            625   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:86: TMOD &= ~0xf0;  // TMOD: timer 1 in 8-bit auto-reload
+0046 53890F     626            anl     _TMOD,#0x0F
+0049            627   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:87: TMOD |=  0x20;                       
+0049 438920     628            orl     _TMOD,#0x20
+004C            629   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:88: TR1 = 1; // START Timer1
+004C D28E       630            setb    _TR1
+004E            631   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:89: TI = 1;  // Indicate TX0 ready
+004E D299       632            setb    _TI
+0050            633   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:91: return 0;
+0050 758200     634            mov     dpl,#0x00
+0053 22         635            ret
 0054            636   ;------------------------------------------------------------
-0054            637   ;us                        Allocated to registers r2 
-0054            638   ;i                         Allocated to registers r3 
-0054            639   ;------------------------------------------------------------
-0054            640   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:95: void Timer3us(unsigned char us)
-0054            641   ;        -----------------------------------------
-0054            642   ;         function Timer3us
+0054            637   ;Allocation info for local variables in function 'Timer3us'
+0054            638   ;------------------------------------------------------------
+0054            639   ;us                        Allocated to registers r2 
+0054            640   ;i                         Allocated to registers r3 
+0054            641   ;------------------------------------------------------------
+0054            642   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:95: void Timer3us(unsigned char us)
 0054            643   ;        -----------------------------------------
-0054            644   _Timer3us:
-0054 AA82       645            mov     r2,dpl
-0056            646   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:100: CKCON0|=0b_0100_0000;
-0056 438E40     647            orl     _CKCON0,#0x40
-0059            648   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:102: TMR3RL = (-(SYSCLK)/1000000L); // Set Timer3 to overflow in 1us.
-0059 7592B8     649            mov     _TMR3RL,#0xB8
-005C 7593FF     650            mov     (_TMR3RL >> 8),#0xFF
-005F            651   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:103: TMR3 = TMR3RL;                 // Initialize Timer3 for first overflow
-005F 859294     652            mov     _TMR3,_TMR3RL
-0062 859395     653            mov     (_TMR3 >> 8),(_TMR3RL >> 8)
-0065            654   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:105: TMR3CN0 = 0x04;                 // Sart Timer3 and clear overflow flag
-0065 759104     655            mov     _TMR3CN0,#0x04
-0068            656   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:106: for (i = 0; i < us; i++)       // Count <us> overflows
-0068 7B00       657            mov     r3,#0x00
-006A            658   L003004?:
-006A C3         659            clr     c
-006B EB         660            mov     a,r3
-006C 9A         661            subb    a,r2
-006D 5000       662            jnc     L003007?
-006F            663   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:108: while (!(TMR3CN0 & 0x80));  // Wait for overflow
-006F            664   L003001?:
-006F E591       665            mov     a,_TMR3CN0
-0071 30E7B0     666            jnb     acc.7,L003001?
-0074            667   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:109: TMR3CN0 &= ~(0x80);         // Clear overflow indicator
-0074 53917F     668            anl     _TMR3CN0,#0x7F
-0077            669   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:106: for (i = 0; i < us; i++)       // Count <us> overflows
-0077 0B         670            inc     r3
-0078 8000       671            sjmp    L003004?
-007A            672   L003007?:
-007A            673   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:111: TMR3CN0 = 0 ;                   // Stop Timer3 and clear overflow flag
-007A 759100     674            mov     _TMR3CN0,#0x00
-007D 22         675            ret
-007E            676   ;------------------------------------------------------------
-007E            677   ;Allocation info for local variables in function 'waitms'
+0054            644   ;         function Timer3us
+0054            645   ;        -----------------------------------------
+0054            646   _Timer3us:
+0054 AA82       647            mov     r2,dpl
+0056            648   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:100: CKCON0|=0b_0100_0000;
+0056 438E40     649            orl     _CKCON0,#0x40
+0059            650   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:102: TMR3RL = (-(SYSCLK)/1000000L); // Set Timer3 to overflow in 1us.
+0059 7592B8     651            mov     _TMR3RL,#0xB8
+005C 7593FF     652            mov     (_TMR3RL >> 8),#0xFF
+005F            653   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:103: TMR3 = TMR3RL;                 // Initialize Timer3 for first overflow
+005F 859294     654            mov     _TMR3,_TMR3RL
+0062 859395     655            mov     (_TMR3 >> 8),(_TMR3RL >> 8)
+0065            656   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:105: TMR3CN0 = 0x04;                 // Sart Timer3 and clear overflow flag
+0065 759104     657            mov     _TMR3CN0,#0x04
+0068            658   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:106: for (i = 0; i < us; i++)       // Count <us> overflows
+0068 7B00       659            mov     r3,#0x00
+006A            660   L003004?:
+006A C3         661            clr     c
+006B EB         662            mov     a,r3
+006C 9A         663            subb    a,r2
+006D 5000       664            jnc     L003007?
+006F            665   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:108: while (!(TMR3CN0 & 0x80));  // Wait for overflow
+006F            666   L003001?:
+006F E591       667            mov     a,_TMR3CN0
+0071 30E7F0     668            jnb     acc.7,L003001?
+0074            669   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:109: TMR3CN0 &= ~(0x80);         // Clear overflow indicator
+0074 53917F     670            anl     _TMR3CN0,#0x7F
+0077            671   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:106: for (i = 0; i < us; i++)       // Count <us> overflows
+0077 0B         672            inc     r3
+0078 8000       673            sjmp    L003004?
+007A            674   L003007?:
+007A            675   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:111: TMR3CN0 = 0 ;                   // Stop Timer3 and clear overflow flag
+007A 759100     676            mov     _TMR3CN0,#0x00
+007D 22         677            ret
 007E            678   ;------------------------------------------------------------
-007E            679   ;ms                        Allocated to registers r2 r3 
-007E            680   ;j                         Allocated to registers r2 r3 
-007E            681   ;------------------------------------------------------------
-007E            682   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:114: void waitms (unsigned int ms)
-007E            683   ;        -----------------------------------------
-007E            684   ;         function waitms
+007E            679   ;Allocation info for local variables in function 'waitms'
+007E            680   ;------------------------------------------------------------
+007E            681   ;ms                        Allocated to registers r2 r3 
+007E            682   ;j                         Allocated to registers r2 r3 
+007E            683   ;------------------------------------------------------------
+007E            684   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:114: void waitms (unsigned int ms)
 007E            685   ;        -----------------------------------------
-007E            686   _waitms:
-007E AA82       687            mov     r2,dpl
-0080 AB83       688            mov     r3,dph
-0082            689   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:117: for(j=ms; j!=0; j--)
-0082            690   L004001?:
-0082 BA0070     691            cjne    r2,#0x00,L004010?
-0085 BB0070     692            cjne    r3,#0x00,L004010?
-0088 22         693            ret
-0089            694   L004010?:
-0089            695   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:119: Timer3us(249);
-0089 7582F9     696            mov     dpl,#0xF9
-008C C002       697            push    ar2
-008E C003       698            push    ar3
-0090 120000     699            lcall   _Timer3us
-0093            700   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:120: Timer3us(249);
-0093 7582F9     701            mov     dpl,#0xF9
-0096 120000     702            lcall   _Timer3us
-0099            703   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:121: Timer3us(249);
-0099 7582F9     704            mov     dpl,#0xF9
-009C 120000     705            lcall   _Timer3us
-009F            706   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:122: Timer3us(250);
-009F 7582FA     707            mov     dpl,#0xFA
-00A2 120000     708            lcall   _Timer3us
-00A5 D003       709            pop     ar3
-00A7 D002       710            pop     ar2
-00A9            711   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:117: for(j=ms; j!=0; j--)
-00A9 1A         712            dec     r2
-00AA BAFFB0     713            cjne    r2,#0xff,L004011?
-00AD 1B         714            dec     r3
-00AE            715   L004011?:
-00AE 8000       716            sjmp    L004001?
-00B0            717   ;------------------------------------------------------------
-00B0            718   ;Allocation info for local variables in function 'LCD_pulse'
+007E            686   ;         function waitms
+007E            687   ;        -----------------------------------------
+007E            688   _waitms:
+007E AA82       689            mov     r2,dpl
+0080 AB83       690            mov     r3,dph
+0082            691   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:117: for(j=ms; j!=0; j--)
+0082            692   L004001?:
+0082 BA00B0     693            cjne    r2,#0x00,L004010?
+0085 BB00B0     694            cjne    r3,#0x00,L004010?
+0088 22         695            ret
+0089            696   L004010?:
+0089            697   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:119: Timer3us(249);
+0089 7582F9     698            mov     dpl,#0xF9
+008C C002       699            push    ar2
+008E C003       700            push    ar3
+0090 120000     701            lcall   _Timer3us
+0093            702   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:120: Timer3us(249);
+0093 7582F9     703            mov     dpl,#0xF9
+0096 120000     704            lcall   _Timer3us
+0099            705   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:121: Timer3us(249);
+0099 7582F9     706            mov     dpl,#0xF9
+009C 120000     707            lcall   _Timer3us
+009F            708   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:122: Timer3us(250);
+009F 7582FA     709            mov     dpl,#0xFA
+00A2 120000     710            lcall   _Timer3us
+00A5 D003       711            pop     ar3
+00A7 D002       712            pop     ar2
+00A9            713   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:117: for(j=ms; j!=0; j--)
+00A9 1A         714            dec     r2
+00AA BAFFF0     715            cjne    r2,#0xff,L004011?
+00AD 1B         716            dec     r3
+00AE            717   L004011?:
+00AE 8000       718            sjmp    L004001?
 00B0            719   ;------------------------------------------------------------
-00B0            720   ;------------------------------------------------------------
-00B0            721   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:127: void LCD_pulse (void)
-00B0            722   ;        -----------------------------------------
-00B0            723   ;         function LCD_pulse
+00B0            720   ;Allocation info for local variables in function 'LCD_pulse'
+00B0            721   ;------------------------------------------------------------
+00B0            722   ;------------------------------------------------------------
+00B0            723   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:127: void LCD_pulse (void)
 00B0            724   ;        -----------------------------------------
-00B0            725   _LCD_pulse:
-00B0            726   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:129: LCD_E=1;
-00B0 D2A5       727            setb    _P2_5
-00B2            728   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:130: Timer3us(40);
-00B2 758228     729            mov     dpl,#0x28
-00B5 120000     730            lcall   _Timer3us
-00B8            731   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:131: LCD_E=0;
-00B8 C2A5       732            clr     _P2_5
-00BA 22         733            ret
-00BB            734   ;------------------------------------------------------------
-00BB            735   ;Allocation info for local variables in function 'LCD_byte'
+00B0            725   ;         function LCD_pulse
+00B0            726   ;        -----------------------------------------
+00B0            727   _LCD_pulse:
+00B0            728   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:129: LCD_E=1;
+00B0 D2A5       729            setb    _P2_5
+00B2            730   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:130: Timer3us(40);
+00B2 758228     731            mov     dpl,#0x28
+00B5 120000     732            lcall   _Timer3us
+00B8            733   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:131: LCD_E=0;
+00B8 C2A5       734            clr     _P2_5
+00BA 22         735            ret
 00BB            736   ;------------------------------------------------------------
-00BB            737   ;x                         Allocated to registers r2 
+00BB            737   ;Allocation info for local variables in function 'LCD_byte'
 00BB            738   ;------------------------------------------------------------
-00BB            739   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:134: void LCD_byte (unsigned char x)
-00BB            740   ;        -----------------------------------------
-00BB            741   ;         function LCD_byte
+00BB            739   ;x                         Allocated to registers r2 
+00BB            740   ;------------------------------------------------------------
+00BB            741   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:134: void LCD_byte (unsigned char x)
 00BB            742   ;        -----------------------------------------
-00BB            743   _LCD_byte:
-00BB AA82       744            mov     r2,dpl
-00BD            745   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:137: ACC=x; //Send high nible
-00BD 8AE0       746            mov     _ACC,r2
-00BF            747   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:138: LCD_D7=ACC_7;
-00BF A2E7       748            mov     c,_ACC_7
-00C1 92A1       749            mov     _P2_1,c
-00C3            750   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:139: LCD_D6=ACC_6;
-00C3 A2E6       751            mov     c,_ACC_6
-00C5 92A2       752            mov     _P2_2,c
-00C7            753   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:140: LCD_D5=ACC_5;
-00C7 A2E5       754            mov     c,_ACC_5
-00C9 92A3       755            mov     _P2_3,c
-00CB            756   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:141: LCD_D4=ACC_4;
-00CB A2E4       757            mov     c,_ACC_4
-00CD 92A4       758            mov     _P2_4,c
-00CF            759   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:142: LCD_pulse();
-00CF C002       760            push    ar2
-00D1 120000     761            lcall   _LCD_pulse
-00D4            762   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:143: Timer3us(40);
-00D4 758228     763            mov     dpl,#0x28
-00D7 120000     764            lcall   _Timer3us
-00DA D002       765            pop     ar2
-00DC            766   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:144: ACC=x; //Send low nible
-00DC 8AE0       767            mov     _ACC,r2
-00DE            768   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:145: LCD_D7=ACC_3;
-00DE A2E3       769            mov     c,_ACC_3
-00E0 92A1       770            mov     _P2_1,c
-00E2            771   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:146: LCD_D6=ACC_2;
-00E2 A2E2       772            mov     c,_ACC_2
-00E4 92A2       773            mov     _P2_2,c
-00E6            774   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:147: LCD_D5=ACC_1;
-00E6 A2E1       775            mov     c,_ACC_1
-00E8 92A3       776            mov     _P2_3,c
-00EA            777   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:148: LCD_D4=ACC_0;
-00EA A2E0       778            mov     c,_ACC_0
-00EC 92A4       779            mov     _P2_4,c
-00EE            780   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:149: LCD_pulse();
-00EE 020000     781            ljmp    _LCD_pulse
-00F1            782   ;------------------------------------------------------------
-00F1            783   ;Allocation info for local variables in function 'WriteData'
+00BB            743   ;         function LCD_byte
+00BB            744   ;        -----------------------------------------
+00BB            745   _LCD_byte:
+00BB AA82       746            mov     r2,dpl
+00BD            747   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:137: ACC=x; //Send high nible
+00BD 8AE0       748            mov     _ACC,r2
+00BF            749   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:138: LCD_D7=ACC_7;
+00BF A2E7       750            mov     c,_ACC_7
+00C1 92A1       751            mov     _P2_1,c
+00C3            752   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:139: LCD_D6=ACC_6;
+00C3 A2E6       753            mov     c,_ACC_6
+00C5 92A2       754            mov     _P2_2,c
+00C7            755   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:140: LCD_D5=ACC_5;
+00C7 A2E5       756            mov     c,_ACC_5
+00C9 92A3       757            mov     _P2_3,c
+00CB            758   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:141: LCD_D4=ACC_4;
+00CB A2E4       759            mov     c,_ACC_4
+00CD 92A4       760            mov     _P2_4,c
+00CF            761   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:142: LCD_pulse();
+00CF C002       762            push    ar2
+00D1 120000     763            lcall   _LCD_pulse
+00D4            764   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:143: Timer3us(40);
+00D4 758228     765            mov     dpl,#0x28
+00D7 120000     766            lcall   _Timer3us
+00DA D002       767            pop     ar2
+00DC            768   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:144: ACC=x; //Send low nible
+00DC 8AE0       769            mov     _ACC,r2
+00DE            770   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:145: LCD_D7=ACC_3;
+00DE A2E3       771            mov     c,_ACC_3
+00E0 92A1       772            mov     _P2_1,c
+00E2            773   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:146: LCD_D6=ACC_2;
+00E2 A2E2       774            mov     c,_ACC_2
+00E4 92A2       775            mov     _P2_2,c
+00E6            776   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:147: LCD_D5=ACC_1;
+00E6 A2E1       777            mov     c,_ACC_1
+00E8 92A3       778            mov     _P2_3,c
+00EA            779   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:148: LCD_D4=ACC_0;
+00EA A2E0       780            mov     c,_ACC_0
+00EC 92A4       781            mov     _P2_4,c
+00EE            782   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:149: LCD_pulse();
+00EE 020000     783            ljmp    _LCD_pulse
 00F1            784   ;------------------------------------------------------------
-00F1            785   ;x                         Allocated to registers r2 
+00F1            785   ;Allocation info for local variables in function 'WriteData'
 00F1            786   ;------------------------------------------------------------
-00F1            787   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:152: void WriteData (unsigned char x)
-00F1            788   ;        -----------------------------------------
-00F1            789   ;         function WriteData
+00F1            787   ;x                         Allocated to registers r2 
+00F1            788   ;------------------------------------------------------------
+00F1            789   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:152: void WriteData (unsigned char x)
 00F1            790   ;        -----------------------------------------
-00F1            791   _WriteData:
-00F1 AA82       792            mov     r2,dpl
-00F3            793   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:154: LCD_RS=1;
-00F3 D2A6       794            setb    _P2_6
-00F5            795   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:155: LCD_byte(x);
-00F5 8A82       796            mov     dpl,r2
-00F7 120000     797            lcall   _LCD_byte
-00FA            798   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:156: waitms(2);
-00FA 900002     799            mov     dptr,#0x0002
-00FD 020000     800            ljmp    _waitms
-0100            801   ;------------------------------------------------------------
-0100            802   ;Allocation info for local variables in function 'WriteCommand'
+00F1            791   ;         function WriteData
+00F1            792   ;        -----------------------------------------
+00F1            793   _WriteData:
+00F1 AA82       794            mov     r2,dpl
+00F3            795   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:154: LCD_RS=1;
+00F3 D2A6       796            setb    _P2_6
+00F5            797   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:155: LCD_byte(x);
+00F5 8A82       798            mov     dpl,r2
+00F7 120000     799            lcall   _LCD_byte
+00FA            800   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:156: waitms(2);
+00FA 900002     801            mov     dptr,#0x0002
+00FD 020000     802            ljmp    _waitms
 0100            803   ;------------------------------------------------------------
-0100            804   ;x                         Allocated to registers r2 
+0100            804   ;Allocation info for local variables in function 'WriteCommand'
 0100            805   ;------------------------------------------------------------
-0100            806   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:159: void WriteCommand (unsigned char x)
-0100            807   ;        -----------------------------------------
-0100            808   ;         function WriteCommand
+0100            806   ;x                         Allocated to registers r2 
+0100            807   ;------------------------------------------------------------
+0100            808   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:159: void WriteCommand (unsigned char x)
 0100            809   ;        -----------------------------------------
-0100            810   _WriteCommand:
-0100 AA82       811            mov     r2,dpl
-0102            812   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:161: LCD_RS=0;
-0102 C2A6       813            clr     _P2_6
-0104            814   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:162: LCD_byte(x);
-0104 8A82       815            mov     dpl,r2
-0106 120000     816            lcall   _LCD_byte
-0109            817   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:163: waitms(5);
-0109 900005     818            mov     dptr,#0x0005
-010C 020000     819            ljmp    _waitms
-010F            820   ;------------------------------------------------------------
-010F            821   ;Allocation info for local variables in function 'LCD_4BIT'
+0100            810   ;         function WriteCommand
+0100            811   ;        -----------------------------------------
+0100            812   _WriteCommand:
+0100 AA82       813            mov     r2,dpl
+0102            814   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:161: LCD_RS=0;
+0102 C2A6       815            clr     _P2_6
+0104            816   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:162: LCD_byte(x);
+0104 8A82       817            mov     dpl,r2
+0106 120000     818            lcall   _LCD_byte
+0109            819   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:163: waitms(5);
+0109 900005     820            mov     dptr,#0x0005
+010C 020000     821            ljmp    _waitms
 010F            822   ;------------------------------------------------------------
-010F            823   ;------------------------------------------------------------
-010F            824   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:166: void LCD_4BIT (void)
-010F            825   ;        -----------------------------------------
-010F            826   ;         function LCD_4BIT
+010F            823   ;Allocation info for local variables in function 'LCD_4BIT'
+010F            824   ;------------------------------------------------------------
+010F            825   ;------------------------------------------------------------
+010F            826   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:166: void LCD_4BIT (void)
 010F            827   ;        -----------------------------------------
-010F            828   _LCD_4BIT:
-010F            829   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:168: LCD_E=0; // Resting state of LCD's enable is zero
-010F C2A5       830            clr     _P2_5
-0111            831   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:170: waitms(20);
-0111 900014     832            mov     dptr,#0x0014
-0114 120000     833            lcall   _waitms
-0117            834   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:172: WriteCommand(0x33);
-0117 758233     835            mov     dpl,#0x33
-011A 120000     836            lcall   _WriteCommand
-011D            837   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:173: WriteCommand(0x33);
-011D 758233     838            mov     dpl,#0x33
-0120 120000     839            lcall   _WriteCommand
-0123            840   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:174: WriteCommand(0x32); // Change to 4-bit mode
-0123 758232     841            mov     dpl,#0x32
-0126 120000     842            lcall   _WriteCommand
-0129            843   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:177: WriteCommand(0x28);
-0129 758228     844            mov     dpl,#0x28
-012C 120000     845            lcall   _WriteCommand
-012F            846   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:178: WriteCommand(0x0c);
-012F 75820C     847            mov     dpl,#0x0C
-0132 120000     848            lcall   _WriteCommand
-0135            849   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:179: WriteCommand(0x01); // Clear screen command (takes some time)
-0135 758201     850            mov     dpl,#0x01
-0138 120000     851            lcall   _WriteCommand
-013B            852   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:180: waitms(20); // Wait for clear screen command to finsih.
-013B 900014     853            mov     dptr,#0x0014
-013E 020000     854            ljmp    _waitms
-0141            855   ;------------------------------------------------------------
-0141            856   ;Allocation info for local variables in function 'LCDprint'
+010F            828   ;         function LCD_4BIT
+010F            829   ;        -----------------------------------------
+010F            830   _LCD_4BIT:
+010F            831   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:168: LCD_E=0; // Resting state of LCD's enable is zero
+010F C2A5       832            clr     _P2_5
+0111            833   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:170: waitms(20);
+0111 900014     834            mov     dptr,#0x0014
+0114 120000     835            lcall   _waitms
+0117            836   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:172: WriteCommand(0x33);
+0117 758233     837            mov     dpl,#0x33
+011A 120000     838            lcall   _WriteCommand
+011D            839   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:173: WriteCommand(0x33);
+011D 758233     840            mov     dpl,#0x33
+0120 120000     841            lcall   _WriteCommand
+0123            842   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:174: WriteCommand(0x32); // Change to 4-bit mode
+0123 758232     843            mov     dpl,#0x32
+0126 120000     844            lcall   _WriteCommand
+0129            845   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:177: WriteCommand(0x28);
+0129 758228     846            mov     dpl,#0x28
+012C 120000     847            lcall   _WriteCommand
+012F            848   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:178: WriteCommand(0x0c);
+012F 75820C     849            mov     dpl,#0x0C
+0132 120000     850            lcall   _WriteCommand
+0135            851   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:179: WriteCommand(0x01); // Clear screen command (takes some time)
+0135 758201     852            mov     dpl,#0x01
+0138 120000     853            lcall   _WriteCommand
+013B            854   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:180: waitms(20); // Wait for clear screen command to finsih.
+013B 900014     855            mov     dptr,#0x0014
+013E 020000     856            ljmp    _waitms
 0141            857   ;------------------------------------------------------------
-0141            858   ;line                      Allocated with name '_LCDprint_PARM_2'
-0141            859   ;string                    Allocated to registers r2 r3 r4 
-0141            860   ;j                         Allocated to registers r5 r6 
-0141            861   ;------------------------------------------------------------
-0141            862   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:183: void LCDprint(char * string, unsigned char line, bit clear)
-0141            863   ;        -----------------------------------------
-0141            864   ;         function LCDprint
+0141            858   ;Allocation info for local variables in function 'LCDprint'
+0141            859   ;------------------------------------------------------------
+0141            860   ;line                      Allocated with name '_LCDprint_PARM_2'
+0141            861   ;string                    Allocated to registers r2 r3 r4 
+0141            862   ;j                         Allocated to registers r5 r6 
+0141            863   ;------------------------------------------------------------
+0141            864   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:183: void LCDprint(char * string, unsigned char line, bit clear)
 0141            865   ;        -----------------------------------------
-0141            866   _LCDprint:
-0141 AA82       867            mov     r2,dpl
-0143 AB83       868            mov     r3,dph
-0145 ACF0       869            mov     r4,b
-0147            870   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:187: WriteCommand(line==2?0xc0:0x80);
-0147 7402       871            mov     a,#0x02
-0149 B5B830     872            cjne    a,_LCDprint_PARM_2,L010013?
-014C 7DC0       873            mov     r5,#0xC0
-014E 8000       874            sjmp    L010014?
-0150            875   L010013?:
-0150 7D80       876            mov     r5,#0x80
-0152            877   L010014?:
-0152 8D82       878            mov     dpl,r5
-0154 C002       879            push    ar2
-0156 C003       880            push    ar3
-0158 C004       881            push    ar4
-015A 120000     882            lcall   _WriteCommand
-015D            883   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:188: waitms(5);
-015D 900005     884            mov     dptr,#0x0005
-0160 120000     885            lcall   _waitms
-0163 D004       886            pop     ar4
-0165 D003       887            pop     ar3
-0167 D002       888            pop     ar2
-0169            889   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:189: for(j=0; string[j]!=0; j++)      WriteData(string[j]);// Write the message
-0169 7D00       890            mov     r5,#0x00
-016B 7E00       891            mov     r6,#0x00
-016D            892   L010003?:
-016D ED         893            mov     a,r5
-016E 2A         894            add     a,r2
-016F FF         895            mov     r7,a
-0170 EE         896            mov     a,r6
-0171 3B         897            addc    a,r3
-0172 F8         898            mov     r0,a
-0173 8C01       899            mov     ar1,r4
-0175 8F82       900            mov     dpl,r7
-0177 8883       901            mov     dph,r0
-0179 89F0       902            mov     b,r1
-017B 120000     903            lcall   __gptrget
-017E FF         904            mov     r7,a
-017F 6000       905            jz      L010006?
-0181 8F82       906            mov     dpl,r7
-0183 C002       907            push    ar2
-0185 C003       908            push    ar3
-0187 C004       909            push    ar4
-0189 C005       910            push    ar5
-018B C006       911            push    ar6
-018D 120000     912            lcall   _WriteData
-0190 D006       913            pop     ar6
-0192 D005       914            pop     ar5
-0194 D004       915            pop     ar4
-0196 D003       916            pop     ar3
-0198 D002       917            pop     ar2
-019A 0D         918            inc     r5
-019B BD00B0     919            cjne    r5,#0x00,L010003?
-019E 0E         920            inc     r6
-019F 8000       921            sjmp    L010003?
-01A1            922   L010006?:
-01A1            923   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:190: if(clear) for(; j<CHARS_PER_LINE; j++) WriteData(' '); // Clear the rest of the line
-01A1 30F070     924            jnb     _LCDprint_PARM_3,L010011?
-01A4 8D02       925            mov     ar2,r5
-01A6 8E03       926            mov     ar3,r6
-01A8            927   L010007?:
-01A8 C3         928            clr     c
-01A9 EA         929            mov     a,r2
-01AA 9410       930            subb    a,#0x10
-01AC EB         931            mov     a,r3
-01AD 6480       932            xrl     a,#0x80
-01AF 9480       933            subb    a,#0x80
-01B1 5000       934            jnc     L010011?
-01B3 758220     935            mov     dpl,#0x20
-01B6 C002       936            push    ar2
-01B8 C003       937            push    ar3
-01BA 120000     938            lcall   _WriteData
-01BD D003       939            pop     ar3
-01BF D002       940            pop     ar2
-01C1 0A         941            inc     r2
-01C2 BA00B0     942            cjne    r2,#0x00,L010007?
-01C5 0B         943            inc     r3
-01C6 8000       944            sjmp    L010007?
-01C8            945   L010011?:
-01C8 22         946            ret
-01C9            947   ;------------------------------------------------------------
-01C9            948   ;Allocation info for local variables in function 'getsn'
+0141            866   ;         function LCDprint
+0141            867   ;        -----------------------------------------
+0141            868   _LCDprint:
+0141 AA82       869            mov     r2,dpl
+0143 AB83       870            mov     r3,dph
+0145 ACF0       871            mov     r4,b
+0147            872   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:187: WriteCommand(line==2?0xc0:0x80);
+0147 7402       873            mov     a,#0x02
+0149 B5C070     874            cjne    a,_LCDprint_PARM_2,L010013?
+014C 7DC0       875            mov     r5,#0xC0
+014E 8000       876            sjmp    L010014?
+0150            877   L010013?:
+0150 7D80       878            mov     r5,#0x80
+0152            879   L010014?:
+0152 8D82       880            mov     dpl,r5
+0154 C002       881            push    ar2
+0156 C003       882            push    ar3
+0158 C004       883            push    ar4
+015A 120000     884            lcall   _WriteCommand
+015D            885   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:188: waitms(5);
+015D 900005     886            mov     dptr,#0x0005
+0160 120000     887            lcall   _waitms
+0163 D004       888            pop     ar4
+0165 D003       889            pop     ar3
+0167 D002       890            pop     ar2
+0169            891   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:189: for(j=0; string[j]!=0; j++)      WriteData(string[j]);// Write the message
+0169 7D00       892            mov     r5,#0x00
+016B 7E00       893            mov     r6,#0x00
+016D            894   L010003?:
+016D ED         895            mov     a,r5
+016E 2A         896            add     a,r2
+016F FF         897            mov     r7,a
+0170 EE         898            mov     a,r6
+0171 3B         899            addc    a,r3
+0172 F8         900            mov     r0,a
+0173 8C01       901            mov     ar1,r4
+0175 8F82       902            mov     dpl,r7
+0177 8883       903            mov     dph,r0
+0179 89F0       904            mov     b,r1
+017B 120000     905            lcall   __gptrget
+017E FF         906            mov     r7,a
+017F 6000       907            jz      L010006?
+0181 8F82       908            mov     dpl,r7
+0183 C002       909            push    ar2
+0185 C003       910            push    ar3
+0187 C004       911            push    ar4
+0189 C005       912            push    ar5
+018B C006       913            push    ar6
+018D 120000     914            lcall   _WriteData
+0190 D006       915            pop     ar6
+0192 D005       916            pop     ar5
+0194 D004       917            pop     ar4
+0196 D003       918            pop     ar3
+0198 D002       919            pop     ar2
+019A 0D         920            inc     r5
+019B BD00F0     921            cjne    r5,#0x00,L010003?
+019E 0E         922            inc     r6
+019F 8000       923            sjmp    L010003?
+01A1            924   L010006?:
+01A1            925   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:190: if(clear) for(; j<CHARS_PER_LINE; j++) WriteData(' '); // Clear the rest of the line
+01A1 30E0B0     926            jnb     _LCDprint_PARM_3,L010011?
+01A4 8D02       927            mov     ar2,r5
+01A6 8E03       928            mov     ar3,r6
+01A8            929   L010007?:
+01A8 C3         930            clr     c
+01A9 EA         931            mov     a,r2
+01AA 9410       932            subb    a,#0x10
+01AC EB         933            mov     a,r3
+01AD 6480       934            xrl     a,#0x80
+01AF 9480       935            subb    a,#0x80
+01B1 5000       936            jnc     L010011?
+01B3 758220     937            mov     dpl,#0x20
+01B6 C002       938            push    ar2
+01B8 C003       939            push    ar3
+01BA 120000     940            lcall   _WriteData
+01BD D003       941            pop     ar3
+01BF D002       942            pop     ar2
+01C1 0A         943            inc     r2
+01C2 BA00F0     944            cjne    r2,#0x00,L010007?
+01C5 0B         945            inc     r3
+01C6 8000       946            sjmp    L010007?
+01C8            947   L010011?:
+01C8 22         948            ret
 01C9            949   ;------------------------------------------------------------
-01C9            950   ;len                       Allocated with name '_getsn_PARM_2'
-01C9            951   ;buff                      Allocated with name '_getsn_buff_1_43'
-01C9            952   ;j                         Allocated with name '_getsn_sloc0_1_0'
-01C9            953   ;c                         Allocated to registers r3 
-01C9            954   ;sloc0                     Allocated with name '_getsn_sloc0_1_0'
-01C9            955   ;------------------------------------------------------------
-01C9            956   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:193: int getsn (char * buff, int len)
-01C9            957   ;        -----------------------------------------
-01C9            958   ;         function getsn
+01C9            950   ;Allocation info for local variables in function 'getsn'
+01C9            951   ;------------------------------------------------------------
+01C9            952   ;len                       Allocated with name '_getsn_PARM_2'
+01C9            953   ;buff                      Allocated with name '_getsn_buff_1_43'
+01C9            954   ;j                         Allocated with name '_getsn_sloc0_1_0'
+01C9            955   ;c                         Allocated to registers r3 
+01C9            956   ;sloc0                     Allocated with name '_getsn_sloc0_1_0'
+01C9            957   ;------------------------------------------------------------
+01C9            958   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:193: int getsn (char * buff, int len)
 01C9            959   ;        -----------------------------------------
-01C9            960   _getsn:
-01C9 858210     961            mov     _getsn_buff_1_43,dpl
-01CC 858311     962            mov     (_getsn_buff_1_43 + 1),dph
-01CF 85F012     963            mov     (_getsn_buff_1_43 + 2),b
-01D2            964   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:198: for(j=0; j<(len-1); j++)
-01D2 E4         965            clr     a
-01D3 F560       966            mov     _getsn_sloc0_1_0,a
-01D5 F561       967            mov     (_getsn_sloc0_1_0 + 1),a
-01D7 E568       968            mov     a,_getsn_PARM_2
-01D9 24FF       969            add     a,#0xff
-01DB FF         970            mov     r7,a
-01DC E569       971            mov     a,(_getsn_PARM_2 + 1)
-01DE 34FF       972            addc    a,#0xff
-01E0 F8         973            mov     r0,a
-01E1 7900       974            mov     r1,#0x00
-01E3 7A00       975            mov     r2,#0x00
-01E5            976   L011005?:
-01E5 C3         977            clr     c
-01E6 E9         978            mov     a,r1
-01E7 9F         979            subb    a,r7
-01E8 EA         980            mov     a,r2
-01E9 6480       981            xrl     a,#0x80
-01EB 88F0       982            mov     b,r0
-01ED 63F080     983            xrl     b,#0x80
-01F0 95F0       984            subb    a,b
-01F2 5000       985            jnc     L011008?
-01F4            986   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:200: c=getchar();
-01F4 C002       987            push    ar2
-01F6 C007       988            push    ar7
-01F8 C000       989            push    ar0
-01FA C001       990            push    ar1
-01FC 120000     991            lcall   _getchar
-01FF AB82       992            mov     r3,dpl
-0201 D001       993            pop     ar1
-0203 D000       994            pop     ar0
-0205 D007       995            pop     ar7
-0207 D002       996            pop     ar2
-0209            997   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:201: if ( (c=='\n') || (c=='\r') )
-0209 BB0AB0     998            cjne    r3,#0x0A,L011015?
-020C 8000       999            sjmp    L011001?
-020E           1000   L011015?:
-020E BB0D30    1001            cjne    r3,#0x0D,L011002?
-0211           1002   L011001?:
-0211           1003   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:203: buff[j]=0;
-0211 E560      1004            mov     a,_getsn_sloc0_1_0
-0213 2510      1005            add     a,_getsn_buff_1_43
-0215 FC        1006            mov     r4,a
-0216 E561      1007            mov     a,(_getsn_sloc0_1_0 + 1)
-0218 3511      1008            addc    a,(_getsn_buff_1_43 + 1)
-021A FD        1009            mov     r5,a
-021B AE12      1010            mov     r6,(_getsn_buff_1_43 + 2)
-021D 8C82      1011            mov     dpl,r4
-021F 8D83      1012            mov     dph,r5
-0221 8EF0      1013            mov     b,r6
-0223 E4        1014            clr     a
-0224 120000    1015            lcall   __gptrput
-0227           1016   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:204: return j;
-0227 856082    1017            mov     dpl,_getsn_sloc0_1_0
-022A 856183    1018            mov     dph,(_getsn_sloc0_1_0 + 1)
-022D 22        1019            ret
-022E           1020   L011002?:
-022E           1021   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:208: buff[j]=c;
-022E E9        1022            mov     a,r1
-022F 2510      1023            add     a,_getsn_buff_1_43
-0231 FC        1024            mov     r4,a
-0232 EA        1025            mov     a,r2
-0233 3511      1026            addc    a,(_getsn_buff_1_43 + 1)
-0235 FD        1027            mov     r5,a
-0236 AE12      1028            mov     r6,(_getsn_buff_1_43 + 2)
-0238 8C82      1029            mov     dpl,r4
-023A 8D83      1030            mov     dph,r5
-023C 8EF0      1031            mov     b,r6
-023E EB        1032            mov     a,r3
-023F 120000    1033            lcall   __gptrput
-0242           1034   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:198: for(j=0; j<(len-1); j++)
-0242 09        1035            inc     r1
-0243 B900B0    1036            cjne    r1,#0x00,L011018?
-0246 0A        1037            inc     r2
-0247           1038   L011018?:
-0247 8960      1039            mov     _getsn_sloc0_1_0,r1
-0249 8A61      1040            mov     (_getsn_sloc0_1_0 + 1),r2
-024B 8000      1041            sjmp    L011005?
-024D           1042   L011008?:
-024D           1043   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:211: buff[j]=0;
-024D E560      1044            mov     a,_getsn_sloc0_1_0
-024F 2510      1045            add     a,_getsn_buff_1_43
-0251 FA        1046            mov     r2,a
-0252 E561      1047            mov     a,(_getsn_sloc0_1_0 + 1)
-0254 3511      1048            addc    a,(_getsn_buff_1_43 + 1)
-0256 FB        1049            mov     r3,a
-0257 AC12      1050            mov     r4,(_getsn_buff_1_43 + 2)
-0259 8A82      1051            mov     dpl,r2
-025B 8B83      1052            mov     dph,r3
-025D 8CF0      1053            mov     b,r4
-025F E4        1054            clr     a
-0260 120000    1055            lcall   __gptrput
-0263           1056   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:212: return len;
-0263 856882    1057            mov     dpl,_getsn_PARM_2
-0266 856983    1058            mov     dph,(_getsn_PARM_2 + 1)
-0269 22        1059            ret
-026A           1060   ;------------------------------------------------------------
-026A           1061   ;Allocation info for local variables in function 'TIMER0_Init'
+01C9            960   ;         function getsn
+01C9            961   ;        -----------------------------------------
+01C9            962   _getsn:
+01C9 858210     963            mov     _getsn_buff_1_43,dpl
+01CC 858311     964            mov     (_getsn_buff_1_43 + 1),dph
+01CF 85F012     965            mov     (_getsn_buff_1_43 + 2),b
+01D2            966   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:198: for(j=0; j<(len-1); j++)
+01D2 E4         967            clr     a
+01D3 F560       968            mov     _getsn_sloc0_1_0,a
+01D5 F561       969            mov     (_getsn_sloc0_1_0 + 1),a
+01D7 E570       970            mov     a,_getsn_PARM_2
+01D9 24FF       971            add     a,#0xff
+01DB FF         972            mov     r7,a
+01DC E571       973            mov     a,(_getsn_PARM_2 + 1)
+01DE 34FF       974            addc    a,#0xff
+01E0 F8         975            mov     r0,a
+01E1 7900       976            mov     r1,#0x00
+01E3 7A00       977            mov     r2,#0x00
+01E5            978   L011005?:
+01E5 C3         979            clr     c
+01E6 E9         980            mov     a,r1
+01E7 9F         981            subb    a,r7
+01E8 EA         982            mov     a,r2
+01E9 6480       983            xrl     a,#0x80
+01EB 88F0       984            mov     b,r0
+01ED 63F080     985            xrl     b,#0x80
+01F0 95F0       986            subb    a,b
+01F2 5000       987            jnc     L011008?
+01F4            988   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:200: c=getchar();
+01F4 C002       989            push    ar2
+01F6 C007       990            push    ar7
+01F8 C000       991            push    ar0
+01FA C001       992            push    ar1
+01FC 120000     993            lcall   _getchar
+01FF AB82       994            mov     r3,dpl
+0201 D001       995            pop     ar1
+0203 D000       996            pop     ar0
+0205 D007       997            pop     ar7
+0207 D002       998            pop     ar2
+0209            999   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:201: if ( (c=='\n') || (c=='\r') )
+0209 BB0AF0    1000            cjne    r3,#0x0A,L011015?
+020C 8000      1001            sjmp    L011001?
+020E           1002   L011015?:
+020E BB0D70    1003            cjne    r3,#0x0D,L011002?
+0211           1004   L011001?:
+0211           1005   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:203: buff[j]=0;
+0211 E560      1006            mov     a,_getsn_sloc0_1_0
+0213 2510      1007            add     a,_getsn_buff_1_43
+0215 FC        1008            mov     r4,a
+0216 E561      1009            mov     a,(_getsn_sloc0_1_0 + 1)
+0218 3511      1010            addc    a,(_getsn_buff_1_43 + 1)
+021A FD        1011            mov     r5,a
+021B AE12      1012            mov     r6,(_getsn_buff_1_43 + 2)
+021D 8C82      1013            mov     dpl,r4
+021F 8D83      1014            mov     dph,r5
+0221 8EF0      1015            mov     b,r6
+0223 E4        1016            clr     a
+0224 120000    1017            lcall   __gptrput
+0227           1018   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:204: return j;
+0227 856082    1019            mov     dpl,_getsn_sloc0_1_0
+022A 856183    1020            mov     dph,(_getsn_sloc0_1_0 + 1)
+022D 22        1021            ret
+022E           1022   L011002?:
+022E           1023   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:208: buff[j]=c;
+022E E9        1024            mov     a,r1
+022F 2510      1025            add     a,_getsn_buff_1_43
+0231 FC        1026            mov     r4,a
+0232 EA        1027            mov     a,r2
+0233 3511      1028            addc    a,(_getsn_buff_1_43 + 1)
+0235 FD        1029            mov     r5,a
+0236 AE12      1030            mov     r6,(_getsn_buff_1_43 + 2)
+0238 8C82      1031            mov     dpl,r4
+023A 8D83      1032            mov     dph,r5
+023C 8EF0      1033            mov     b,r6
+023E EB        1034            mov     a,r3
+023F 120000    1035            lcall   __gptrput
+0242           1036   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:198: for(j=0; j<(len-1); j++)
+0242 09        1037            inc     r1
+0243 B900F0    1038            cjne    r1,#0x00,L011018?
+0246 0A        1039            inc     r2
+0247           1040   L011018?:
+0247 8960      1041            mov     _getsn_sloc0_1_0,r1
+0249 8A61      1042            mov     (_getsn_sloc0_1_0 + 1),r2
+024B 8000      1043            sjmp    L011005?
+024D           1044   L011008?:
+024D           1045   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:211: buff[j]=0;
+024D E560      1046            mov     a,_getsn_sloc0_1_0
+024F 2510      1047            add     a,_getsn_buff_1_43
+0251 FA        1048            mov     r2,a
+0252 E561      1049            mov     a,(_getsn_sloc0_1_0 + 1)
+0254 3511      1050            addc    a,(_getsn_buff_1_43 + 1)
+0256 FB        1051            mov     r3,a
+0257 AC12      1052            mov     r4,(_getsn_buff_1_43 + 2)
+0259 8A82      1053            mov     dpl,r2
+025B 8B83      1054            mov     dph,r3
+025D 8CF0      1055            mov     b,r4
+025F E4        1056            clr     a
+0260 120000    1057            lcall   __gptrput
+0263           1058   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:212: return len;
+0263 857082    1059            mov     dpl,_getsn_PARM_2
+0266 857183    1060            mov     dph,(_getsn_PARM_2 + 1)
+0269 22        1061            ret
 026A           1062   ;------------------------------------------------------------
-026A           1063   ;------------------------------------------------------------
-026A           1064   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:215: void TIMER0_Init(void)
-026A           1065   ;        -----------------------------------------
-026A           1066   ;         function TIMER0_Init
+026A           1063   ;Allocation info for local variables in function 'TIMER0_Init'
+026A           1064   ;------------------------------------------------------------
+026A           1065   ;------------------------------------------------------------
+026A           1066   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:215: void TIMER0_Init(void)
 026A           1067   ;        -----------------------------------------
-026A           1068   _TIMER0_Init:
-026A           1069   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:217: TMOD&=0b_1111_0000; // Set the bits of Timer/Counter 0 to zero
-026A 5389F0    1070            anl     _TMOD,#0xF0
-026D           1071   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:218: TMOD|=0b_0000_0001; // Timer/Counter 0 used as a 16-bit timer
-026D 438901    1072            orl     _TMOD,#0x01
-0270           1073   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:219: TR0=0; // Stop Timer/Counter 0
-0270 C28C      1074            clr     _TR0
-0272 22        1075            ret
-0273           1076   ;------------------------------------------------------------
-0273           1077   ;Allocation info for local variables in function 'PtoC'
+026A           1068   ;         function TIMER0_Init
+026A           1069   ;        -----------------------------------------
+026A           1070   _TIMER0_Init:
+026A           1071   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:217: TMOD&=0b_1111_0000; // Set the bits of Timer/Counter 0 to zero
+026A 5389F0    1072            anl     _TMOD,#0xF0
+026D           1073   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:218: TMOD|=0b_0000_0001; // Timer/Counter 0 used as a 16-bit timer
+026D 438901    1074            orl     _TMOD,#0x01
+0270           1075   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:219: TR0=0; // Stop Timer/Counter 0
+0270 C28C      1076            clr     _TR0
+0272 22        1077            ret
 0273           1078   ;------------------------------------------------------------
-0273           1079   ;period                    Allocated to registers r2 r3 r4 r5 
+0273           1079   ;Allocation info for local variables in function 'PtoC'
 0273           1080   ;------------------------------------------------------------
-0273           1081   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:222: double PtoC(double period){
-0273           1082   ;        -----------------------------------------
-0273           1083   ;         function PtoC
+0273           1081   ;period                    Allocated to registers r2 r3 r4 r5 
+0273           1082   ;------------------------------------------------------------
+0273           1083   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:222: double PtoC(double period){
 0273           1084   ;        -----------------------------------------
-0273           1085   _PtoC:
-0273 AA82      1086            mov     r2,dpl
-0275 AB83      1087            mov     r3,dph
-0277 ACF0      1088            mov     r4,b
-0279 FD        1089            mov     r5,a
-027A           1090   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:223: return ((period*1000000000.0)/(3465.7359028));
-027A C002      1091            push    ar2
-027C C003      1092            push    ar3
-027E C004      1093            push    ar4
-0280 C005      1094            push    ar5
-0282 906B28    1095            mov     dptr,#0x6B28
-0285 75F06E    1096            mov     b,#0x6E
-0288 744E      1097            mov     a,#0x4E
-028A 120000    1098            lcall   ___fsmul
-028D AA82      1099            mov     r2,dpl
-028F AB83      1100            mov     r3,dph
-0291 ACF0      1101            mov     r4,b
-0293 FD        1102            mov     r5,a
-0294 E581      1103            mov     a,sp
-0296 24FC      1104            add     a,#0xfc
-0298 F581      1105            mov     sp,a
-029A 74C6      1106            mov     a,#0xC6
-029C C0E0      1107            push    acc
-029E 749B      1108            mov     a,#0x9B
-02A0 C0E0      1109            push    acc
-02A2 7458      1110            mov     a,#0x58
-02A4 C0E0      1111            push    acc
-02A6 7445      1112            mov     a,#0x45
-02A8 C0E0      1113            push    acc
-02AA 8A82      1114            mov     dpl,r2
-02AC 8B83      1115            mov     dph,r3
-02AE 8CF0      1116            mov     b,r4
-02B0 ED        1117            mov     a,r5
-02B1 120000    1118            lcall   ___fsdiv
-02B4 AA82      1119            mov     r2,dpl
-02B6 AB83      1120            mov     r3,dph
-02B8 ACF0      1121            mov     r4,b
-02BA FD        1122            mov     r5,a
-02BB E581      1123            mov     a,sp
-02BD 24FC      1124            add     a,#0xfc
-02BF F581      1125            mov     sp,a
-02C1 8A82      1126            mov     dpl,r2
-02C3 8B83      1127            mov     dph,r3
-02C5 8CF0      1128            mov     b,r4
-02C7 ED        1129            mov     a,r5
-02C8 22        1130            ret
-02C9           1131   ;------------------------------------------------------------
-02C9           1132   ;Allocation info for local variables in function 'writeOutputBuffer'
+0273           1085   ;         function PtoC
+0273           1086   ;        -----------------------------------------
+0273           1087   _PtoC:
+0273 AA82      1088            mov     r2,dpl
+0275 AB83      1089            mov     r3,dph
+0277 ACF0      1090            mov     r4,b
+0279 FD        1091            mov     r5,a
+027A           1092   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:223: return ((period*1000000000.0)/(3465.7359028));
+027A C002      1093            push    ar2
+027C C003      1094            push    ar3
+027E C004      1095            push    ar4
+0280 C005      1096            push    ar5
+0282 906B28    1097            mov     dptr,#0x6B28
+0285 75F06E    1098            mov     b,#0x6E
+0288 744E      1099            mov     a,#0x4E
+028A 120000    1100            lcall   ___fsmul
+028D AA82      1101            mov     r2,dpl
+028F AB83      1102            mov     r3,dph
+0291 ACF0      1103            mov     r4,b
+0293 FD        1104            mov     r5,a
+0294 E581      1105            mov     a,sp
+0296 24FC      1106            add     a,#0xfc
+0298 F581      1107            mov     sp,a
+029A 74C6      1108            mov     a,#0xC6
+029C C0E0      1109            push    acc
+029E 749B      1110            mov     a,#0x9B
+02A0 C0E0      1111            push    acc
+02A2 7458      1112            mov     a,#0x58
+02A4 C0E0      1113            push    acc
+02A6 7445      1114            mov     a,#0x45
+02A8 C0E0      1115            push    acc
+02AA 8A82      1116            mov     dpl,r2
+02AC 8B83      1117            mov     dph,r3
+02AE 8CF0      1118            mov     b,r4
+02B0 ED        1119            mov     a,r5
+02B1 120000    1120            lcall   ___fsdiv
+02B4 AA82      1121            mov     r2,dpl
+02B6 AB83      1122            mov     r3,dph
+02B8 ACF0      1123            mov     r4,b
+02BA FD        1124            mov     r5,a
+02BB E581      1125            mov     a,sp
+02BD 24FC      1126            add     a,#0xfc
+02BF F581      1127            mov     sp,a
+02C1 8A82      1128            mov     dpl,r2
+02C3 8B83      1129            mov     dph,r3
+02C5 8CF0      1130            mov     b,r4
+02C7 ED        1131            mov     a,r5
+02C8 22        1132            ret
 02C9           1133   ;------------------------------------------------------------
-02C9           1134   ;cap                       Allocated with name '_writeOutputBuffer_PARM_2'
-02C9           1135   ;buffer                    Allocated to registers r2 r3 r4 
-02C9           1136   ;suffix                    Allocated to registers r5 
-02C9           1137   ;------------------------------------------------------------
-02C9           1138   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:226: void writeOutputBuffer(char *buffer, double cap){
-02C9           1139   ;        -----------------------------------------
-02C9           1140   ;         function writeOutputBuffer
+02C9           1134   ;Allocation info for local variables in function 'writeOutputBuffer'
+02C9           1135   ;------------------------------------------------------------
+02C9           1136   ;cap                       Allocated with name '_writeOutputBuffer_PARM_2'
+02C9           1137   ;buffer                    Allocated to registers r2 r3 r4 
+02C9           1138   ;suffix                    Allocated to registers r5 
+02C9           1139   ;------------------------------------------------------------
+02C9           1140   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:226: void writeOutputBuffer(char *buffer, double cap){
 02C9           1141   ;        -----------------------------------------
-02C9           1142   _writeOutputBuffer:
-02C9 AA82      1143            mov     r2,dpl
-02CB AB83      1144            mov     r3,dph
-02CD ACF0      1145            mov     r4,b
-02CF           1146   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:227: char suffix = 'n';
-02CF 7D6E      1147            mov     r5,#0x6E
-02D1           1148   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:229: if(cap > 100.0)
-02D1 C002      1149            push    ar2
-02D3 C003      1150            push    ar3
-02D5 C004      1151            push    ar4
-02D7 C005      1152            push    ar5
-02D9 E4        1153            clr     a
-02DA C0E0      1154            push    acc
-02DC C0E0      1155            push    acc
-02DE 74C8      1156            mov     a,#0xC8
-02E0 C0E0      1157            push    acc
-02E2 7442      1158            mov     a,#0x42
-02E4 C0E0      1159            push    acc
-02E6 854082    1160            mov     dpl,_writeOutputBuffer_PARM_2
-02E9 854183    1161            mov     dph,(_writeOutputBuffer_PARM_2 + 1)
-02EC 8542F0    1162            mov     b,(_writeOutputBuffer_PARM_2 + 2)
-02EF E543      1163            mov     a,(_writeOutputBuffer_PARM_2 + 3)
-02F1 120000    1164            lcall   ___fsgt
-02F4 AE82      1165            mov     r6,dpl
-02F6 E581      1166            mov     a,sp
-02F8 24FC      1167            add     a,#0xfc
-02FA F581      1168            mov     sp,a
-02FC D005      1169            pop     ar5
-02FE D004      1170            pop     ar4
-0300 D003      1171            pop     ar3
-0302 D002      1172            pop     ar2
-0304 EE        1173            mov     a,r6
-0305 6000      1174            jz      L014002?
-0307           1175   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:231: suffix = 'u';
-0307 7D75      1176            mov     r5,#0x75
-0309           1177   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:232: cap = cap/1000.0;
-0309 C002      1178            push    ar2
-030B C003      1179            push    ar3
-030D C004      1180            push    ar4
-030F C005      1181            push    ar5
-0311 E4        1182            clr     a
-0312 C0E0      1183            push    acc
-0314 C0E0      1184            push    acc
-0316 747A      1185            mov     a,#0x7A
-0318 C0E0      1186            push    acc
-031A 7444      1187            mov     a,#0x44
-031C C0E0      1188            push    acc
-031E 854082    1189            mov     dpl,_writeOutputBuffer_PARM_2
-0321 854183    1190            mov     dph,(_writeOutputBuffer_PARM_2 + 1)
-0324 8542F0    1191            mov     b,(_writeOutputBuffer_PARM_2 + 2)
-0327 E543      1192            mov     a,(_writeOutputBuffer_PARM_2 + 3)
-0329 120000    1193            lcall   ___fsdiv
-032C 858240    1194            mov     _writeOutputBuffer_PARM_2,dpl
-032F 858341    1195            mov     (_writeOutputBuffer_PARM_2 + 1),dph
-0332 85F042    1196            mov     (_writeOutputBuffer_PARM_2 + 2),b
-0335 F543      1197            mov     (_writeOutputBuffer_PARM_2 + 3),a
-0337 E581      1198            mov     a,sp
-0339 24FC      1199            add     a,#0xfc
-033B F581      1200            mov     sp,a
-033D D005      1201            pop     ar5
-033F D004      1202            pop     ar4
-0341 D003      1203            pop     ar3
-0343 D002      1204            pop     ar2
-0345           1205   L014002?:
-0345           1206   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:234: if(cap > 100.0)
-0345 C002      1207            push    ar2
-0347 C003      1208            push    ar3
-0349 C004      1209            push    ar4
-034B C005      1210            push    ar5
-034D E4        1211            clr     a
-034E C0E0      1212            push    acc
-0350 C0E0      1213            push    acc
-0352 74C8      1214            mov     a,#0xC8
-0354 C0E0      1215            push    acc
-0356 7442      1216            mov     a,#0x42
-0358 C0E0      1217            push    acc
-035A 854082    1218            mov     dpl,_writeOutputBuffer_PARM_2
-035D 854183    1219            mov     dph,(_writeOutputBuffer_PARM_2 + 1)
-0360 8542F0    1220            mov     b,(_writeOutputBuffer_PARM_2 + 2)
-0363 E543      1221            mov     a,(_writeOutputBuffer_PARM_2 + 3)
-0365 120000    1222            lcall   ___fsgt
-0368 AE82      1223            mov     r6,dpl
-036A E581      1224            mov     a,sp
-036C 24FC      1225            add     a,#0xfc
-036E F581      1226            mov     sp,a
-0370 D005      1227            pop     ar5
-0372 D004      1228            pop     ar4
-0374 D003      1229            pop     ar3
-0376 D002      1230            pop     ar2
-0378 EE        1231            mov     a,r6
-0379 6000      1232            jz      L014004?
-037B           1233   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:236: suffix = 'm';
-037B 7D6D      1234            mov     r5,#0x6D
-037D           1235   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:237: cap = cap/1000.0;
-037D C002      1236            push    ar2
-037F C003      1237            push    ar3
-0381 C004      1238            push    ar4
-0383 C005      1239            push    ar5
-0385 E4        1240            clr     a
-0386 C0E0      1241            push    acc
-0388 C0E0      1242            push    acc
-038A 747A      1243            mov     a,#0x7A
-038C C0E0      1244            push    acc
-038E 7444      1245            mov     a,#0x44
-0390 C0E0      1246            push    acc
-0392 854082    1247            mov     dpl,_writeOutputBuffer_PARM_2
-0395 854183    1248            mov     dph,(_writeOutputBuffer_PARM_2 + 1)
-0398 8542F0    1249            mov     b,(_writeOutputBuffer_PARM_2 + 2)
-039B E543      1250            mov     a,(_writeOutputBuffer_PARM_2 + 3)
-039D 120000    1251            lcall   ___fsdiv
-03A0 858240    1252            mov     _writeOutputBuffer_PARM_2,dpl
-03A3 858341    1253            mov     (_writeOutputBuffer_PARM_2 + 1),dph
-03A6 85F042    1254            mov     (_writeOutputBuffer_PARM_2 + 2),b
-03A9 F543      1255            mov     (_writeOutputBuffer_PARM_2 + 3),a
-03AB E581      1256            mov     a,sp
-03AD 24FC      1257            add     a,#0xfc
-03AF F581      1258            mov     sp,a
-03B1 D005      1259            pop     ar5
-03B3 D004      1260            pop     ar4
-03B5 D003      1261            pop     ar3
-03B7 D002      1262            pop     ar2
-03B9           1263   L014004?:
-03B9           1264   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:239: sprintf(buffer, "C = %.4f%cF", cap, suffix);
-03B9 ED        1265            mov     a,r5
-03BA 33        1266            rlc     a
-03BB 95E0      1267            subb    a,acc
-03BD FE        1268            mov     r6,a
-03BE C005      1269            push    ar5
-03C0 C006      1270            push    ar6
-03C2 C040      1271            push    _writeOutputBuffer_PARM_2
-03C4 C041      1272            push    (_writeOutputBuffer_PARM_2 + 1)
-03C6 C042      1273            push    (_writeOutputBuffer_PARM_2 + 2)
-03C8 C043      1274            push    (_writeOutputBuffer_PARM_2 + 3)
-03CA 7470      1275            mov     a,#__str_0
-03CC C0E0      1276            push    acc
-03CE 74B9      1277            mov     a,#(__str_0 >> 8)
-03D0 C0E0      1278            push    acc
-03D2 7480      1279            mov     a,#0x80
-03D4 C0E0      1280            push    acc
-03D6 C002      1281            push    ar2
-03D8 C003      1282            push    ar3
-03DA C004      1283            push    ar4
-03DC 120000    1284            lcall   _sprintf
-03DF E581      1285            mov     a,sp
-03E1 24F4      1286            add     a,#0xf4
-03E3 F581      1287            mov     sp,a
-03E5 22        1288            ret
-03E6           1289   ;------------------------------------------------------------
-03E6           1290   ;Allocation info for local variables in function 'main'
-03E6           1291   ;------------------------------------------------------------
-03E6           1292   ;period                    Allocated to registers r2 r3 r4 r5 
-03E6           1293   ;output_buffer             Allocated with name '_main_output_buffer_1_57'
-03E6           1294   ;------------------------------------------------------------
-03E6           1295   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:242: void main (void) 
-03E6           1296   ;        -----------------------------------------
-03E6           1297   ;         function main
-03E6           1298   ;        -----------------------------------------
-03E6           1299   _main:
-03E6           1300   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:249: TIMER0_Init();
-03E6 120000    1301            lcall   _TIMER0_Init
-03E9           1302   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:251: LCD_4BIT();
-03E9 120000    1303            lcall   _LCD_4BIT
-03EC           1304   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:253: waitms(500); // Give PuTTY a chance to start.
-03EC 9001F4    1305            mov     dptr,#0x01F4
-03EF 120000    1306            lcall   _waitms
-03F2           1307   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:254: printf("\x1b[2J"); // Clear screen using ANSI escape sequence.
-03F2 74F0      1308            mov     a,#__str_1
-03F4 C0E0      1309            push    acc
-03F6 74B9      1310            mov     a,#(__str_1 >> 8)
-03F8 C0E0      1311            push    acc
-03FA 7480      1312            mov     a,#0x80
-03FC C0E0      1313            push    acc
-03FE 120000    1314            lcall   _printf
-0401 1581      1315            dec     sp
-0403 1581      1316            dec     sp
-0405 1581      1317            dec     sp
-0407           1318   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:259: __FILE__, __DATE__, __TIME__);
-0407           1319   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:258: "Compiled: %s, %s\n\n",
-0407 7470      1320            mov     a,#__str_5
-0409 C0E0      1321            push    acc
-040B 74BA      1322            mov     a,#(__str_5 >> 8)
-040D C0E0      1323            push    acc
-040F 7480      1324            mov     a,#0x80
-0411 C0E0      1325            push    acc
-0413 74B0      1326            mov     a,#__str_4
-0415 C0E0      1327            push    acc
-0417 74BA      1328            mov     a,#(__str_4 >> 8)
-0419 C0E0      1329            push    acc
-041B 7480      1330            mov     a,#0x80
-041D C0E0      1331            push    acc
-041F 74F0      1332            mov     a,#__str_3
-0421 C0E0      1333            push    acc
-0423 74BA      1334            mov     a,#(__str_3 >> 8)
-0425 C0E0      1335            push    acc
-0427 7480      1336            mov     a,#0x80
-0429 C0E0      1337            push    acc
-042B 7430      1338            mov     a,#__str_2
-042D C0E0      1339            push    acc
-042F 74BB      1340            mov     a,#(__str_2 >> 8)
-0431 C0E0      1341            push    acc
-0433 7480      1342            mov     a,#0x80
-0435 C0E0      1343            push    acc
-0437 120000    1344            lcall   _printf
-043A E581      1345            mov     a,sp
-043C 24F4      1346            add     a,#0xf4
-043E F581      1347            mov     sp,a
-0440           1348   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:261: while (1)
-0440           1349   L015018?:
-0440           1350   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:264: TL0=0; 
-0440 758A00    1351            mov     _TL0,#0x00
-0443           1352   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:265: TH0=0;
-0443 758C00    1353            mov     _TH0,#0x00
-0446           1354   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:266: TF0=0;
-0446 C28D      1355            clr     _TF0
-0448           1356   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:267: overflow_count=0;
-0448 75F800    1357            mov     _overflow_count,#0x00
-044B           1358   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:269: while(P0_1!=0); // Wait for the signal to be zero
-044B           1359   L015001?:
-044B 2081B0    1360            jb      _P0_1,L015001?
-044E           1361   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:270: while(P0_1!=1); // Wait for the signal to be one
-044E           1362   L015004?:
-044E 3081F0    1363            jnb     _P0_1,L015004?
-0451           1364   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:271: TR0=1; // Start the timer
-0451 D28C      1365            setb    _TR0
-0453           1366   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:272: while(P0_1!=0) // Wait for the signal to be zero
-0453           1367   L015009?:
-0453 308170    1368            jnb     _P0_1,L015014?
-0456           1369   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:274: if(TF0==1) // Did the 16-bit timer overflow?
-0456           1370   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:276: TF0=0;
-0456 108DB0    1371            jbc     _TF0,L015035?
-0459 8000      1372            sjmp    L015009?
-045B           1373   L015035?:
-045B           1374   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:277: overflow_count++;
-045B 05F8      1375            inc     _overflow_count
-045D           1376   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:280: while(P0_1!=1) // Wait for the signal to be one
-045D 8000      1377            sjmp    L015009?
-045F           1378   L015014?:
-045F 2081F0    1379            jb      _P0_1,L015016?
-0462           1380   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:282: if(TF0==1) // Did the 16-bit timer overflow?
-0462           1381   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:284: TF0=0;
-0462 108D30    1382            jbc     _TF0,L015037?
-0465 8000      1383            sjmp    L015014?
-0467           1384   L015037?:
-0467           1385   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:285: overflow_count++;
-0467 05F8      1386            inc     _overflow_count
-0469 8000      1387            sjmp    L015014?
-046B           1388   L015016?:
-046B           1389   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:288: TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period!
-046B C28C      1390            clr     _TR0
-046D           1391   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:289: period=(overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK);
-046D 85F882    1392            mov     dpl,_overflow_count
-0470 120000    1393            lcall   ___uchar2fs
-0473 AA82      1394            mov     r2,dpl
-0475 AB83      1395            mov     r3,dph
-0477 ACF0      1396            mov     r4,b
-0479 FD        1397            mov     r5,a
-047A C002      1398            push    ar2
-047C C003      1399            push    ar3
-047E C004      1400            push    ar4
-0480 C005      1401            push    ar5
-0482 900000    1402            mov     dptr,#0x0000
-0485 75F080    1403            mov     b,#0x80
-0488 7447      1404            mov     a,#0x47
-048A 120000    1405            lcall   ___fsmul
-048D AA82      1406            mov     r2,dpl
-048F AB83      1407            mov     r3,dph
-0491 ACF0      1408            mov     r4,b
-0493 FD        1409            mov     r5,a
-0494 E581      1410            mov     a,sp
-0496 24FC      1411            add     a,#0xfc
-0498 F581      1412            mov     sp,a
-049A 858C82    1413            mov     dpl,_TH0
-049D C002      1414            push    ar2
-049F C003      1415            push    ar3
-04A1 C004      1416            push    ar4
-04A3 C005      1417            push    ar5
-04A5 120000    1418            lcall   ___uchar2fs
-04A8 AE82      1419            mov     r6,dpl
-04AA AF83      1420            mov     r7,dph
-04AC A8F0      1421            mov     r0,b
-04AE F9        1422            mov     r1,a
-04AF C006      1423            push    ar6
-04B1 C007      1424            push    ar7
-04B3 C000      1425            push    ar0
-04B5 C001      1426            push    ar1
-04B7 900000    1427            mov     dptr,#0x0000
-04BA 75F080    1428            mov     b,#0x80
-04BD 7443      1429            mov     a,#0x43
-04BF 120000    1430            lcall   ___fsmul
-04C2 AE82      1431            mov     r6,dpl
-04C4 AF83      1432            mov     r7,dph
-04C6 A8F0      1433            mov     r0,b
-04C8 F9        1434            mov     r1,a
-04C9 E581      1435            mov     a,sp
-04CB 24FC      1436            add     a,#0xfc
-04CD F581      1437            mov     sp,a
-04CF D005      1438            pop     ar5
-04D1 D004      1439            pop     ar4
-04D3 D003      1440            pop     ar3
-04D5 D002      1441            pop     ar2
-04D7 C006      1442            push    ar6
-04D9 C007      1443            push    ar7
-04DB C000      1444            push    ar0
-04DD C001      1445            push    ar1
-04DF 8A82      1446            mov     dpl,r2
-04E1 8B83      1447            mov     dph,r3
-04E3 8CF0      1448            mov     b,r4
-04E5 ED        1449            mov     a,r5
-04E6 120000    1450            lcall   ___fsadd
-04E9 AA82      1451            mov     r2,dpl
-04EB AB83      1452            mov     r3,dph
-04ED ACF0      1453            mov     r4,b
-04EF FD        1454            mov     r5,a
-04F0 E581      1455            mov     a,sp
-04F2 24FC      1456            add     a,#0xfc
-04F4 F581      1457            mov     sp,a
-04F6 AE8A      1458            mov     r6,_TL0
-04F8 7F00      1459            mov     r7,#0x00
-04FA 8E82      1460            mov     dpl,r6
-04FC 8F83      1461            mov     dph,r7
-04FE C002      1462            push    ar2
-0500 C003      1463            push    ar3
-0502 C004      1464            push    ar4
-0504 C005      1465            push    ar5
-0506 120000    1466            lcall   ___sint2fs
-0509 AE82      1467            mov     r6,dpl
-050B AF83      1468            mov     r7,dph
-050D A8F0      1469            mov     r0,b
-050F F9        1470            mov     r1,a
-0510 D005      1471            pop     ar5
-0512 D004      1472            pop     ar4
-0514 D003      1473            pop     ar3
-0516 D002      1474            pop     ar2
-0518 C006      1475            push    ar6
-051A C007      1476            push    ar7
-051C C000      1477            push    ar0
-051E C001      1478            push    ar1
-0520 8A82      1479            mov     dpl,r2
-0522 8B83      1480            mov     dph,r3
-0524 8CF0      1481            mov     b,r4
-0526 ED        1482            mov     a,r5
-0527 120000    1483            lcall   ___fsadd
-052A AA82      1484            mov     r2,dpl
-052C AB83      1485            mov     r3,dph
-052E ACF0      1486            mov     r4,b
-0530 FD        1487            mov     r5,a
-0531 E581      1488            mov     a,sp
-0533 24FC      1489            add     a,#0xfc
-0535 F581      1490            mov     sp,a
-0537 C002      1491            push    ar2
-0539 C003      1492            push    ar3
-053B C004      1493            push    ar4
-053D C005      1494            push    ar5
-053F 90F4FC    1495            mov     dptr,#0xF4FC
-0542 75F032    1496            mov     b,#0x32
-0545 7434      1497            mov     a,#0x34
-0547 120000    1498            lcall   ___fsmul
-054A AA82      1499            mov     r2,dpl
-054C AB83      1500            mov     r3,dph
-054E ACF0      1501            mov     r4,b
-0550 FD        1502            mov     r5,a
-0551 E581      1503            mov     a,sp
-0553 24FC      1504            add     a,#0xfc
-0555 F581      1505            mov     sp,a
-0557           1506   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:292: writeOutputBuffer(output_buffer, PtoC(period));
-0557 8A82      1507            mov     dpl,r2
-0559 8B83      1508            mov     dph,r3
-055B 8CF0      1509            mov     b,r4
-055D ED        1510            mov     a,r5
-055E 120000    1511            lcall   _PtoC
-0561 858240    1512            mov     _writeOutputBuffer_PARM_2,dpl
-0564 858341    1513            mov     (_writeOutputBuffer_PARM_2 + 1),dph
-0567 85F042    1514            mov     (_writeOutputBuffer_PARM_2 + 2),b
-056A F543      1515            mov     (_writeOutputBuffer_PARM_2 + 3),a
-056C 90B0B0    1516            mov     dptr,#_main_output_buffer_1_57
-056F 75F040    1517            mov     b,#0x40
-0572 120000    1518            lcall   _writeOutputBuffer
-0575           1519   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:295: LCDprint(output_buffer, 1, 1);
-0575 75B801    1520            mov     _LCDprint_PARM_2,#0x01
-0578 D2F0      1521            setb    _LCDprint_PARM_3
-057A 90B0B0    1522            mov     dptr,#_main_output_buffer_1_57
-057D 75F040    1523            mov     b,#0x40
-0580 120000    1524            lcall   _LCDprint
-0583 020000    1525            ljmp    L015018?
-0586           1526            rseg R_CSEG
-0586           1527   
-0000           1528            rseg R_XINIT
-0000           1529   
-0000           1530            rseg R_CONST
-0000           1531   __str_0:
-0000 43203D20  1532            db 'C = %.4f%cF'
+02C9           1142   ;         function writeOutputBuffer
+02C9           1143   ;        -----------------------------------------
+02C9           1144   _writeOutputBuffer:
+02C9 AA82      1145            mov     r2,dpl
+02CB AB83      1146            mov     r3,dph
+02CD ACF0      1147            mov     r4,b
+02CF           1148   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:227: char suffix = 'n';
+02CF 7D6E      1149            mov     r5,#0x6E
+02D1           1150   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:228: if(cap < 1.5)
+02D1 C002      1151            push    ar2
+02D3 C003      1152            push    ar3
+02D5 C004      1153            push    ar4
+02D7 C005      1154            push    ar5
+02D9 E4        1155            clr     a
+02DA C0E0      1156            push    acc
+02DC C0E0      1157            push    acc
+02DE 74C0      1158            mov     a,#0xC0
+02E0 C0E0      1159            push    acc
+02E2 743F      1160            mov     a,#0x3F
+02E4 C0E0      1161            push    acc
+02E6 853082    1162            mov     dpl,_writeOutputBuffer_PARM_2
+02E9 853183    1163            mov     dph,(_writeOutputBuffer_PARM_2 + 1)
+02EC 8532F0    1164            mov     b,(_writeOutputBuffer_PARM_2 + 2)
+02EF E533      1165            mov     a,(_writeOutputBuffer_PARM_2 + 3)
+02F1 120000    1166            lcall   ___fslt
+02F4 AE82      1167            mov     r6,dpl
+02F6 E581      1168            mov     a,sp
+02F8 24FC      1169            add     a,#0xfc
+02FA F581      1170            mov     sp,a
+02FC D005      1171            pop     ar5
+02FE D004      1172            pop     ar4
+0300 D003      1173            pop     ar3
+0302 D002      1174            pop     ar2
+0304 EE        1175            mov     a,r6
+0305 6000      1176            jz      L014002?
+0307           1177   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:230: sprintf(buffer, "Insert Capacitor");
+0307 7470      1178            mov     a,#__str_0
+0309 C0E0      1179            push    acc
+030B 74B9      1180            mov     a,#(__str_0 >> 8)
+030D C0E0      1181            push    acc
+030F 7480      1182            mov     a,#0x80
+0311 C0E0      1183            push    acc
+0313 C002      1184            push    ar2
+0315 C003      1185            push    ar3
+0317 C004      1186            push    ar4
+0319 120000    1187            lcall   _sprintf
+031C E581      1188            mov     a,sp
+031E 24FA      1189            add     a,#0xfa
+0320 F581      1190            mov     sp,a
+0322           1191   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:231: return;
+0322 22        1192            ret
+0323           1193   L014002?:
+0323           1194   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:233: if(cap > 100.0)
+0323 C002      1195            push    ar2
+0325 C003      1196            push    ar3
+0327 C004      1197            push    ar4
+0329 C005      1198            push    ar5
+032B E4        1199            clr     a
+032C C0E0      1200            push    acc
+032E C0E0      1201            push    acc
+0330 74C8      1202            mov     a,#0xC8
+0332 C0E0      1203            push    acc
+0334 7442      1204            mov     a,#0x42
+0336 C0E0      1205            push    acc
+0338 853082    1206            mov     dpl,_writeOutputBuffer_PARM_2
+033B 853183    1207            mov     dph,(_writeOutputBuffer_PARM_2 + 1)
+033E 8532F0    1208            mov     b,(_writeOutputBuffer_PARM_2 + 2)
+0341 E533      1209            mov     a,(_writeOutputBuffer_PARM_2 + 3)
+0343 120000    1210            lcall   ___fsgt
+0346 AE82      1211            mov     r6,dpl
+0348 E581      1212            mov     a,sp
+034A 24FC      1213            add     a,#0xfc
+034C F581      1214            mov     sp,a
+034E D005      1215            pop     ar5
+0350 D004      1216            pop     ar4
+0352 D003      1217            pop     ar3
+0354 D002      1218            pop     ar2
+0356 EE        1219            mov     a,r6
+0357 6000      1220            jz      L014004?
+0359           1221   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:235: suffix = 'u';
+0359 7D75      1222            mov     r5,#0x75
+035B           1223   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:236: cap = cap/1000.0;
+035B C002      1224            push    ar2
+035D C003      1225            push    ar3
+035F C004      1226            push    ar4
+0361 C005      1227            push    ar5
+0363 E4        1228            clr     a
+0364 C0E0      1229            push    acc
+0366 C0E0      1230            push    acc
+0368 747A      1231            mov     a,#0x7A
+036A C0E0      1232            push    acc
+036C 7444      1233            mov     a,#0x44
+036E C0E0      1234            push    acc
+0370 853082    1235            mov     dpl,_writeOutputBuffer_PARM_2
+0373 853183    1236            mov     dph,(_writeOutputBuffer_PARM_2 + 1)
+0376 8532F0    1237            mov     b,(_writeOutputBuffer_PARM_2 + 2)
+0379 E533      1238            mov     a,(_writeOutputBuffer_PARM_2 + 3)
+037B 120000    1239            lcall   ___fsdiv
+037E 858230    1240            mov     _writeOutputBuffer_PARM_2,dpl
+0381 858331    1241            mov     (_writeOutputBuffer_PARM_2 + 1),dph
+0384 85F032    1242            mov     (_writeOutputBuffer_PARM_2 + 2),b
+0387 F533      1243            mov     (_writeOutputBuffer_PARM_2 + 3),a
+0389 E581      1244            mov     a,sp
+038B 24FC      1245            add     a,#0xfc
+038D F581      1246            mov     sp,a
+038F D005      1247            pop     ar5
+0391 D004      1248            pop     ar4
+0393 D003      1249            pop     ar3
+0395 D002      1250            pop     ar2
+0397           1251   L014004?:
+0397           1252   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:238: if(cap > 100.0)
+0397 C002      1253            push    ar2
+0399 C003      1254            push    ar3
+039B C004      1255            push    ar4
+039D C005      1256            push    ar5
+039F E4        1257            clr     a
+03A0 C0E0      1258            push    acc
+03A2 C0E0      1259            push    acc
+03A4 74C8      1260            mov     a,#0xC8
+03A6 C0E0      1261            push    acc
+03A8 7442      1262            mov     a,#0x42
+03AA C0E0      1263            push    acc
+03AC 853082    1264            mov     dpl,_writeOutputBuffer_PARM_2
+03AF 853183    1265            mov     dph,(_writeOutputBuffer_PARM_2 + 1)
+03B2 8532F0    1266            mov     b,(_writeOutputBuffer_PARM_2 + 2)
+03B5 E533      1267            mov     a,(_writeOutputBuffer_PARM_2 + 3)
+03B7 120000    1268            lcall   ___fsgt
+03BA AE82      1269            mov     r6,dpl
+03BC E581      1270            mov     a,sp
+03BE 24FC      1271            add     a,#0xfc
+03C0 F581      1272            mov     sp,a
+03C2 D005      1273            pop     ar5
+03C4 D004      1274            pop     ar4
+03C6 D003      1275            pop     ar3
+03C8 D002      1276            pop     ar2
+03CA EE        1277            mov     a,r6
+03CB 6000      1278            jz      L014006?
+03CD           1279   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:240: suffix = 'm';
+03CD 7D6D      1280            mov     r5,#0x6D
+03CF           1281   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:241: cap = cap/1000.0;
+03CF C002      1282            push    ar2
+03D1 C003      1283            push    ar3
+03D3 C004      1284            push    ar4
+03D5 C005      1285            push    ar5
+03D7 E4        1286            clr     a
+03D8 C0E0      1287            push    acc
+03DA C0E0      1288            push    acc
+03DC 747A      1289            mov     a,#0x7A
+03DE C0E0      1290            push    acc
+03E0 7444      1291            mov     a,#0x44
+03E2 C0E0      1292            push    acc
+03E4 853082    1293            mov     dpl,_writeOutputBuffer_PARM_2
+03E7 853183    1294            mov     dph,(_writeOutputBuffer_PARM_2 + 1)
+03EA 8532F0    1295            mov     b,(_writeOutputBuffer_PARM_2 + 2)
+03ED E533      1296            mov     a,(_writeOutputBuffer_PARM_2 + 3)
+03EF 120000    1297            lcall   ___fsdiv
+03F2 858230    1298            mov     _writeOutputBuffer_PARM_2,dpl
+03F5 858331    1299            mov     (_writeOutputBuffer_PARM_2 + 1),dph
+03F8 85F032    1300            mov     (_writeOutputBuffer_PARM_2 + 2),b
+03FB F533      1301            mov     (_writeOutputBuffer_PARM_2 + 3),a
+03FD E581      1302            mov     a,sp
+03FF 24FC      1303            add     a,#0xfc
+0401 F581      1304            mov     sp,a
+0403 D005      1305            pop     ar5
+0405 D004      1306            pop     ar4
+0407 D003      1307            pop     ar3
+0409 D002      1308            pop     ar2
+040B           1309   L014006?:
+040B           1310   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:243: if(cap > 100.0)
+040B C002      1311            push    ar2
+040D C003      1312            push    ar3
+040F C004      1313            push    ar4
+0411 C005      1314            push    ar5
+0413 E4        1315            clr     a
+0414 C0E0      1316            push    acc
+0416 C0E0      1317            push    acc
+0418 74C8      1318            mov     a,#0xC8
+041A C0E0      1319            push    acc
+041C 7442      1320            mov     a,#0x42
+041E C0E0      1321            push    acc
+0420 853082    1322            mov     dpl,_writeOutputBuffer_PARM_2
+0423 853183    1323            mov     dph,(_writeOutputBuffer_PARM_2 + 1)
+0426 8532F0    1324            mov     b,(_writeOutputBuffer_PARM_2 + 2)
+0429 E533      1325            mov     a,(_writeOutputBuffer_PARM_2 + 3)
+042B 120000    1326            lcall   ___fsgt
+042E AE82      1327            mov     r6,dpl
+0430 E581      1328            mov     a,sp
+0432 24FC      1329            add     a,#0xfc
+0434 F581      1330            mov     sp,a
+0436 D005      1331            pop     ar5
+0438 D004      1332            pop     ar4
+043A D003      1333            pop     ar3
+043C D002      1334            pop     ar2
+043E EE        1335            mov     a,r6
+043F 6000      1336            jz      L014008?
+0441           1337   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:245: suffix = ' ';
+0441 7D20      1338            mov     r5,#0x20
+0443           1339   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:246: cap = cap/1000.0;
+0443 C002      1340            push    ar2
+0445 C003      1341            push    ar3
+0447 C004      1342            push    ar4
+0449 C005      1343            push    ar5
+044B E4        1344            clr     a
+044C C0E0      1345            push    acc
+044E C0E0      1346            push    acc
+0450 747A      1347            mov     a,#0x7A
+0452 C0E0      1348            push    acc
+0454 7444      1349            mov     a,#0x44
+0456 C0E0      1350            push    acc
+0458 853082    1351            mov     dpl,_writeOutputBuffer_PARM_2
+045B 853183    1352            mov     dph,(_writeOutputBuffer_PARM_2 + 1)
+045E 8532F0    1353            mov     b,(_writeOutputBuffer_PARM_2 + 2)
+0461 E533      1354            mov     a,(_writeOutputBuffer_PARM_2 + 3)
+0463 120000    1355            lcall   ___fsdiv
+0466 858230    1356            mov     _writeOutputBuffer_PARM_2,dpl
+0469 858331    1357            mov     (_writeOutputBuffer_PARM_2 + 1),dph
+046C 85F032    1358            mov     (_writeOutputBuffer_PARM_2 + 2),b
+046F F533      1359            mov     (_writeOutputBuffer_PARM_2 + 3),a
+0471 E581      1360            mov     a,sp
+0473 24FC      1361            add     a,#0xfc
+0475 F581      1362            mov     sp,a
+0477 D005      1363            pop     ar5
+0479 D004      1364            pop     ar4
+047B D003      1365            pop     ar3
+047D D002      1366            pop     ar2
+047F           1367   L014008?:
+047F           1368   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:248: sprintf(buffer, "C = %.4f%cF", cap, suffix);
+047F ED        1369            mov     a,r5
+0480 33        1370            rlc     a
+0481 95E0      1371            subb    a,acc
+0483 FE        1372            mov     r6,a
+0484 C005      1373            push    ar5
+0486 C006      1374            push    ar6
+0488 C030      1375            push    _writeOutputBuffer_PARM_2
+048A C031      1376            push    (_writeOutputBuffer_PARM_2 + 1)
+048C C032      1377            push    (_writeOutputBuffer_PARM_2 + 2)
+048E C033      1378            push    (_writeOutputBuffer_PARM_2 + 3)
+0490 74F0      1379            mov     a,#__str_1
+0492 C0E0      1380            push    acc
+0494 74BA      1381            mov     a,#(__str_1 >> 8)
+0496 C0E0      1382            push    acc
+0498 7480      1383            mov     a,#0x80
+049A C0E0      1384            push    acc
+049C C002      1385            push    ar2
+049E C003      1386            push    ar3
+04A0 C004      1387            push    ar4
+04A2 120000    1388            lcall   _sprintf
+04A5 E581      1389            mov     a,sp
+04A7 24F4      1390            add     a,#0xf4
+04A9 F581      1391            mov     sp,a
+04AB 22        1392            ret
+04AC           1393   ;------------------------------------------------------------
+04AC           1394   ;Allocation info for local variables in function 'main'
+04AC           1395   ;------------------------------------------------------------
+04AC           1396   ;period                    Allocated to registers r2 r3 r4 r5 
+04AC           1397   ;mode                      Allocated with name '_main_mode_1_59'
+04AC           1398   ;output_buffer             Allocated with name '_main_output_buffer_1_59'
+04AC           1399   ;------------------------------------------------------------
+04AC           1400   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:251: void main (void) 
+04AC           1401   ;        -----------------------------------------
+04AC           1402   ;         function main
+04AC           1403   ;        -----------------------------------------
+04AC           1404   _main:
+04AC           1405   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:255: int mode = 0;
+04AC E4        1406            clr     a
+04AD F5A0      1407            mov     _main_mode_1_59,a
+04AF F5A1      1408            mov     (_main_mode_1_59 + 1),a
+04B1           1409   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:258: TIMER0_Init();
+04B1 120000    1410            lcall   _TIMER0_Init
+04B4           1411   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:260: LCD_4BIT();
+04B4 120000    1412            lcall   _LCD_4BIT
+04B7           1413   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:262: waitms(500); // Give PuTTY a chance to start.
+04B7 9001F4    1414            mov     dptr,#0x01F4
+04BA 120000    1415            lcall   _waitms
+04BD           1416   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:263: printf("\x1b[2J"); // Clear screen using ANSI escape sequence.
+04BD 7430      1417            mov     a,#__str_2
+04BF C0E0      1418            push    acc
+04C1 74BB      1419            mov     a,#(__str_2 >> 8)
+04C3 C0E0      1420            push    acc
+04C5 7480      1421            mov     a,#0x80
+04C7 C0E0      1422            push    acc
+04C9 120000    1423            lcall   _printf
+04CC 1581      1424            dec     sp
+04CE 1581      1425            dec     sp
+04D0 1581      1426            dec     sp
+04D2           1427   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:268: __FILE__, __DATE__, __TIME__);
+04D2           1428   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:267: "Compiled: %s, %s\n\n",
+04D2 74B0      1429            mov     a,#__str_6
+04D4 C0E0      1430            push    acc
+04D6 74BB      1431            mov     a,#(__str_6 >> 8)
+04D8 C0E0      1432            push    acc
+04DA 7480      1433            mov     a,#0x80
+04DC C0E0      1434            push    acc
+04DE 74F0      1435            mov     a,#__str_5
+04E0 C0E0      1436            push    acc
+04E2 74BB      1437            mov     a,#(__str_5 >> 8)
+04E4 C0E0      1438            push    acc
+04E6 7480      1439            mov     a,#0x80
+04E8 C0E0      1440            push    acc
+04EA 7430      1441            mov     a,#__str_4
+04EC C0E0      1442            push    acc
+04EE 74BC      1443            mov     a,#(__str_4 >> 8)
+04F0 C0E0      1444            push    acc
+04F2 7480      1445            mov     a,#0x80
+04F4 C0E0      1446            push    acc
+04F6 7470      1447            mov     a,#__str_3
+04F8 C0E0      1448            push    acc
+04FA 74BC      1449            mov     a,#(__str_3 >> 8)
+04FC C0E0      1450            push    acc
+04FE 7480      1451            mov     a,#0x80
+0500 C0E0      1452            push    acc
+0502 120000    1453            lcall   _printf
+0505 E581      1454            mov     a,sp
+0507 24F4      1455            add     a,#0xf4
+0509 F581      1456            mov     sp,a
+050B           1457   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:270: while (1)
+050B           1458   L015034?:
+050B           1459   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:273: TL0=0; 
+050B 758A00    1460            mov     _TL0,#0x00
+050E           1461   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:274: TH0=0;
+050E 758C00    1462            mov     _TH0,#0x00
+0511           1463   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:275: TF0=0;
+0511 C28D      1464            clr     _TF0
+0513           1465   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:276: overflow_count=0;
+0513 750000    1466            mov     _overflow_count,#0x00
+0516           1467   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:278: while(P0_1!=0); // Wait for the signal to be zero
+0516           1468   L015001?:
+0516 2081F0    1469            jb      _P0_1,L015001?
+0519           1470   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:279: while(P0_1!=1); // Wait for the signal to be one
+0519           1471   L015004?:
+0519 308130    1472            jnb     _P0_1,L015004?
+051C           1473   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:280: TR0=1; // Start the timer
+051C D28C      1474            setb    _TR0
+051E           1475   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:281: while(P0_1!=0) // Wait for the signal to be zero
+051E           1476   L015009?:
+051E 3081B0    1477            jnb     _P0_1,L015014?
+0521           1478   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:283: if(TF0==1) // Did the 16-bit timer overflow?
+0521           1479   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:285: TF0=0;
+0521 108DF0    1480            jbc     _TF0,L015058?
+0524 8000      1481            sjmp    L015009?
+0526           1482   L015058?:
+0526           1483   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:286: overflow_count++;
+0526 0500      1484            inc     _overflow_count
+0528           1485   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:289: while(P0_1!=1) // Wait for the signal to be one
+0528 8000      1486            sjmp    L015009?
+052A           1487   L015014?:
+052A 208130    1488            jb      _P0_1,L015016?
+052D           1489   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:291: if(TF0==1) // Did the 16-bit timer overflow?
+052D           1490   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:293: TF0=0;
+052D 108D70    1491            jbc     _TF0,L015060?
+0530 8000      1492            sjmp    L015014?
+0532           1493   L015060?:
+0532           1494   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:294: overflow_count++;
+0532 0500      1495            inc     _overflow_count
+0534 8000      1496            sjmp    L015014?
+0536           1497   L015016?:
+0536           1498   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:297: TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period!
+0536 C28C      1499            clr     _TR0
+0538           1500   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:298: period=(overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK);
+0538 850082    1501            mov     dpl,_overflow_count
+053B 120000    1502            lcall   ___uchar2fs
+053E AC82      1503            mov     r4,dpl
+0540 AD83      1504            mov     r5,dph
+0542 AEF0      1505            mov     r6,b
+0544 FF        1506            mov     r7,a
+0545 C004      1507            push    ar4
+0547 C005      1508            push    ar5
+0549 C006      1509            push    ar6
+054B C007      1510            push    ar7
+054D 900000    1511            mov     dptr,#0x0000
+0550 75F080    1512            mov     b,#0x80
+0553 7447      1513            mov     a,#0x47
+0555 120000    1514            lcall   ___fsmul
+0558 AC82      1515            mov     r4,dpl
+055A AD83      1516            mov     r5,dph
+055C AEF0      1517            mov     r6,b
+055E FF        1518            mov     r7,a
+055F E581      1519            mov     a,sp
+0561 24FC      1520            add     a,#0xfc
+0563 F581      1521            mov     sp,a
+0565 858C82    1522            mov     dpl,_TH0
+0568 C004      1523            push    ar4
+056A C005      1524            push    ar5
+056C C006      1525            push    ar6
+056E C007      1526            push    ar7
+0570 120000    1527            lcall   ___uchar2fs
+0573 A882      1528            mov     r0,dpl
+0575 A983      1529            mov     r1,dph
+0577 AAF0      1530            mov     r2,b
+0579 FB        1531            mov     r3,a
+057A C000      1532            push    ar0
+057C C001      1533            push    ar1
+057E C002      1534            push    ar2
+0580 C003      1535            push    ar3
+0582 900000    1536            mov     dptr,#0x0000
+0585 75F080    1537            mov     b,#0x80
+0588 7443      1538            mov     a,#0x43
+058A 120000    1539            lcall   ___fsmul
+058D AA82      1540            mov     r2,dpl
+058F AB83      1541            mov     r3,dph
+0591 A8F0      1542            mov     r0,b
+0593 F9        1543            mov     r1,a
+0594 E581      1544            mov     a,sp
+0596 24FC      1545            add     a,#0xfc
+0598 F581      1546            mov     sp,a
+059A D007      1547            pop     ar7
+059C D006      1548            pop     ar6
+059E D005      1549            pop     ar5
+05A0 D004      1550            pop     ar4
+05A2 C002      1551            push    ar2
+05A4 C003      1552            push    ar3
+05A6 C000      1553            push    ar0
+05A8 C001      1554            push    ar1
+05AA 8C82      1555            mov     dpl,r4
+05AC 8D83      1556            mov     dph,r5
+05AE 8EF0      1557            mov     b,r6
+05B0 EF        1558            mov     a,r7
+05B1 120000    1559            lcall   ___fsadd
+05B4 AA82      1560            mov     r2,dpl
+05B6 AB83      1561            mov     r3,dph
+05B8 ACF0      1562            mov     r4,b
+05BA FD        1563            mov     r5,a
+05BB E581      1564            mov     a,sp
+05BD 24FC      1565            add     a,#0xfc
+05BF F581      1566            mov     sp,a
+05C1 AE8A      1567            mov     r6,_TL0
+05C3 7F00      1568            mov     r7,#0x00
+05C5 8E82      1569            mov     dpl,r6
+05C7 8F83      1570            mov     dph,r7
+05C9 C002      1571            push    ar2
+05CB C003      1572            push    ar3
+05CD C004      1573            push    ar4
+05CF C005      1574            push    ar5
+05D1 120000    1575            lcall   ___sint2fs
+05D4 AE82      1576            mov     r6,dpl
+05D6 AF83      1577            mov     r7,dph
+05D8 A8F0      1578            mov     r0,b
+05DA F9        1579            mov     r1,a
+05DB D005      1580            pop     ar5
+05DD D004      1581            pop     ar4
+05DF D003      1582            pop     ar3
+05E1 D002      1583            pop     ar2
+05E3 C006      1584            push    ar6
+05E5 C007      1585            push    ar7
+05E7 C000      1586            push    ar0
+05E9 C001      1587            push    ar1
+05EB 8A82      1588            mov     dpl,r2
+05ED 8B83      1589            mov     dph,r3
+05EF 8CF0      1590            mov     b,r4
+05F1 ED        1591            mov     a,r5
+05F2 120000    1592            lcall   ___fsadd
+05F5 AA82      1593            mov     r2,dpl
+05F7 AB83      1594            mov     r3,dph
+05F9 ACF0      1595            mov     r4,b
+05FB FD        1596            mov     r5,a
+05FC E581      1597            mov     a,sp
+05FE 24FC      1598            add     a,#0xfc
+0600 F581      1599            mov     sp,a
+0602 C002      1600            push    ar2
+0604 C003      1601            push    ar3
+0606 C004      1602            push    ar4
+0608 C005      1603            push    ar5
+060A 90F4FC    1604            mov     dptr,#0xF4FC
+060D 75F032    1605            mov     b,#0x32
+0610 7434      1606            mov     a,#0x34
+0612 120000    1607            lcall   ___fsmul
+0615 AA82      1608            mov     r2,dpl
+0617 AB83      1609            mov     r3,dph
+0619 ACF0      1610            mov     r4,b
+061B FD        1611            mov     r5,a
+061C E581      1612            mov     a,sp
+061E 24FC      1613            add     a,#0xfc
+0620 F581      1614            mov     sp,a
+0622           1615   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:301: if(P1_1 == 0)
+0622 209170    1616            jb      _P1_1,L015023?
+0625           1617   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:303: printf("button2 pressed\n");
+0625 C002      1618            push    ar2
+0627 C003      1619            push    ar3
+0629 C004      1620            push    ar4
+062B C005      1621            push    ar5
+062D 74B0      1622            mov     a,#__str_7
+062F C0E0      1623            push    acc
+0631 74BF      1624            mov     a,#(__str_7 >> 8)
+0633 C0E0      1625            push    acc
+0635 7480      1626            mov     a,#0x80
+0637 C0E0      1627            push    acc
+0639 120000    1628            lcall   _printf
+063C 1581      1629            dec     sp
+063E 1581      1630            dec     sp
+0640 1581      1631            dec     sp
+0642 D005      1632            pop     ar5
+0644 D004      1633            pop     ar4
+0646 D003      1634            pop     ar3
+0648 D002      1635            pop     ar2
+064A           1636   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:304: mode++;
+064A 05A0      1637            inc     _main_mode_1_59
+064C E4        1638            clr     a
+064D B5A0F0    1639            cjne    a,_main_mode_1_59,L015062?
+0650 05A1      1640            inc     (_main_mode_1_59 + 1)
+0652           1641   L015062?:
+0652           1642   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:305: if(mode > 1)
+0652 C3        1643            clr     c
+0653 7401      1644            mov     a,#0x01
+0655 95A0      1645            subb    a,_main_mode_1_59
+0657 E4        1646            clr     a
+0658 6480      1647            xrl     a,#0x80
+065A 85A1F0    1648            mov     b,(_main_mode_1_59 + 1)
+065D 63F080    1649            xrl     b,#0x80
+0660 95F0      1650            subb    a,b
+0662 5000      1651            jnc     L015019?
+0664           1652   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:306: mode = 0;
+0664 E4        1653            clr     a
+0665 F5A0      1654            mov     _main_mode_1_59,a
+0667 F5A1      1655            mov     (_main_mode_1_59 + 1),a
+0669           1656   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:307: while(P1_1 == 0)
+0669           1657   L015019?:
+0669 309130    1658            jnb     _P1_1,L015019?
+066C           1659   L015023?:
+066C           1660   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:312: if(P1_3 == 0)
+066C 209370    1661            jb      _P1_3,L015028?
+066F           1662   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:314: writeOutputBuffer(output_buffer, PtoC(period));
+066F 8A82      1663            mov     dpl,r2
+0671 8B83      1664            mov     dph,r3
+0673 8CF0      1665            mov     b,r4
+0675 ED        1666            mov     a,r5
+0676 C002      1667            push    ar2
+0678 C003      1668            push    ar3
+067A C004      1669            push    ar4
+067C C005      1670            push    ar5
+067E 120000    1671            lcall   _PtoC
+0681 858230    1672            mov     _writeOutputBuffer_PARM_2,dpl
+0684 858331    1673            mov     (_writeOutputBuffer_PARM_2 + 1),dph
+0687 85F032    1674            mov     (_writeOutputBuffer_PARM_2 + 2),b
+068A F533      1675            mov     (_writeOutputBuffer_PARM_2 + 3),a
+068C 90B0F0    1676            mov     dptr,#_main_output_buffer_1_59
+068F 75F040    1677            mov     b,#0x40
+0692 120000    1678            lcall   _writeOutputBuffer
+0695           1679   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:315: LCDprint(output_buffer, 2, 1);
+0695 75C002    1680            mov     _LCDprint_PARM_2,#0x02
+0698 D2E0      1681            setb    _LCDprint_PARM_3
+069A 90B0F0    1682            mov     dptr,#_main_output_buffer_1_59
+069D 75F040    1683            mov     b,#0x40
+06A0 120000    1684            lcall   _LCDprint
+06A3 D005      1685            pop     ar5
+06A5 D004      1686            pop     ar4
+06A7 D003      1687            pop     ar3
+06A9 D002      1688            pop     ar2
+06AB           1689   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:316: while(P1_3 == 0)
+06AB           1690   L015024?:
+06AB 3093B0    1691            jnb     _P1_3,L015024?
+06AE           1692   L015028?:
+06AE           1693   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:321: if(mode == 0)
+06AE E5A0      1694            mov     a,_main_mode_1_59
+06B0 45A1      1695            orl     a,(_main_mode_1_59 + 1)
+06B2 7000      1696            jnz     L015030?
+06B4           1697   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:323: writeOutputBuffer(output_buffer, PtoC(period));
+06B4 8A82      1698            mov     dpl,r2
+06B6 8B83      1699            mov     dph,r3
+06B8 8CF0      1700            mov     b,r4
+06BA ED        1701            mov     a,r5
+06BB C002      1702            push    ar2
+06BD C003      1703            push    ar3
+06BF C004      1704            push    ar4
+06C1 C005      1705            push    ar5
+06C3 120000    1706            lcall   _PtoC
+06C6 858230    1707            mov     _writeOutputBuffer_PARM_2,dpl
+06C9 858331    1708            mov     (_writeOutputBuffer_PARM_2 + 1),dph
+06CC 85F032    1709            mov     (_writeOutputBuffer_PARM_2 + 2),b
+06CF F533      1710            mov     (_writeOutputBuffer_PARM_2 + 3),a
+06D1 90B0F0    1711            mov     dptr,#_main_output_buffer_1_59
+06D4 75F040    1712            mov     b,#0x40
+06D7 120000    1713            lcall   _writeOutputBuffer
+06DA           1714   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:324: printf("\r%s", output_buffer);
+06DA 74F0      1715            mov     a,#_main_output_buffer_1_59
+06DC C0E0      1716            push    acc
+06DE 74B0      1717            mov     a,#(_main_output_buffer_1_59 >> 8)
+06E0 C0E0      1718            push    acc
+06E2 7440      1719            mov     a,#0x40
+06E4 C0E0      1720            push    acc
+06E6 7430      1721            mov     a,#__str_8
+06E8 C0E0      1722            push    acc
+06EA 74C1      1723            mov     a,#(__str_8 >> 8)
+06EC C0E0      1724            push    acc
+06EE 7480      1725            mov     a,#0x80
+06F0 C0E0      1726            push    acc
+06F2 120000    1727            lcall   _printf
+06F5 E581      1728            mov     a,sp
+06F7 24FA      1729            add     a,#0xfa
+06F9 F581      1730            mov     sp,a
+06FB           1731   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:325: LCDprint(output_buffer, 1, 1);   
+06FB 75C001    1732            mov     _LCDprint_PARM_2,#0x01
+06FE D2E0      1733            setb    _LCDprint_PARM_3
+0700 90B0F0    1734            mov     dptr,#_main_output_buffer_1_59
+0703 75F040    1735            mov     b,#0x40
+0706 120000    1736            lcall   _LCDprint
+0709 D005      1737            pop     ar5
+070B D004      1738            pop     ar4
+070D D003      1739            pop     ar3
+070F D002      1740            pop     ar2
+0711           1741   L015030?:
+0711           1742   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:327: if(mode == 1)
+0711 7401      1743            mov     a,#0x01
+0713 B5A070    1744            cjne    a,_main_mode_1_59,L015068?
+0716 E4        1745            clr     a
+0717 B5A170    1746            cjne    a,(_main_mode_1_59 + 1),L015068?
+071A 8000      1747            sjmp    L015069?
+071C           1748   L015068?:
+071C 020000    1749            ljmp    L015034?
+071F           1750   L015069?:
+071F           1751   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:329: sprintf(output_buffer, "T=%lfs", period);
+071F C002      1752            push    ar2
+0721 C003      1753            push    ar3
+0723 C004      1754            push    ar4
+0725 C005      1755            push    ar5
+0727 74F0      1756            mov     a,#__str_9
+0729 C0E0      1757            push    acc
+072B 74C1      1758            mov     a,#(__str_9 >> 8)
+072D C0E0      1759            push    acc
+072F 7480      1760            mov     a,#0x80
+0731 C0E0      1761            push    acc
+0733 74F0      1762            mov     a,#_main_output_buffer_1_59
+0735 C0E0      1763            push    acc
+0737 74B0      1764            mov     a,#(_main_output_buffer_1_59 >> 8)
+0739 C0E0      1765            push    acc
+073B 7440      1766            mov     a,#0x40
+073D C0E0      1767            push    acc
+073F 120000    1768            lcall   _sprintf
+0742 E581      1769            mov     a,sp
+0744 24F6      1770            add     a,#0xf6
+0746 F581      1771            mov     sp,a
+0748           1772   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:330: printf("\r%s", output_buffer);
+0748 74F0      1773            mov     a,#_main_output_buffer_1_59
+074A C0E0      1774            push    acc
+074C 74B0      1775            mov     a,#(_main_output_buffer_1_59 >> 8)
+074E C0E0      1776            push    acc
+0750 7440      1777            mov     a,#0x40
+0752 C0E0      1778            push    acc
+0754 7430      1779            mov     a,#__str_8
+0756 C0E0      1780            push    acc
+0758 74C1      1781            mov     a,#(__str_8 >> 8)
+075A C0E0      1782            push    acc
+075C 7480      1783            mov     a,#0x80
+075E C0E0      1784            push    acc
+0760 120000    1785            lcall   _printf
+0763 E581      1786            mov     a,sp
+0765 24FA      1787            add     a,#0xfa
+0767 F581      1788            mov     sp,a
+0769           1789   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:331: LCDprint(output_buffer, 1, 1);   
+0769 75C001    1790            mov     _LCDprint_PARM_2,#0x01
+076C D2E0      1791            setb    _LCDprint_PARM_3
+076E 90B0F0    1792            mov     dptr,#_main_output_buffer_1_59
+0771 75F040    1793            mov     b,#0x40
+0774 120000    1794            lcall   _LCDprint
+0777 020000    1795            ljmp    L015034?
+077A           1796            rseg R_CSEG
+077A           1797   
+0000           1798            rseg R_XINIT
+0000           1799   
+0000           1800            rseg R_CONST
+0000           1801   __str_0:
+0000 496E7365  1802            db 'Insert Capacitor'
+     72742043
+     61706163
+     69746F72
+0010 00        1803            db 0x00
+0011           1804   __str_1:
+0011 43203D20  1805            db 'C = %.4f%cF'
      252E3466
      256346
-000B 00        1533            db 0x00
-000C           1534   __str_1:
-000C 1B        1535            db 0x1B
-000D 5B324A    1536            db '[2J'
-0010 00        1537            db 0x00
-0011           1538   __str_2:
-0011 45464D38  1539            db 'EFM8 Period measurement at pin P0.1 using Timer 0.'
+001C 00        1806            db 0x00
+001D           1807   __str_2:
+001D 1B        1808            db 0x1B
+001E 5B324A    1809            db '[2J'
+0021 00        1810            db 0x00
+0022           1811   __str_3:
+0022 45464D38  1812            db 'EFM8 Period measurement at pin P0.1 using Timer 0.'
      20506572
      696F6420
      6D656173
@@ -1551,52 +1827,67 @@
      67205469
      6D657220
      302E
-0043 0A        1540            db 0x0A
-0044 46696C65  1541            db 'File: %s'
+0054 0A        1813            db 0x0A
+0055 46696C65  1814            db 'File: %s'
      3A202573
-004C 0A        1542            db 0x0A
-004D 436F6D70  1543            db 'Compiled: %s, %s'
+005D 0A        1815            db 0x0A
+005E 436F6D70  1816            db 'Compiled: %s, %s'
      696C6564
      3A202573
      2C202573
-005D 0A        1544            db 0x0A
-005E 0A        1545            db 0x0A
-005F 00        1546            db 0x00
-0060           1547   __str_3:
-0060 433A      1548            db 'C:'
-0062 5C        1549            db 0x5C
-0063 55736572  1550            db 'Users'
+006E 0A        1817            db 0x0A
+006F 0A        1818            db 0x0A
+0070 00        1819            db 0x00
+0071           1820   __str_4:
+0071 433A      1821            db 'C:'
+0073 5C        1822            db 0x5C
+0074 55736572  1823            db 'Users'
      73
-0068 5C        1551            db 0x5C
-0069 6B636772  1552            db 'kcgro'
+0079 5C        1824            db 0x5C
+007A 6B636772  1825            db 'kcgro'
      6F
-006E 5C        1553            db 0x5C
-006F 446F6375  1554            db 'Documents'
+007F 5C        1826            db 0x5C
+0080 446F6375  1827            db 'Documents'
      6D656E74
      73
-0078 5C        1555            db 0x5C
-0079 47697448  1556            db 'GitHub'
+0089 5C        1828            db 0x5C
+008A 47697448  1829            db 'GitHub'
      7562
-007F 5C        1557            db 0x5C
-0080 454C4543  1558            db 'ELEC291'
+0090 5C        1830            db 0x5C
+0091 454C4543  1831            db 'ELEC291'
      323931
-0087 5C        1559            db 0x5C
-0088 4C414234  1560            db 'LAB4'
-008C 5C        1561            db 0x5C
-008D 50657269  1562            db 'PeriodEFM8.c'
+0098 5C        1832            db 0x5C
+0099 4C414234  1833            db 'LAB4'
+009D 5C        1834            db 0x5C
+009E 50657269  1835            db 'PeriodEFM8.c'
      6F644546
      4D382E63
-0099 00        1563            db 0x00
-009A           1564   __str_4:
-009A 46656220  1565            db 'Feb 28 2023'
-     32382032
+00AA 00        1836            db 0x00
+00AB           1837   __str_5:
+00AB 4D617220  1838            db 'Mar  1 2023'
+     20312032
      303233
-00A5 00        1566            db 0x00
-00A6           1567   __str_5:
-00A6 31343A35  1568            db '14:59:27'
-     393A3237
-00AE 00        1569            db 0x00
-00AF           1570   
-0003           1571            CSEG
-0003           1572   
-0003           1573   end
+00B6 00        1839            db 0x00
+00B7           1840   __str_6:
+00B7 31333A30  1841            db '13:06:00'
+     363A3030
+00BF 00        1842            db 0x00
+00C0           1843   __str_7:
+00C0 62757474  1844            db 'button2 pressed'
+     6F6E3220
+     70726573
+     736564
+00CF 0A        1845            db 0x0A
+00D0 00        1846            db 0x00
+00D1           1847   __str_8:
+00D1 0D        1848            db 0x0D
+00D2 2573      1849            db '%s'
+00D4 00        1850            db 0x00
+00D5           1851   __str_9:
+00D5 543D256C  1852            db 'T=%lfs'
+     6673
+00DB 00        1853            db 0x00
+00DC           1854   
+0003           1855            CSEG
+0003           1856   
+0003           1857   end

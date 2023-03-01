@@ -225,7 +225,11 @@ double PtoC(double period){
 
 void writeOutputBuffer(char *buffer, double cap){
 	char suffix = 'n';
-
+	if(cap < 1.5)
+	{
+		sprintf(buffer, "Insert Capacitor");
+		return;
+	}
 	if(cap > 100.0)
 	{
 		suffix = 'u';
@@ -236,6 +240,11 @@ void writeOutputBuffer(char *buffer, double cap){
 		suffix = 'm';
 		cap = cap/1000.0;
 	}
+	if(cap > 100.0)
+	{
+		suffix = ' ';
+		cap = cap/1000.0;
+	}
 	sprintf(buffer, "C = %.4f%cF", cap, suffix);
 }
 
@@ -243,7 +252,7 @@ void main (void)
 {
 	
 	double period;
-
+	int mode = 0;
 	char output_buffer[20];
 	
 	TIMER0_Init();
@@ -289,10 +298,39 @@ void main (void)
 		period=(overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK);
 		// Send the period to the serial port
 
-		writeOutputBuffer(output_buffer, PtoC(period));
-		//sprintf(output_buffer, "C = %f", PtoC(period));
-		//printf("\r%s", output_buffer);
-		LCDprint(output_buffer, 1, 1);
+		if(P1_1 == 0)
+		{
+			printf("button2 pressed\n");
+			mode++;
+			if(mode > 1)
+				mode = 0;
+			while(P1_1 == 0)
+			{
+			}
+		}
+
+		if(P1_3 == 0)
+		{
+			writeOutputBuffer(output_buffer, PtoC(period));
+			LCDprint(output_buffer, 2, 1);
+			while(P1_3 == 0)
+			{
+			}
+		}
+		
+		if(mode == 0)
+		{
+			writeOutputBuffer(output_buffer, PtoC(period));
+			printf("\r%s", output_buffer);
+			LCDprint(output_buffer, 1, 1);	
+		}
+		if(mode == 1)
+		{
+			sprintf(output_buffer, "T=%lfs", period);
+			printf("\r%s", output_buffer);
+			LCDprint(output_buffer, 1, 1);	
+		}
+		
     }
 }
 
