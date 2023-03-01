@@ -1,10 +1,11 @@
 ;--------------------------------------------------------
 ; File Created by C51
 ; Version 1.0.0 #1170 (Feb 16 2022) (MSVC)
-; This file was generated Tue Feb 28 13:51:26 2023
+; This file was generated Tue Feb 28 14:59:27 2023
 ;--------------------------------------------------------
-$name EFM8_LCD_4bit
+$name PeriodEFM8
 $optc51 --model-small
+$printf_float
 	R_DSEG    segment data
 	R_CSEG    segment code
 	R_BSEG    segment bit
@@ -24,6 +25,9 @@ $optc51 --model-small
 ; Public variables in this module
 ;--------------------------------------------------------
 	public _main
+	public _writeOutputBuffer
+	public _PtoC
+	public _TIMER0_Init
 	public _getsn
 	public _LCDprint
 	public _LCD_4BIT
@@ -35,8 +39,10 @@ $optc51 --model-small
 	public _Timer3us
 	public __c51_external_startup
 	public _LCDprint_PARM_3
+	public _writeOutputBuffer_PARM_2
 	public _getsn_PARM_2
 	public _LCDprint_PARM_2
+	public _overflow_count
 ;--------------------------------------------------------
 ; Special Function Registers
 ;--------------------------------------------------------
@@ -485,16 +491,20 @@ _TFRQ           BIT 0xdf
 ; internal ram data
 ;--------------------------------------------------------
 	rseg R_DSEG
+_overflow_count:
+	ds 1
 _LCDprint_PARM_2:
 	ds 1
 _getsn_PARM_2:
 	ds 2
-_getsn_buff_1_42:
+_getsn_buff_1_43:
 	ds 3
 _getsn_sloc0_1_0:
 	ds 2
-_main_buff_1_48:
-	ds 17
+_writeOutputBuffer_PARM_2:
+	ds 4
+_main_output_buffer_1_57:
+	ds 20
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
@@ -556,65 +566,69 @@ _LCDprint_PARM_3:
 ;Allocation info for local variables in function '_c51_external_startup'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:16: char _c51_external_startup (void)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:25: char _c51_external_startup (void)
 ;	-----------------------------------------
 ;	 function _c51_external_startup
 ;	-----------------------------------------
 __c51_external_startup:
 	using	0
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:19: SFRPAGE = 0x00;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:28: SFRPAGE = 0x00;
 	mov	_SFRPAGE,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:20: WDTCN = 0xDE; //First key
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:29: WDTCN = 0xDE; //First key
 	mov	_WDTCN,#0xDE
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:21: WDTCN = 0xAD; //Second key
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:30: WDTCN = 0xAD; //Second key
 	mov	_WDTCN,#0xAD
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:28: SFRPAGE = 0x10;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:32: VDM0CN |= 0x80;
+	orl	_VDM0CN,#0x80
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:33: RSTSRC = 0x02;
+	mov	_RSTSRC,#0x02
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:40: SFRPAGE = 0x10;
 	mov	_SFRPAGE,#0x10
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:29: PFE0CN  = 0x20; // SYSCLK < 75 MHz.
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:41: PFE0CN  = 0x20; // SYSCLK < 75 MHz.
 	mov	_PFE0CN,#0x20
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:30: SFRPAGE = 0x00;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:42: SFRPAGE = 0x00;
 	mov	_SFRPAGE,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:51: CLKSEL = 0x00;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:63: CLKSEL = 0x00;
 	mov	_CLKSEL,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:52: CLKSEL = 0x00;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:64: CLKSEL = 0x00;
 	mov	_CLKSEL,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:53: while ((CLKSEL & 0x80) == 0);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:65: while ((CLKSEL & 0x80) == 0);
 L002001?:
 	mov	a,_CLKSEL
 	jnb	acc.7,L002001?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:54: CLKSEL = 0x03;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:66: CLKSEL = 0x03;
 	mov	_CLKSEL,#0x03
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:55: CLKSEL = 0x03;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:67: CLKSEL = 0x03;
 	mov	_CLKSEL,#0x03
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:56: while ((CLKSEL & 0x80) == 0);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:68: while ((CLKSEL & 0x80) == 0);
 L002004?:
 	mov	a,_CLKSEL
 	jnb	acc.7,L002004?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:61: P0MDOUT |= 0x10; // Enable UART0 TX as push-pull output
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:73: P0MDOUT |= 0x10; // Enable UART0 TX as push-pull output
 	orl	_P0MDOUT,#0x10
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:62: XBR0     = 0x01; // Enable UART0 on P0.4(TX) and P0.5(RX)                     
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:74: XBR0     = 0x01; // Enable UART0 on P0.4(TX) and P0.5(RX)                     
 	mov	_XBR0,#0x01
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:63: XBR1     = 0X00;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:75: XBR1     = 0X00;
 	mov	_XBR1,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:64: XBR2     = 0x40; // Enable crossbar and weak pull-ups
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:76: XBR2     = 0x40; // Enable crossbar and weak pull-ups
 	mov	_XBR2,#0x40
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:70: SCON0 = 0x10;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:82: SCON0 = 0x10;
 	mov	_SCON0,#0x10
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:71: CKCON0 |= 0b_0000_0000 ; // Timer 1 uses the system clock divided by 12.
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:83: CKCON0 |= 0b_0000_0000 ; // Timer 1 uses the system clock divided by 12.
 	mov	_CKCON0,_CKCON0
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:72: TH1 = 0x100-((SYSCLK/BAUDRATE)/(2L*12L));
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:84: TH1 = 0x100-((SYSCLK/BAUDRATE)/(2L*12L));
 	mov	_TH1,#0xE6
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:73: TL1 = TH1;      // Init Timer1
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:85: TL1 = TH1;      // Init Timer1
 	mov	_TL1,_TH1
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:74: TMOD &= ~0xf0;  // TMOD: timer 1 in 8-bit auto-reload
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:86: TMOD &= ~0xf0;  // TMOD: timer 1 in 8-bit auto-reload
 	anl	_TMOD,#0x0F
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:75: TMOD |=  0x20;                       
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:87: TMOD |=  0x20;                       
 	orl	_TMOD,#0x20
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:76: TR1 = 1; // START Timer1
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:88: TR1 = 1; // START Timer1
 	setb	_TR1
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:77: TI = 1;  // Indicate TX0 ready
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:89: TI = 1;  // Indicate TX0 ready
 	setb	_TI
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:79: return 0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:91: return 0;
 	mov	dpl,#0x00
 	ret
 ;------------------------------------------------------------
@@ -623,109 +637,98 @@ L002004?:
 ;us                        Allocated to registers r2 
 ;i                         Allocated to registers r3 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:84: void Timer3us(unsigned char us)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:95: void Timer3us(unsigned char us)
 ;	-----------------------------------------
 ;	 function Timer3us
 ;	-----------------------------------------
 _Timer3us:
 	mov	r2,dpl
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:89: CKCON0|=0b_0100_0000;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:100: CKCON0|=0b_0100_0000;
 	orl	_CKCON0,#0x40
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:91: TMR3RL = (-(SYSCLK)/1000000L); // Set Timer3 to overflow in 1us.
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:102: TMR3RL = (-(SYSCLK)/1000000L); // Set Timer3 to overflow in 1us.
 	mov	_TMR3RL,#0xB8
 	mov	(_TMR3RL >> 8),#0xFF
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:92: TMR3 = TMR3RL;                 // Initialize Timer3 for first overflow
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:103: TMR3 = TMR3RL;                 // Initialize Timer3 for first overflow
 	mov	_TMR3,_TMR3RL
 	mov	(_TMR3 >> 8),(_TMR3RL >> 8)
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:94: TMR3CN0 = 0x04;                 // Sart Timer3 and clear overflow flag
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:105: TMR3CN0 = 0x04;                 // Sart Timer3 and clear overflow flag
 	mov	_TMR3CN0,#0x04
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:95: for (i = 0; i < us; i++)       // Count <us> overflows
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:106: for (i = 0; i < us; i++)       // Count <us> overflows
 	mov	r3,#0x00
 L003004?:
 	clr	c
 	mov	a,r3
 	subb	a,r2
 	jnc	L003007?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:97: while (!(TMR3CN0 & 0x80));  // Wait for overflow
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:108: while (!(TMR3CN0 & 0x80));  // Wait for overflow
 L003001?:
 	mov	a,_TMR3CN0
 	jnb	acc.7,L003001?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:98: TMR3CN0 &= ~(0x80);         // Clear overflow indicator
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:109: TMR3CN0 &= ~(0x80);         // Clear overflow indicator
 	anl	_TMR3CN0,#0x7F
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:95: for (i = 0; i < us; i++)       // Count <us> overflows
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:106: for (i = 0; i < us; i++)       // Count <us> overflows
 	inc	r3
 	sjmp	L003004?
 L003007?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:100: TMR3CN0 = 0 ;                   // Stop Timer3 and clear overflow flag
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:111: TMR3CN0 = 0 ;                   // Stop Timer3 and clear overflow flag
 	mov	_TMR3CN0,#0x00
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'waitms'
 ;------------------------------------------------------------
 ;ms                        Allocated to registers r2 r3 
-;j                         Allocated to registers r4 r5 
-;k                         Allocated to registers r6 
+;j                         Allocated to registers r2 r3 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:103: void waitms (unsigned int ms)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:114: void waitms (unsigned int ms)
 ;	-----------------------------------------
 ;	 function waitms
 ;	-----------------------------------------
 _waitms:
 	mov	r2,dpl
 	mov	r3,dph
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:107: for(j=0; j<ms; j++)
-	mov	r4,#0x00
-	mov	r5,#0x00
-L004005?:
-	clr	c
-	mov	a,r4
-	subb	a,r2
-	mov	a,r5
-	subb	a,r3
-	jnc	L004009?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:108: for (k=0; k<4; k++) Timer3us(250);
-	mov	r6,#0x00
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:117: for(j=ms; j!=0; j--)
 L004001?:
-	cjne	r6,#0x04,L004018?
-L004018?:
-	jnc	L004007?
-	mov	dpl,#0xFA
+	cjne	r2,#0x00,L004010?
+	cjne	r3,#0x00,L004010?
+	ret
+L004010?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:119: Timer3us(249);
+	mov	dpl,#0xF9
 	push	ar2
 	push	ar3
-	push	ar4
-	push	ar5
-	push	ar6
 	lcall	_Timer3us
-	pop	ar6
-	pop	ar5
-	pop	ar4
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:120: Timer3us(249);
+	mov	dpl,#0xF9
+	lcall	_Timer3us
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:121: Timer3us(249);
+	mov	dpl,#0xF9
+	lcall	_Timer3us
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:122: Timer3us(250);
+	mov	dpl,#0xFA
+	lcall	_Timer3us
 	pop	ar3
 	pop	ar2
-	inc	r6
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:117: for(j=ms; j!=0; j--)
+	dec	r2
+	cjne	r2,#0xff,L004011?
+	dec	r3
+L004011?:
 	sjmp	L004001?
-L004007?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:107: for(j=0; j<ms; j++)
-	inc	r4
-	cjne	r4,#0x00,L004005?
-	inc	r5
-	sjmp	L004005?
-L004009?:
-	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'LCD_pulse'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:111: void LCD_pulse (void)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:127: void LCD_pulse (void)
 ;	-----------------------------------------
 ;	 function LCD_pulse
 ;	-----------------------------------------
 _LCD_pulse:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:113: LCD_E=1;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:129: LCD_E=1;
 	setb	_P2_5
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:114: Timer3us(40);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:130: Timer3us(40);
 	mov	dpl,#0x28
 	lcall	_Timer3us
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:115: LCD_E=0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:131: LCD_E=0;
 	clr	_P2_5
 	ret
 ;------------------------------------------------------------
@@ -733,66 +736,66 @@ _LCD_pulse:
 ;------------------------------------------------------------
 ;x                         Allocated to registers r2 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:118: void LCD_byte (unsigned char x)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:134: void LCD_byte (unsigned char x)
 ;	-----------------------------------------
 ;	 function LCD_byte
 ;	-----------------------------------------
 _LCD_byte:
 	mov	r2,dpl
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:121: ACC=x; //Send high nible
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:137: ACC=x; //Send high nible
 	mov	_ACC,r2
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:122: LCD_D7=ACC_7;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:138: LCD_D7=ACC_7;
 	mov	c,_ACC_7
 	mov	_P2_1,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:123: LCD_D6=ACC_6;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:139: LCD_D6=ACC_6;
 	mov	c,_ACC_6
 	mov	_P2_2,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:124: LCD_D5=ACC_5;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:140: LCD_D5=ACC_5;
 	mov	c,_ACC_5
 	mov	_P2_3,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:125: LCD_D4=ACC_4;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:141: LCD_D4=ACC_4;
 	mov	c,_ACC_4
 	mov	_P2_4,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:126: LCD_pulse();
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:142: LCD_pulse();
 	push	ar2
 	lcall	_LCD_pulse
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:127: Timer3us(40);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:143: Timer3us(40);
 	mov	dpl,#0x28
 	lcall	_Timer3us
 	pop	ar2
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:128: ACC=x; //Send low nible
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:144: ACC=x; //Send low nible
 	mov	_ACC,r2
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:129: LCD_D7=ACC_3;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:145: LCD_D7=ACC_3;
 	mov	c,_ACC_3
 	mov	_P2_1,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:130: LCD_D6=ACC_2;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:146: LCD_D6=ACC_2;
 	mov	c,_ACC_2
 	mov	_P2_2,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:131: LCD_D5=ACC_1;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:147: LCD_D5=ACC_1;
 	mov	c,_ACC_1
 	mov	_P2_3,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:132: LCD_D4=ACC_0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:148: LCD_D4=ACC_0;
 	mov	c,_ACC_0
 	mov	_P2_4,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:133: LCD_pulse();
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:149: LCD_pulse();
 	ljmp	_LCD_pulse
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'WriteData'
 ;------------------------------------------------------------
 ;x                         Allocated to registers r2 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:136: void WriteData (unsigned char x)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:152: void WriteData (unsigned char x)
 ;	-----------------------------------------
 ;	 function WriteData
 ;	-----------------------------------------
 _WriteData:
 	mov	r2,dpl
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:138: LCD_RS=1;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:154: LCD_RS=1;
 	setb	_P2_6
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:139: LCD_byte(x);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:155: LCD_byte(x);
 	mov	dpl,r2
 	lcall	_LCD_byte
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:140: waitms(2);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:156: waitms(2);
 	mov	dptr,#0x0002
 	ljmp	_waitms
 ;------------------------------------------------------------
@@ -800,53 +803,53 @@ _WriteData:
 ;------------------------------------------------------------
 ;x                         Allocated to registers r2 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:143: void WriteCommand (unsigned char x)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:159: void WriteCommand (unsigned char x)
 ;	-----------------------------------------
 ;	 function WriteCommand
 ;	-----------------------------------------
 _WriteCommand:
 	mov	r2,dpl
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:145: LCD_RS=0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:161: LCD_RS=0;
 	clr	_P2_6
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:146: LCD_byte(x);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:162: LCD_byte(x);
 	mov	dpl,r2
 	lcall	_LCD_byte
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:147: waitms(5);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:163: waitms(5);
 	mov	dptr,#0x0005
 	ljmp	_waitms
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'LCD_4BIT'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:150: void LCD_4BIT (void)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:166: void LCD_4BIT (void)
 ;	-----------------------------------------
 ;	 function LCD_4BIT
 ;	-----------------------------------------
 _LCD_4BIT:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:152: LCD_E=0; // Resting state of LCD's enable is zero
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:168: LCD_E=0; // Resting state of LCD's enable is zero
 	clr	_P2_5
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:154: waitms(20);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:170: waitms(20);
 	mov	dptr,#0x0014
 	lcall	_waitms
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:156: WriteCommand(0x33);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:172: WriteCommand(0x33);
 	mov	dpl,#0x33
 	lcall	_WriteCommand
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:157: WriteCommand(0x33);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:173: WriteCommand(0x33);
 	mov	dpl,#0x33
 	lcall	_WriteCommand
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:158: WriteCommand(0x32); // Change to 4-bit mode
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:174: WriteCommand(0x32); // Change to 4-bit mode
 	mov	dpl,#0x32
 	lcall	_WriteCommand
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:161: WriteCommand(0x28);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:177: WriteCommand(0x28);
 	mov	dpl,#0x28
 	lcall	_WriteCommand
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:162: WriteCommand(0x0c);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:178: WriteCommand(0x0c);
 	mov	dpl,#0x0C
 	lcall	_WriteCommand
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:163: WriteCommand(0x01); // Clear screen command (takes some time)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:179: WriteCommand(0x01); // Clear screen command (takes some time)
 	mov	dpl,#0x01
 	lcall	_WriteCommand
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:164: waitms(20); // Wait for clear screen command to finsih.
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:180: waitms(20); // Wait for clear screen command to finsih.
 	mov	dptr,#0x0014
 	ljmp	_waitms
 ;------------------------------------------------------------
@@ -856,7 +859,7 @@ _LCD_4BIT:
 ;string                    Allocated to registers r2 r3 r4 
 ;j                         Allocated to registers r5 r6 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:167: void LCDprint(char * string, unsigned char line, bit clear)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:183: void LCDprint(char * string, unsigned char line, bit clear)
 ;	-----------------------------------------
 ;	 function LCDprint
 ;	-----------------------------------------
@@ -864,7 +867,7 @@ _LCDprint:
 	mov	r2,dpl
 	mov	r3,dph
 	mov	r4,b
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:171: WriteCommand(line==2?0xc0:0x80);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:187: WriteCommand(line==2?0xc0:0x80);
 	mov	a,#0x02
 	cjne	a,_LCDprint_PARM_2,L010013?
 	mov	r5,#0xC0
@@ -877,13 +880,13 @@ L010014?:
 	push	ar3
 	push	ar4
 	lcall	_WriteCommand
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:172: waitms(5);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:188: waitms(5);
 	mov	dptr,#0x0005
 	lcall	_waitms
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:173: for(j=0; string[j]!=0; j++)	WriteData(string[j]);// Write the message
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:189: for(j=0; string[j]!=0; j++)	WriteData(string[j]);// Write the message
 	mov	r5,#0x00
 	mov	r6,#0x00
 L010003?:
@@ -917,7 +920,7 @@ L010003?:
 	inc	r6
 	sjmp	L010003?
 L010006?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:174: if(clear) for(; j<CHARS_PER_LINE; j++) WriteData(' '); // Clear the rest of the line
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:190: if(clear) for(; j<CHARS_PER_LINE; j++) WriteData(' '); // Clear the rest of the line
 	jnb	_LCDprint_PARM_3,L010011?
 	mov	ar2,r5
 	mov	ar3,r6
@@ -945,20 +948,20 @@ L010011?:
 ;Allocation info for local variables in function 'getsn'
 ;------------------------------------------------------------
 ;len                       Allocated with name '_getsn_PARM_2'
-;buff                      Allocated with name '_getsn_buff_1_42'
+;buff                      Allocated with name '_getsn_buff_1_43'
 ;j                         Allocated with name '_getsn_sloc0_1_0'
 ;c                         Allocated to registers r3 
 ;sloc0                     Allocated with name '_getsn_sloc0_1_0'
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:177: int getsn (char * buff, int len)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:193: int getsn (char * buff, int len)
 ;	-----------------------------------------
 ;	 function getsn
 ;	-----------------------------------------
 _getsn:
-	mov	_getsn_buff_1_42,dpl
-	mov	(_getsn_buff_1_42 + 1),dph
-	mov	(_getsn_buff_1_42 + 2),b
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:182: for(j=0; j<(len-1); j++)
+	mov	_getsn_buff_1_43,dpl
+	mov	(_getsn_buff_1_43 + 1),dph
+	mov	(_getsn_buff_1_43 + 2),b
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:198: for(j=0; j<(len-1); j++)
 	clr	a
 	mov	_getsn_sloc0_1_0,a
 	mov	(_getsn_sloc0_1_0 + 1),a
@@ -980,7 +983,7 @@ L011005?:
 	xrl	b,#0x80
 	subb	a,b
 	jnc	L011008?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:184: c=getchar();
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:200: c=getchar();
 	push	ar2
 	push	ar7
 	push	ar0
@@ -991,44 +994,44 @@ L011005?:
 	pop	ar0
 	pop	ar7
 	pop	ar2
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:185: if ( (c=='\n') || (c=='\r') )
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:201: if ( (c=='\n') || (c=='\r') )
 	cjne	r3,#0x0A,L011015?
 	sjmp	L011001?
 L011015?:
 	cjne	r3,#0x0D,L011002?
 L011001?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:187: buff[j]=0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:203: buff[j]=0;
 	mov	a,_getsn_sloc0_1_0
-	add	a,_getsn_buff_1_42
+	add	a,_getsn_buff_1_43
 	mov	r4,a
 	mov	a,(_getsn_sloc0_1_0 + 1)
-	addc	a,(_getsn_buff_1_42 + 1)
+	addc	a,(_getsn_buff_1_43 + 1)
 	mov	r5,a
-	mov	r6,(_getsn_buff_1_42 + 2)
+	mov	r6,(_getsn_buff_1_43 + 2)
 	mov	dpl,r4
 	mov	dph,r5
 	mov	b,r6
 	clr	a
 	lcall	__gptrput
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:188: return j;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:204: return j;
 	mov	dpl,_getsn_sloc0_1_0
 	mov	dph,(_getsn_sloc0_1_0 + 1)
 	ret
 L011002?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:192: buff[j]=c;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:208: buff[j]=c;
 	mov	a,r1
-	add	a,_getsn_buff_1_42
+	add	a,_getsn_buff_1_43
 	mov	r4,a
 	mov	a,r2
-	addc	a,(_getsn_buff_1_42 + 1)
+	addc	a,(_getsn_buff_1_43 + 1)
 	mov	r5,a
-	mov	r6,(_getsn_buff_1_42 + 2)
+	mov	r6,(_getsn_buff_1_43 + 2)
 	mov	dpl,r4
 	mov	dph,r5
 	mov	b,r6
 	mov	a,r3
 	lcall	__gptrput
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:182: for(j=0; j<(len-1); j++)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:198: for(j=0; j<(len-1); j++)
 	inc	r1
 	cjne	r1,#0x00,L011018?
 	inc	r2
@@ -1037,50 +1040,301 @@ L011018?:
 	mov	(_getsn_sloc0_1_0 + 1),r2
 	sjmp	L011005?
 L011008?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:195: buff[j]=0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:211: buff[j]=0;
 	mov	a,_getsn_sloc0_1_0
-	add	a,_getsn_buff_1_42
+	add	a,_getsn_buff_1_43
 	mov	r2,a
 	mov	a,(_getsn_sloc0_1_0 + 1)
-	addc	a,(_getsn_buff_1_42 + 1)
+	addc	a,(_getsn_buff_1_43 + 1)
 	mov	r3,a
-	mov	r4,(_getsn_buff_1_42 + 2)
+	mov	r4,(_getsn_buff_1_43 + 2)
 	mov	dpl,r2
 	mov	dph,r3
 	mov	b,r4
 	clr	a
 	lcall	__gptrput
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:196: return len;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:212: return len;
 	mov	dpl,_getsn_PARM_2
 	mov	dph,(_getsn_PARM_2 + 1)
 	ret
 ;------------------------------------------------------------
+;Allocation info for local variables in function 'TIMER0_Init'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:215: void TIMER0_Init(void)
+;	-----------------------------------------
+;	 function TIMER0_Init
+;	-----------------------------------------
+_TIMER0_Init:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:217: TMOD&=0b_1111_0000; // Set the bits of Timer/Counter 0 to zero
+	anl	_TMOD,#0xF0
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:218: TMOD|=0b_0000_0001; // Timer/Counter 0 used as a 16-bit timer
+	orl	_TMOD,#0x01
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:219: TR0=0; // Stop Timer/Counter 0
+	clr	_TR0
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'PtoC'
+;------------------------------------------------------------
+;period                    Allocated to registers r2 r3 r4 r5 
+;------------------------------------------------------------
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:222: double PtoC(double period){
+;	-----------------------------------------
+;	 function PtoC
+;	-----------------------------------------
+_PtoC:
+	mov	r2,dpl
+	mov	r3,dph
+	mov	r4,b
+	mov	r5,a
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:223: return ((period*1000000000.0)/(3465.7359028));
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	mov	dptr,#0x6B28
+	mov	b,#0x6E
+	mov	a,#0x4E
+	lcall	___fsmul
+	mov	r2,dpl
+	mov	r3,dph
+	mov	r4,b
+	mov	r5,a
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	mov	a,#0xC6
+	push	acc
+	mov	a,#0x9B
+	push	acc
+	mov	a,#0x58
+	push	acc
+	mov	a,#0x45
+	push	acc
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	mov	a,r5
+	lcall	___fsdiv
+	mov	r2,dpl
+	mov	r3,dph
+	mov	r4,b
+	mov	r5,a
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	mov	a,r5
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'writeOutputBuffer'
+;------------------------------------------------------------
+;cap                       Allocated with name '_writeOutputBuffer_PARM_2'
+;buffer                    Allocated to registers r2 r3 r4 
+;suffix                    Allocated to registers r5 
+;------------------------------------------------------------
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:226: void writeOutputBuffer(char *buffer, double cap){
+;	-----------------------------------------
+;	 function writeOutputBuffer
+;	-----------------------------------------
+_writeOutputBuffer:
+	mov	r2,dpl
+	mov	r3,dph
+	mov	r4,b
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:227: char suffix = 'n';
+	mov	r5,#0x6E
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:229: if(cap > 100.0)
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	clr	a
+	push	acc
+	push	acc
+	mov	a,#0xC8
+	push	acc
+	mov	a,#0x42
+	push	acc
+	mov	dpl,_writeOutputBuffer_PARM_2
+	mov	dph,(_writeOutputBuffer_PARM_2 + 1)
+	mov	b,(_writeOutputBuffer_PARM_2 + 2)
+	mov	a,(_writeOutputBuffer_PARM_2 + 3)
+	lcall	___fsgt
+	mov	r6,dpl
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+	mov	a,r6
+	jz	L014002?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:231: suffix = 'u';
+	mov	r5,#0x75
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:232: cap = cap/1000.0;
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	clr	a
+	push	acc
+	push	acc
+	mov	a,#0x7A
+	push	acc
+	mov	a,#0x44
+	push	acc
+	mov	dpl,_writeOutputBuffer_PARM_2
+	mov	dph,(_writeOutputBuffer_PARM_2 + 1)
+	mov	b,(_writeOutputBuffer_PARM_2 + 2)
+	mov	a,(_writeOutputBuffer_PARM_2 + 3)
+	lcall	___fsdiv
+	mov	_writeOutputBuffer_PARM_2,dpl
+	mov	(_writeOutputBuffer_PARM_2 + 1),dph
+	mov	(_writeOutputBuffer_PARM_2 + 2),b
+	mov	(_writeOutputBuffer_PARM_2 + 3),a
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+L014002?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:234: if(cap > 100.0)
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	clr	a
+	push	acc
+	push	acc
+	mov	a,#0xC8
+	push	acc
+	mov	a,#0x42
+	push	acc
+	mov	dpl,_writeOutputBuffer_PARM_2
+	mov	dph,(_writeOutputBuffer_PARM_2 + 1)
+	mov	b,(_writeOutputBuffer_PARM_2 + 2)
+	mov	a,(_writeOutputBuffer_PARM_2 + 3)
+	lcall	___fsgt
+	mov	r6,dpl
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+	mov	a,r6
+	jz	L014004?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:236: suffix = 'm';
+	mov	r5,#0x6D
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:237: cap = cap/1000.0;
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	clr	a
+	push	acc
+	push	acc
+	mov	a,#0x7A
+	push	acc
+	mov	a,#0x44
+	push	acc
+	mov	dpl,_writeOutputBuffer_PARM_2
+	mov	dph,(_writeOutputBuffer_PARM_2 + 1)
+	mov	b,(_writeOutputBuffer_PARM_2 + 2)
+	mov	a,(_writeOutputBuffer_PARM_2 + 3)
+	lcall	___fsdiv
+	mov	_writeOutputBuffer_PARM_2,dpl
+	mov	(_writeOutputBuffer_PARM_2 + 1),dph
+	mov	(_writeOutputBuffer_PARM_2 + 2),b
+	mov	(_writeOutputBuffer_PARM_2 + 3),a
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+L014004?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:239: sprintf(buffer, "C = %.4f%cF", cap, suffix);
+	mov	a,r5
+	rlc	a
+	subb	a,acc
+	mov	r6,a
+	push	ar5
+	push	ar6
+	push	_writeOutputBuffer_PARM_2
+	push	(_writeOutputBuffer_PARM_2 + 1)
+	push	(_writeOutputBuffer_PARM_2 + 2)
+	push	(_writeOutputBuffer_PARM_2 + 3)
+	mov	a,#__str_0
+	push	acc
+	mov	a,#(__str_0 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_sprintf
+	mov	a,sp
+	add	a,#0xf4
+	mov	sp,a
+	ret
+;------------------------------------------------------------
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
-;buff                      Allocated with name '_main_buff_1_48'
+;period                    Allocated to registers r2 r3 r4 r5 
+;output_buffer             Allocated with name '_main_output_buffer_1_57'
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:199: void main (void)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:242: void main (void) 
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:203: LCD_4BIT();
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:249: TIMER0_Init();
+	lcall	_TIMER0_Init
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:251: LCD_4BIT();
 	lcall	_LCD_4BIT
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:206: LCDprint("LCD 4-bit test:", 1, 1);
-	mov	_LCDprint_PARM_2,#0x01
-	setb	_LCDprint_PARM_3
-	mov	dptr,#__str_0
-	mov	b,#0x80
-	lcall	_LCDprint
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:207: LCDprint("Hello, World!", 2, 1);
-	mov	_LCDprint_PARM_2,#0x02
-	setb	_LCDprint_PARM_3
-	mov	dptr,#__str_1
-	mov	b,#0x80
-	lcall	_LCDprint
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:208: while(1)
-L012002?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:210: printf("Type what you want to display in line 2 (16 char max): ");
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:253: waitms(500); // Give PuTTY a chance to start.
+	mov	dptr,#0x01F4
+	lcall	_waitms
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:254: printf("\x1b[2J"); // Clear screen using ANSI escape sequence.
+	mov	a,#__str_1
+	push	acc
+	mov	a,#(__str_1 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:259: __FILE__, __DATE__, __TIME__);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:258: "Compiled: %s, %s\n\n",
+	mov	a,#__str_5
+	push	acc
+	mov	a,#(__str_5 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	mov	a,#__str_4
+	push	acc
+	mov	a,#(__str_4 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	mov	a,#__str_3
+	push	acc
+	mov	a,#(__str_3 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
 	mov	a,#__str_2
 	push	acc
 	mov	a,#(__str_2 >> 8)
@@ -1088,50 +1342,230 @@ L012002?:
 	mov	a,#0x80
 	push	acc
 	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:211: getsn(buff, sizeof(buff));
-	mov	_getsn_PARM_2,#0x11
-	clr	a
-	mov	(_getsn_PARM_2 + 1),a
-	mov	dptr,#_main_buff_1_48
+	mov	a,sp
+	add	a,#0xf4
+	mov	sp,a
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:261: while (1)
+L015018?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:264: TL0=0; 
+	mov	_TL0,#0x00
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:265: TH0=0;
+	mov	_TH0,#0x00
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:266: TF0=0;
+	clr	_TF0
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:267: overflow_count=0;
+	mov	_overflow_count,#0x00
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:269: while(P0_1!=0); // Wait for the signal to be zero
+L015001?:
+	jb	_P0_1,L015001?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:270: while(P0_1!=1); // Wait for the signal to be one
+L015004?:
+	jnb	_P0_1,L015004?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:271: TR0=1; // Start the timer
+	setb	_TR0
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:272: while(P0_1!=0) // Wait for the signal to be zero
+L015009?:
+	jnb	_P0_1,L015014?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:274: if(TF0==1) // Did the 16-bit timer overflow?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:276: TF0=0;
+	jbc	_TF0,L015035?
+	sjmp	L015009?
+L015035?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:277: overflow_count++;
+	inc	_overflow_count
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:280: while(P0_1!=1) // Wait for the signal to be one
+	sjmp	L015009?
+L015014?:
+	jb	_P0_1,L015016?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:282: if(TF0==1) // Did the 16-bit timer overflow?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:284: TF0=0;
+	jbc	_TF0,L015037?
+	sjmp	L015014?
+L015037?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:285: overflow_count++;
+	inc	_overflow_count
+	sjmp	L015014?
+L015016?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:288: TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period!
+	clr	_TR0
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:289: period=(overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK);
+	mov	dpl,_overflow_count
+	lcall	___uchar2fs
+	mov	r2,dpl
+	mov	r3,dph
+	mov	r4,b
+	mov	r5,a
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	mov	dptr,#0x0000
+	mov	b,#0x80
+	mov	a,#0x47
+	lcall	___fsmul
+	mov	r2,dpl
+	mov	r3,dph
+	mov	r4,b
+	mov	r5,a
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	mov	dpl,_TH0
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	lcall	___uchar2fs
+	mov	r6,dpl
+	mov	r7,dph
+	mov	r0,b
+	mov	r1,a
+	push	ar6
+	push	ar7
+	push	ar0
+	push	ar1
+	mov	dptr,#0x0000
+	mov	b,#0x80
+	mov	a,#0x43
+	lcall	___fsmul
+	mov	r6,dpl
+	mov	r7,dph
+	mov	r0,b
+	mov	r1,a
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+	push	ar6
+	push	ar7
+	push	ar0
+	push	ar1
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	mov	a,r5
+	lcall	___fsadd
+	mov	r2,dpl
+	mov	r3,dph
+	mov	r4,b
+	mov	r5,a
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	mov	r6,_TL0
+	mov	r7,#0x00
+	mov	dpl,r6
+	mov	dph,r7
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	lcall	___sint2fs
+	mov	r6,dpl
+	mov	r7,dph
+	mov	r0,b
+	mov	r1,a
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+	push	ar6
+	push	ar7
+	push	ar0
+	push	ar1
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	mov	a,r5
+	lcall	___fsadd
+	mov	r2,dpl
+	mov	r3,dph
+	mov	r4,b
+	mov	r5,a
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	mov	dptr,#0xF4FC
+	mov	b,#0x32
+	mov	a,#0x34
+	lcall	___fsmul
+	mov	r2,dpl
+	mov	r3,dph
+	mov	r4,b
+	mov	r5,a
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:292: writeOutputBuffer(output_buffer, PtoC(period));
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	mov	a,r5
+	lcall	_PtoC
+	mov	_writeOutputBuffer_PARM_2,dpl
+	mov	(_writeOutputBuffer_PARM_2 + 1),dph
+	mov	(_writeOutputBuffer_PARM_2 + 2),b
+	mov	(_writeOutputBuffer_PARM_2 + 3),a
+	mov	dptr,#_main_output_buffer_1_57
 	mov	b,#0x40
-	lcall	_getsn
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:212: printf("\n");
-	mov	a,#__str_3
-	push	acc
-	mov	a,#(__str_3 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:213: LCDprint(buff, 2, 1);
-	mov	_LCDprint_PARM_2,#0x02
+	lcall	_writeOutputBuffer
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\PeriodEFM8.c:295: LCDprint(output_buffer, 1, 1);
+	mov	_LCDprint_PARM_2,#0x01
 	setb	_LCDprint_PARM_3
-	mov	dptr,#_main_buff_1_48
+	mov	dptr,#_main_output_buffer_1_57
 	mov	b,#0x40
 	lcall	_LCDprint
-	sjmp	L012002?
+	ljmp	L015018?
 	rseg R_CSEG
 
 	rseg R_XINIT
 
 	rseg R_CONST
 __str_0:
-	db 'LCD 4-bit test:'
+	db 'C = %.4f%cF'
 	db 0x00
 __str_1:
-	db 'Hello, World!'
+	db 0x1B
+	db '[2J'
 	db 0x00
 __str_2:
-	db 'Type what you want to display in line 2 (16 char max): '
+	db 'EFM8 Period measurement at pin P0.1 using Timer 0.'
+	db 0x0A
+	db 'File: %s'
+	db 0x0A
+	db 'Compiled: %s, %s'
+	db 0x0A
+	db 0x0A
 	db 0x00
 __str_3:
-	db 0x0A
+	db 'C:'
+	db 0x5C
+	db 'Users'
+	db 0x5C
+	db 'kcgro'
+	db 0x5C
+	db 'Documents'
+	db 0x5C
+	db 'GitHub'
+	db 0x5C
+	db 'ELEC291'
+	db 0x5C
+	db 'LAB4'
+	db 0x5C
+	db 'PeriodEFM8.c'
+	db 0x00
+__str_4:
+	db 'Feb 28 2023'
+	db 0x00
+__str_5:
+	db '14:59:27'
 	db 0x00
 
 	CSEG

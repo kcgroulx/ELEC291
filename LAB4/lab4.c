@@ -1,15 +1,16 @@
-// PeriodEFM8.c: Measure the period of a signal on pin P0.1.
+// FreqEFM8.c: Measure the frequency of a signal on pin T0.
 //
 // By:  Jesus Calvino-Fraga (c) 2008-2018
 //
 // The next line clears the "C51 command line options:" field when compiling with CrossIDE
-//  ~C51~  
-
+//  ~C51~
+  
 #include <EFM8LB1.h>
 #include <stdio.h>
 
 #define SYSCLK      72000000L  // SYSCLK frequency in Hz
 #define BAUDRATE      115200L  // Baud rate of UART in bps
+
 
 #define LCD_RS P2_6
 // #define LCD_RW Px_x // Not used in this code.  Connect to GND
@@ -72,7 +73,7 @@ char _c51_external_startup (void)
 	
 	P0MDOUT |= 0x10; // Enable UART0 TX as push-pull output
 	XBR0     = 0x01; // Enable UART0 on P0.4(TX) and P0.5(RX)                     
-	XBR1     = 0X00;
+	XBR1     = 0X10; // Enable T0 on P0.0
 	XBR2     = 0x40; // Enable crossbar and weak pull-ups
 
 	#if (((SYSCLK/BAUDRATE)/(2L*12L))>0xFFL)
@@ -90,7 +91,7 @@ char _c51_external_startup (void)
 	
 	return 0;
 }
-
+ 
 // Uses Timer3 to delay <us> micro-seconds. 
 void Timer3us(unsigned char us)
 {
@@ -107,6 +108,11 @@ void Timer3us(unsigned char us)
 	{
 		while (!(TMR3CN0 & 0x80));  // Wait for overflow
 		TMR3CN0 &= ~(0x80);         // Clear overflow indicator
+		if (TF0)
+		{
+		   TF0=0;
+		   overflow_count++;
+		}
 	}
 	TMR3CN0 = 0 ;                   // Stop Timer3 and clear overflow flag
 }
@@ -122,7 +128,6 @@ void waitms (unsigned int ms)
 		Timer3us(250);
 	}
 }
-
 
 void LCD_pulse (void)
 {
@@ -212,48 +217,33 @@ int getsn (char * buff, int len)
 	return len;
 }
 
+float f2c(float frequency)
+{
+	return (float)1/(0.6931*frequency*5000);
+}
+
 void TIMER0_Init(void)
 {
 	TMOD&=0b_1111_0000; // Set the bits of Timer/Counter 0 to zero
-	TMOD|=0b_0000_0001; // Timer/Counter 0 used as a 16-bit timer
+	TMOD|=0b_0000_0101; // Timer/Counter 0 used as a 16-bit counter
 	TR0=0; // Stop Timer/Counter 0
-}
-
-double PtoC(double period){
-	return ((period*1000000000.0)/(3465.7359028));
-}
-
-void writeOutputBuffer(char *buffer, double cap){
-	char suffix = 'n';
-
-	if(cap > 100.0)
-	{
-		suffix = 'u';
-		cap = cap/1000.0;
-	}
-	if(cap > 100.0)
-	{
-		suffix = 'm';
-		cap = cap/1000.0;
-	}
-	sprintf(buffer, "C = %.4f%cF", cap, suffix);
 }
 
 void main (void) 
 {
 	
-	double period;
-
 	char output_buffer[20];
+	float period;
+	float F = 100.123;
+
+	//int F = 5;
 	
 	TIMER0_Init();
-	
-	LCD_4BIT();
 
 	waitms(500); // Give PuTTY a chance to start.
 	printf("\x1b[2J"); // Clear screen using ANSI escape sequence.
 
-	printf ("EFM8 Period measurement at pin P0.1 using Timer 0.\n"
+	printf ("EFM8 Frequency measurement using Timer/Counter 0.\n"
 	        "File: %s\n"
 	        "Compiled: %s, %s\n\n",
 	        __FILE__, __DATE__, __TIME__);
@@ -288,13 +278,7 @@ void main (void)
 		TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period!
 		period=(overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK);
 		// Send the period to the serial port
-
-		writeOutputBuffer(output_buffer, PtoC(period));
-		//sprintf(output_buffer, "C = %f", PtoC(period));
-		//printf("\r%s", output_buffer);
-		LCDprint(output_buffer, 1, 1);
+		printf( "\rT=%f ms    ", period*1000.0);
     }
+	
 }
-
-
- 

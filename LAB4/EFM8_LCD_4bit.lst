@@ -1,7 +1,7 @@
 0000              1   ;--------------------------------------------------------
 0000              2   ; File Created by C51
 0000              3   ; Version 1.0.0 #1170 (Feb 16 2022) (MSVC)
-0000              4   ; This file was generated Tue Feb 28 11:51:48 2023
+0000              4   ; This file was generated Tue Feb 28 13:51:26 2023
 0000              5   ;--------------------------------------------------------
                   5   $name EFM8_LCD_4bit
                   6   $optc51 --model-small
@@ -556,65 +556,65 @@
 0000            556   ;Allocation info for local variables in function '_c51_external_startup'
 0000            557   ;------------------------------------------------------------
 0000            558   ;------------------------------------------------------------
-0000            559   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:16: char _c51_external_startup (void)
+0000            559   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:16: char _c51_external_startup (void)
 0000            560   ;        -----------------------------------------
 0000            561   ;         function _c51_external_startup
 0000            562   ;        -----------------------------------------
 0000            563   __c51_external_startup:
 0000            564            using   0
-0000            565   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:19: SFRPAGE = 0x00;
+0000            565   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:19: SFRPAGE = 0x00;
 0000 75A700     566            mov     _SFRPAGE,#0x00
-0003            567   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:20: WDTCN = 0xDE; //First key
+0003            567   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:20: WDTCN = 0xDE; //First key
 0003 7597DE     568            mov     _WDTCN,#0xDE
-0006            569   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:21: WDTCN = 0xAD; //Second key
+0006            569   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:21: WDTCN = 0xAD; //Second key
 0006 7597AD     570            mov     _WDTCN,#0xAD
-0009            571   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:28: SFRPAGE = 0x10;
+0009            571   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:28: SFRPAGE = 0x10;
 0009 75A710     572            mov     _SFRPAGE,#0x10
-000C            573   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:29: PFE0CN  = 0x20; // SYSCLK < 75 MHz.
+000C            573   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:29: PFE0CN  = 0x20; // SYSCLK < 75 MHz.
 000C 75C120     574            mov     _PFE0CN,#0x20
-000F            575   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:30: SFRPAGE = 0x00;
+000F            575   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:30: SFRPAGE = 0x00;
 000F 75A700     576            mov     _SFRPAGE,#0x00
-0012            577   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:51: CLKSEL = 0x00;
+0012            577   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:51: CLKSEL = 0x00;
 0012 75A900     578            mov     _CLKSEL,#0x00
-0015            579   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:52: CLKSEL = 0x00;
+0015            579   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:52: CLKSEL = 0x00;
 0015 75A900     580            mov     _CLKSEL,#0x00
-0018            581   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:53: while ((CLKSEL & 0x80) == 0);
+0018            581   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:53: while ((CLKSEL & 0x80) == 0);
 0018            582   L002001?:
 0018 E5A9       583            mov     a,_CLKSEL
-001A 30E7B0     584            jnb     acc.7,L002001?
-001D            585   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:54: CLKSEL = 0x03;
+001A 30E7C8     584            jnb     acc.7,L002001?
+001D            585   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:54: CLKSEL = 0x03;
 001D 75A903     586            mov     _CLKSEL,#0x03
-0020            587   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:55: CLKSEL = 0x03;
+0020            587   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:55: CLKSEL = 0x03;
 0020 75A903     588            mov     _CLKSEL,#0x03
-0023            589   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:56: while ((CLKSEL & 0x80) == 0);
+0023            589   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:56: while ((CLKSEL & 0x80) == 0);
 0023            590   L002004?:
 0023 E5A9       591            mov     a,_CLKSEL
-0025 30E730     592            jnb     acc.7,L002004?
-0028            593   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:61: P0MDOUT |= 0x10; // Enable UART0 TX as push-pull output
+0025 30E748     592            jnb     acc.7,L002004?
+0028            593   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:61: P0MDOUT |= 0x10; // Enable UART0 TX as push-pull output
 0028 43A410     594            orl     _P0MDOUT,#0x10
-002B            595   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:62: XBR0     = 0x01; // Enable UART0 on P0.4(TX) and P0.5(RX)                     
+002B            595   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:62: XBR0     = 0x01; // Enable UART0 on P0.4(TX) and P0.5(RX)                     
 002B 75E101     596            mov     _XBR0,#0x01
-002E            597   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:63: XBR1     = 0X00;
+002E            597   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:63: XBR1     = 0X00;
 002E 75E200     598            mov     _XBR1,#0x00
-0031            599   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:64: XBR2     = 0x40; // Enable crossbar and weak pull-ups
+0031            599   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:64: XBR2     = 0x40; // Enable crossbar and weak pull-ups
 0031 75E340     600            mov     _XBR2,#0x40
-0034            601   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:70: SCON0 = 0x10;
+0034            601   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:70: SCON0 = 0x10;
 0034 759810     602            mov     _SCON0,#0x10
-0037            603   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:71: CKCON0 |= 0b_0000_0000 ; // Timer 1 uses the system clock divided by 12.
+0037            603   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:71: CKCON0 |= 0b_0000_0000 ; // Timer 1 uses the system clock divided by 12.
 0037 858E8E     604            mov     _CKCON0,_CKCON0
-003A            605   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:72: TH1 = 0x100-((SYSCLK/BAUDRATE)/(2L*12L));
+003A            605   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:72: TH1 = 0x100-((SYSCLK/BAUDRATE)/(2L*12L));
 003A 758DE6     606            mov     _TH1,#0xE6
-003D            607   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:73: TL1 = TH1;      // Init Timer1
+003D            607   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:73: TL1 = TH1;      // Init Timer1
 003D 858D8B     608            mov     _TL1,_TH1
-0040            609   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:74: TMOD &= ~0xf0;  // TMOD: timer 1 in 8-bit auto-reload
+0040            609   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:74: TMOD &= ~0xf0;  // TMOD: timer 1 in 8-bit auto-reload
 0040 53890F     610            anl     _TMOD,#0x0F
-0043            611   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:75: TMOD |=  0x20;                       
+0043            611   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:75: TMOD |=  0x20;                       
 0043 438920     612            orl     _TMOD,#0x20
-0046            613   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:76: TR1 = 1; // START Timer1
+0046            613   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:76: TR1 = 1; // START Timer1
 0046 D28E       614            setb    _TR1
-0048            615   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:77: TI = 1;  // Indicate TX0 ready
+0048            615   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:77: TI = 1;  // Indicate TX0 ready
 0048 D299       616            setb    _TI
-004A            617   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:79: return 0;
+004A            617   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:79: return 0;
 004A 758200     618            mov     dpl,#0x00
 004D 22         619            ret
 004E            620   ;------------------------------------------------------------
@@ -623,40 +623,40 @@
 004E            623   ;us                        Allocated to registers r2 
 004E            624   ;i                         Allocated to registers r3 
 004E            625   ;------------------------------------------------------------
-004E            626   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:84: void Timer3us(unsigned char us)
+004E            626   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:84: void Timer3us(unsigned char us)
 004E            627   ;        -----------------------------------------
 004E            628   ;         function Timer3us
 004E            629   ;        -----------------------------------------
 004E            630   _Timer3us:
 004E AA82       631            mov     r2,dpl
-0050            632   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:89: CKCON0|=0b_0100_0000;
+0050            632   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:89: CKCON0|=0b_0100_0000;
 0050 438E40     633            orl     _CKCON0,#0x40
-0053            634   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:91: TMR3RL = (-(SYSCLK)/1000000L); // Set Timer3 to overflow in 1us.
+0053            634   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:91: TMR3RL = (-(SYSCLK)/1000000L); // Set Timer3 to overflow in 1us.
 0053 7592B8     635            mov     _TMR3RL,#0xB8
 0056 7593FF     636            mov     (_TMR3RL >> 8),#0xFF
-0059            637   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:92: TMR3 = TMR3RL;                 // Initialize Timer3 for first overflow
+0059            637   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:92: TMR3 = TMR3RL;                 // Initialize Timer3 for first overflow
 0059 859294     638            mov     _TMR3,_TMR3RL
 005C 859395     639            mov     (_TMR3 >> 8),(_TMR3RL >> 8)
-005F            640   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:94: TMR3CN0 = 0x04;                 // Sart Timer3 and clear overflow flag
+005F            640   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:94: TMR3CN0 = 0x04;                 // Sart Timer3 and clear overflow flag
 005F 759104     641            mov     _TMR3CN0,#0x04
-0062            642   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:95: for (i = 0; i < us; i++)       // Count <us> overflows
+0062            642   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:95: for (i = 0; i < us; i++)       // Count <us> overflows
 0062 7B00       643            mov     r3,#0x00
 0064            644   L003004?:
 0064 C3         645            clr     c
 0065 EB         646            mov     a,r3
 0066 9A         647            subb    a,r2
 0067 5000       648            jnc     L003007?
-0069            649   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:97: while (!(TMR3CN0 & 0x80));  // Wait for overflow
+0069            649   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:97: while (!(TMR3CN0 & 0x80));  // Wait for overflow
 0069            650   L003001?:
 0069 E591       651            mov     a,_TMR3CN0
-006B 30E730     652            jnb     acc.7,L003001?
-006E            653   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:98: TMR3CN0 &= ~(0x80);         // Clear overflow indicator
+006B 30E748     652            jnb     acc.7,L003001?
+006E            653   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:98: TMR3CN0 &= ~(0x80);         // Clear overflow indicator
 006E 53917F     654            anl     _TMR3CN0,#0x7F
-0071            655   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:95: for (i = 0; i < us; i++)       // Count <us> overflows
+0071            655   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:95: for (i = 0; i < us; i++)       // Count <us> overflows
 0071 0B         656            inc     r3
 0072 8000       657            sjmp    L003004?
 0074            658   L003007?:
-0074            659   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:100: TMR3CN0 = 0 ;                   // Stop Timer3 and clear overflow flag
+0074            659   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:100: TMR3CN0 = 0 ;                   // Stop Timer3 and clear overflow flag
 0074 759100     660            mov     _TMR3CN0,#0x00
 0077 22         661            ret
 0078            662   ;------------------------------------------------------------
@@ -666,14 +666,14 @@
 0078            666   ;j                         Allocated to registers r4 r5 
 0078            667   ;k                         Allocated to registers r6 
 0078            668   ;------------------------------------------------------------
-0078            669   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:103: void waitms (unsigned int ms)
+0078            669   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:103: void waitms (unsigned int ms)
 0078            670   ;        -----------------------------------------
 0078            671   ;         function waitms
 0078            672   ;        -----------------------------------------
 0078            673   _waitms:
 0078 AA82       674            mov     r2,dpl
 007A AB83       675            mov     r3,dph
-007C            676   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:107: for(j=0; j<ms; j++)
+007C            676   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:107: for(j=0; j<ms; j++)
 007C 7C00       677            mov     r4,#0x00
 007E 7D00       678            mov     r5,#0x00
 0080            679   L004005?:
@@ -683,10 +683,10 @@
 0083 ED         683            mov     a,r5
 0084 9B         684            subb    a,r3
 0085 5000       685            jnc     L004009?
-0087            686   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:108: for (k=0; k<4; k++) Timer3us(250);
+0087            686   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:108: for (k=0; k<4; k++) Timer3us(250);
 0087 7E00       687            mov     r6,#0x00
 0089            688   L004001?:
-0089 BE0470     689            cjne    r6,#0x04,L004018?
+0089 BE0488     689            cjne    r6,#0x04,L004018?
 008C            690   L004018?:
 008C 5000       691            jnc     L004007?
 008E 7582FA     692            mov     dpl,#0xFA
@@ -704,9 +704,9 @@
 00A8 0E         704            inc     r6
 00A9 8000       705            sjmp    L004001?
 00AB            706   L004007?:
-00AB            707   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:107: for(j=0; j<ms; j++)
+00AB            707   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:107: for(j=0; j<ms; j++)
 00AB 0C         708            inc     r4
-00AC BC00B0     709            cjne    r4,#0x00,L004005?
+00AC BC00C8     709            cjne    r4,#0x00,L004005?
 00AF 0D         710            inc     r5
 00B0 8000       711            sjmp    L004005?
 00B2            712   L004009?:
@@ -715,17 +715,17 @@
 00B3            715   ;Allocation info for local variables in function 'LCD_pulse'
 00B3            716   ;------------------------------------------------------------
 00B3            717   ;------------------------------------------------------------
-00B3            718   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:111: void LCD_pulse (void)
+00B3            718   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:111: void LCD_pulse (void)
 00B3            719   ;        -----------------------------------------
 00B3            720   ;         function LCD_pulse
 00B3            721   ;        -----------------------------------------
 00B3            722   _LCD_pulse:
-00B3            723   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:113: LCD_E=1;
+00B3            723   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:113: LCD_E=1;
 00B3 D2A5       724            setb    _P2_5
-00B5            725   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:114: Timer3us(40);
+00B5            725   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:114: Timer3us(40);
 00B5 758228     726            mov     dpl,#0x28
 00B8 120000     727            lcall   _Timer3us
-00BB            728   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:115: LCD_E=0;
+00BB            728   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:115: LCD_E=0;
 00BB C2A5       729            clr     _P2_5
 00BD 22         730            ret
 00BE            731   ;------------------------------------------------------------
@@ -733,66 +733,66 @@
 00BE            733   ;------------------------------------------------------------
 00BE            734   ;x                         Allocated to registers r2 
 00BE            735   ;------------------------------------------------------------
-00BE            736   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:118: void LCD_byte (unsigned char x)
+00BE            736   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:118: void LCD_byte (unsigned char x)
 00BE            737   ;        -----------------------------------------
 00BE            738   ;         function LCD_byte
 00BE            739   ;        -----------------------------------------
 00BE            740   _LCD_byte:
 00BE AA82       741            mov     r2,dpl
-00C0            742   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:121: ACC=x; //Send high nible
+00C0            742   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:121: ACC=x; //Send high nible
 00C0 8AE0       743            mov     _ACC,r2
-00C2            744   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:122: LCD_D7=ACC_7;
+00C2            744   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:122: LCD_D7=ACC_7;
 00C2 A2E7       745            mov     c,_ACC_7
 00C4 92A1       746            mov     _P2_1,c
-00C6            747   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:123: LCD_D6=ACC_6;
+00C6            747   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:123: LCD_D6=ACC_6;
 00C6 A2E6       748            mov     c,_ACC_6
 00C8 92A2       749            mov     _P2_2,c
-00CA            750   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:124: LCD_D5=ACC_5;
+00CA            750   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:124: LCD_D5=ACC_5;
 00CA A2E5       751            mov     c,_ACC_5
 00CC 92A3       752            mov     _P2_3,c
-00CE            753   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:125: LCD_D4=ACC_4;
+00CE            753   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:125: LCD_D4=ACC_4;
 00CE A2E4       754            mov     c,_ACC_4
 00D0 92A4       755            mov     _P2_4,c
-00D2            756   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:126: LCD_pulse();
+00D2            756   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:126: LCD_pulse();
 00D2 C002       757            push    ar2
 00D4 120000     758            lcall   _LCD_pulse
-00D7            759   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:127: Timer3us(40);
+00D7            759   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:127: Timer3us(40);
 00D7 758228     760            mov     dpl,#0x28
 00DA 120000     761            lcall   _Timer3us
 00DD D002       762            pop     ar2
-00DF            763   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:128: ACC=x; //Send low nible
+00DF            763   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:128: ACC=x; //Send low nible
 00DF 8AE0       764            mov     _ACC,r2
-00E1            765   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:129: LCD_D7=ACC_3;
+00E1            765   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:129: LCD_D7=ACC_3;
 00E1 A2E3       766            mov     c,_ACC_3
 00E3 92A1       767            mov     _P2_1,c
-00E5            768   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:130: LCD_D6=ACC_2;
+00E5            768   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:130: LCD_D6=ACC_2;
 00E5 A2E2       769            mov     c,_ACC_2
 00E7 92A2       770            mov     _P2_2,c
-00E9            771   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:131: LCD_D5=ACC_1;
+00E9            771   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:131: LCD_D5=ACC_1;
 00E9 A2E1       772            mov     c,_ACC_1
 00EB 92A3       773            mov     _P2_3,c
-00ED            774   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:132: LCD_D4=ACC_0;
+00ED            774   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:132: LCD_D4=ACC_0;
 00ED A2E0       775            mov     c,_ACC_0
 00EF 92A4       776            mov     _P2_4,c
-00F1            777   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:133: LCD_pulse();
+00F1            777   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:133: LCD_pulse();
 00F1 020000     778            ljmp    _LCD_pulse
 00F4            779   ;------------------------------------------------------------
 00F4            780   ;Allocation info for local variables in function 'WriteData'
 00F4            781   ;------------------------------------------------------------
 00F4            782   ;x                         Allocated to registers r2 
 00F4            783   ;------------------------------------------------------------
-00F4            784   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:136: void WriteData (unsigned char x)
+00F4            784   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:136: void WriteData (unsigned char x)
 00F4            785   ;        -----------------------------------------
 00F4            786   ;         function WriteData
 00F4            787   ;        -----------------------------------------
 00F4            788   _WriteData:
 00F4 AA82       789            mov     r2,dpl
-00F6            790   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:138: LCD_RS=1;
+00F6            790   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:138: LCD_RS=1;
 00F6 D2A6       791            setb    _P2_6
-00F8            792   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:139: LCD_byte(x);
+00F8            792   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:139: LCD_byte(x);
 00F8 8A82       793            mov     dpl,r2
 00FA 120000     794            lcall   _LCD_byte
-00FD            795   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:140: waitms(2);
+00FD            795   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:140: waitms(2);
 00FD 900002     796            mov     dptr,#0x0002
 0100 020000     797            ljmp    _waitms
 0103            798   ;------------------------------------------------------------
@@ -800,53 +800,53 @@
 0103            800   ;------------------------------------------------------------
 0103            801   ;x                         Allocated to registers r2 
 0103            802   ;------------------------------------------------------------
-0103            803   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:143: void WriteCommand (unsigned char x)
+0103            803   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:143: void WriteCommand (unsigned char x)
 0103            804   ;        -----------------------------------------
 0103            805   ;         function WriteCommand
 0103            806   ;        -----------------------------------------
 0103            807   _WriteCommand:
 0103 AA82       808            mov     r2,dpl
-0105            809   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:145: LCD_RS=0;
+0105            809   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:145: LCD_RS=0;
 0105 C2A6       810            clr     _P2_6
-0107            811   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:146: LCD_byte(x);
+0107            811   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:146: LCD_byte(x);
 0107 8A82       812            mov     dpl,r2
 0109 120000     813            lcall   _LCD_byte
-010C            814   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:147: waitms(5);
+010C            814   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:147: waitms(5);
 010C 900005     815            mov     dptr,#0x0005
 010F 020000     816            ljmp    _waitms
 0112            817   ;------------------------------------------------------------
 0112            818   ;Allocation info for local variables in function 'LCD_4BIT'
 0112            819   ;------------------------------------------------------------
 0112            820   ;------------------------------------------------------------
-0112            821   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:150: void LCD_4BIT (void)
+0112            821   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:150: void LCD_4BIT (void)
 0112            822   ;        -----------------------------------------
 0112            823   ;         function LCD_4BIT
 0112            824   ;        -----------------------------------------
 0112            825   _LCD_4BIT:
-0112            826   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:152: LCD_E=0; // Resting state of LCD's enable is zero
+0112            826   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:152: LCD_E=0; // Resting state of LCD's enable is zero
 0112 C2A5       827            clr     _P2_5
-0114            828   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:154: waitms(20);
+0114            828   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:154: waitms(20);
 0114 900014     829            mov     dptr,#0x0014
 0117 120000     830            lcall   _waitms
-011A            831   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:156: WriteCommand(0x33);
+011A            831   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:156: WriteCommand(0x33);
 011A 758233     832            mov     dpl,#0x33
 011D 120000     833            lcall   _WriteCommand
-0120            834   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:157: WriteCommand(0x33);
+0120            834   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:157: WriteCommand(0x33);
 0120 758233     835            mov     dpl,#0x33
 0123 120000     836            lcall   _WriteCommand
-0126            837   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:158: WriteCommand(0x32); // Change to 4-bit mode
+0126            837   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:158: WriteCommand(0x32); // Change to 4-bit mode
 0126 758232     838            mov     dpl,#0x32
 0129 120000     839            lcall   _WriteCommand
-012C            840   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:161: WriteCommand(0x28);
+012C            840   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:161: WriteCommand(0x28);
 012C 758228     841            mov     dpl,#0x28
 012F 120000     842            lcall   _WriteCommand
-0132            843   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:162: WriteCommand(0x0c);
+0132            843   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:162: WriteCommand(0x0c);
 0132 75820C     844            mov     dpl,#0x0C
 0135 120000     845            lcall   _WriteCommand
-0138            846   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:163: WriteCommand(0x01); // Clear screen command (takes some time)
+0138            846   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:163: WriteCommand(0x01); // Clear screen command (takes some time)
 0138 758201     847            mov     dpl,#0x01
 013B 120000     848            lcall   _WriteCommand
-013E            849   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:164: waitms(20); // Wait for clear screen command to finsih.
+013E            849   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:164: waitms(20); // Wait for clear screen command to finsih.
 013E 900014     850            mov     dptr,#0x0014
 0141 020000     851            ljmp    _waitms
 0144            852   ;------------------------------------------------------------
@@ -856,7 +856,7 @@
 0144            856   ;string                    Allocated to registers r2 r3 r4 
 0144            857   ;j                         Allocated to registers r5 r6 
 0144            858   ;------------------------------------------------------------
-0144            859   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:167: void LCDprint(char * string, unsigned char line, bit clear)
+0144            859   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:167: void LCDprint(char * string, unsigned char line, bit clear)
 0144            860   ;        -----------------------------------------
 0144            861   ;         function LCDprint
 0144            862   ;        -----------------------------------------
@@ -864,9 +864,9 @@
 0144 AA82       864            mov     r2,dpl
 0146 AB83       865            mov     r3,dph
 0148 ACF0       866            mov     r4,b
-014A            867   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:171: WriteCommand(line==2?0xc0:0x80);
+014A            867   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:171: WriteCommand(line==2?0xc0:0x80);
 014A 7402       868            mov     a,#0x02
-014C B59030     869            cjne    a,_LCDprint_PARM_2,L010013?
+014C B5A848     869            cjne    a,_LCDprint_PARM_2,L010013?
 014F 7DC0       870            mov     r5,#0xC0
 0151 8000       871            sjmp    L010014?
 0153            872   L010013?:
@@ -877,13 +877,13 @@
 0159 C003       877            push    ar3
 015B C004       878            push    ar4
 015D 120000     879            lcall   _WriteCommand
-0160            880   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:172: waitms(5);
+0160            880   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:172: waitms(5);
 0160 900005     881            mov     dptr,#0x0005
 0163 120000     882            lcall   _waitms
 0166 D004       883            pop     ar4
 0168 D003       884            pop     ar3
 016A D002       885            pop     ar2
-016C            886   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:173: for(j=0; string[j]!=0; j++)  WriteData(string[j]);// Write the message
+016C            886   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:173: for(j=0; string[j]!=0; j++)   WriteData(string[j]);// Write the message
 016C 7D00       887            mov     r5,#0x00
 016E 7E00       888            mov     r6,#0x00
 0170            889   L010003?:
@@ -913,12 +913,12 @@
 0199 D003       913            pop     ar3
 019B D002       914            pop     ar2
 019D 0D         915            inc     r5
-019E BD00B0     916            cjne    r5,#0x00,L010003?
+019E BD00C8     916            cjne    r5,#0x00,L010003?
 01A1 0E         917            inc     r6
 01A2 8000       918            sjmp    L010003?
 01A4            919   L010006?:
-01A4            920   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:174: if(clear) for(; j<CHARS_PER_LINE; j++) WriteData(' '); // Clear the rest of the line
-01A4 300070     921            jnb     _LCDprint_PARM_3,L010011?
+01A4            920   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:174: if(clear) for(; j<CHARS_PER_LINE; j++) WriteData(' '); // Clear the rest of the line
+01A4 306088     921            jnb     _LCDprint_PARM_3,L010011?
 01A7 8D02       922            mov     ar2,r5
 01A9 8E03       923            mov     ar3,r6
 01AB            924   L010007?:
@@ -936,7 +936,7 @@
 01C0 D003       936            pop     ar3
 01C2 D002       937            pop     ar2
 01C4 0A         938            inc     r2
-01C5 BA00B0     939            cjne    r2,#0x00,L010007?
+01C5 BA00C8     939            cjne    r2,#0x00,L010007?
 01C8 0B         940            inc     r3
 01C9 8000       941            sjmp    L010007?
 01CB            942   L010011?:
@@ -950,22 +950,22 @@
 01CC            950   ;c                         Allocated to registers r3 
 01CC            951   ;sloc0                     Allocated with name '_getsn_sloc0_1_0'
 01CC            952   ;------------------------------------------------------------
-01CC            953   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:177: int getsn (char * buff, int len)
+01CC            953   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:177: int getsn (char * buff, int len)
 01CC            954   ;        -----------------------------------------
 01CC            955   ;         function getsn
 01CC            956   ;        -----------------------------------------
 01CC            957   _getsn:
-01CC 8582A0     958            mov     _getsn_buff_1_42,dpl
-01CF 8583A1     959            mov     (_getsn_buff_1_42 + 1),dph
-01D2 85F0A2     960            mov     (_getsn_buff_1_42 + 2),b
-01D5            961   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:182: for(j=0; j<(len-1); j++)
+01CC 8582B8     958            mov     _getsn_buff_1_42,dpl
+01CF 8583B9     959            mov     (_getsn_buff_1_42 + 1),dph
+01D2 85F0BA     960            mov     (_getsn_buff_1_42 + 2),b
+01D5            961   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:182: for(j=0; j<(len-1); j++)
 01D5 E4         962            clr     a
-01D6 F5F0       963            mov     _getsn_sloc0_1_0,a
-01D8 F5F1       964            mov     (_getsn_sloc0_1_0 + 1),a
-01DA E540       965            mov     a,_getsn_PARM_2
+01D6 F508       963            mov     _getsn_sloc0_1_0,a
+01D8 F509       964            mov     (_getsn_sloc0_1_0 + 1),a
+01DA E558       965            mov     a,_getsn_PARM_2
 01DC 24FF       966            add     a,#0xff
 01DE FF         967            mov     r7,a
-01DF E541       968            mov     a,(_getsn_PARM_2 + 1)
+01DF E559       968            mov     a,(_getsn_PARM_2 + 1)
 01E1 34FF       969            addc    a,#0xff
 01E3 F8         970            mov     r0,a
 01E4 7900       971            mov     r1,#0x00
@@ -980,7 +980,7 @@
 01F0 63F080     980            xrl     b,#0x80
 01F3 95F0       981            subb    a,b
 01F5 5000       982            jnc     L011008?
-01F7            983   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:184: c=getchar();
+01F7            983   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:184: c=getchar();
 01F7 C002       984            push    ar2
 01F9 C007       985            push    ar7
 01FB C000       986            push    ar0
@@ -991,97 +991,97 @@
 0206 D000       991            pop     ar0
 0208 D007       992            pop     ar7
 020A D002       993            pop     ar2
-020C            994   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:185: if ( (c=='\n') || (c=='\r') )
-020C BB0AB0     995            cjne    r3,#0x0A,L011015?
+020C            994   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:185: if ( (c=='\n') || (c=='\r') )
+020C BB0AC8     995            cjne    r3,#0x0A,L011015?
 020F 8000       996            sjmp    L011001?
 0211            997   L011015?:
-0211 BB0D30     998            cjne    r3,#0x0D,L011002?
+0211 BB0D48     998            cjne    r3,#0x0D,L011002?
 0214            999   L011001?:
-0214           1000   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:187: buff[j]=0;
-0214 E5F0      1001            mov     a,_getsn_sloc0_1_0
-0216 25A0      1002            add     a,_getsn_buff_1_42
+0214           1000   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:187: buff[j]=0;
+0214 E508      1001            mov     a,_getsn_sloc0_1_0
+0216 25B8      1002            add     a,_getsn_buff_1_42
 0218 FC        1003            mov     r4,a
-0219 E5F1      1004            mov     a,(_getsn_sloc0_1_0 + 1)
-021B 35A1      1005            addc    a,(_getsn_buff_1_42 + 1)
+0219 E509      1004            mov     a,(_getsn_sloc0_1_0 + 1)
+021B 35B9      1005            addc    a,(_getsn_buff_1_42 + 1)
 021D FD        1006            mov     r5,a
-021E AEA2      1007            mov     r6,(_getsn_buff_1_42 + 2)
+021E AEBA      1007            mov     r6,(_getsn_buff_1_42 + 2)
 0220 8C82      1008            mov     dpl,r4
 0222 8D83      1009            mov     dph,r5
 0224 8EF0      1010            mov     b,r6
 0226 E4        1011            clr     a
 0227 120000    1012            lcall   __gptrput
-022A           1013   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:188: return j;
-022A 85F082    1014            mov     dpl,_getsn_sloc0_1_0
-022D 85F183    1015            mov     dph,(_getsn_sloc0_1_0 + 1)
+022A           1013   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:188: return j;
+022A 850882    1014            mov     dpl,_getsn_sloc0_1_0
+022D 850983    1015            mov     dph,(_getsn_sloc0_1_0 + 1)
 0230 22        1016            ret
 0231           1017   L011002?:
-0231           1018   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:192: buff[j]=c;
+0231           1018   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:192: buff[j]=c;
 0231 E9        1019            mov     a,r1
-0232 25A0      1020            add     a,_getsn_buff_1_42
+0232 25B8      1020            add     a,_getsn_buff_1_42
 0234 FC        1021            mov     r4,a
 0235 EA        1022            mov     a,r2
-0236 35A1      1023            addc    a,(_getsn_buff_1_42 + 1)
+0236 35B9      1023            addc    a,(_getsn_buff_1_42 + 1)
 0238 FD        1024            mov     r5,a
-0239 AEA2      1025            mov     r6,(_getsn_buff_1_42 + 2)
+0239 AEBA      1025            mov     r6,(_getsn_buff_1_42 + 2)
 023B 8C82      1026            mov     dpl,r4
 023D 8D83      1027            mov     dph,r5
 023F 8EF0      1028            mov     b,r6
 0241 EB        1029            mov     a,r3
 0242 120000    1030            lcall   __gptrput
-0245           1031   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:182: for(j=0; j<(len-1); j++)
+0245           1031   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:182: for(j=0; j<(len-1); j++)
 0245 09        1032            inc     r1
-0246 B900B0    1033            cjne    r1,#0x00,L011018?
+0246 B900C8    1033            cjne    r1,#0x00,L011018?
 0249 0A        1034            inc     r2
 024A           1035   L011018?:
-024A 89F0      1036            mov     _getsn_sloc0_1_0,r1
-024C 8AF1      1037            mov     (_getsn_sloc0_1_0 + 1),r2
+024A 8908      1036            mov     _getsn_sloc0_1_0,r1
+024C 8A09      1037            mov     (_getsn_sloc0_1_0 + 1),r2
 024E 8000      1038            sjmp    L011005?
 0250           1039   L011008?:
-0250           1040   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:195: buff[j]=0;
-0250 E5F0      1041            mov     a,_getsn_sloc0_1_0
-0252 25A0      1042            add     a,_getsn_buff_1_42
+0250           1040   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:195: buff[j]=0;
+0250 E508      1041            mov     a,_getsn_sloc0_1_0
+0252 25B8      1042            add     a,_getsn_buff_1_42
 0254 FA        1043            mov     r2,a
-0255 E5F1      1044            mov     a,(_getsn_sloc0_1_0 + 1)
-0257 35A1      1045            addc    a,(_getsn_buff_1_42 + 1)
+0255 E509      1044            mov     a,(_getsn_sloc0_1_0 + 1)
+0257 35B9      1045            addc    a,(_getsn_buff_1_42 + 1)
 0259 FB        1046            mov     r3,a
-025A ACA2      1047            mov     r4,(_getsn_buff_1_42 + 2)
+025A ACBA      1047            mov     r4,(_getsn_buff_1_42 + 2)
 025C 8A82      1048            mov     dpl,r2
 025E 8B83      1049            mov     dph,r3
 0260 8CF0      1050            mov     b,r4
 0262 E4        1051            clr     a
 0263 120000    1052            lcall   __gptrput
-0266           1053   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:196: return len;
-0266 854082    1054            mov     dpl,_getsn_PARM_2
-0269 854183    1055            mov     dph,(_getsn_PARM_2 + 1)
+0266           1053   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:196: return len;
+0266 855882    1054            mov     dpl,_getsn_PARM_2
+0269 855983    1055            mov     dph,(_getsn_PARM_2 + 1)
 026C 22        1056            ret
 026D           1057   ;------------------------------------------------------------
 026D           1058   ;Allocation info for local variables in function 'main'
 026D           1059   ;------------------------------------------------------------
 026D           1060   ;buff                      Allocated with name '_main_buff_1_48'
 026D           1061   ;------------------------------------------------------------
-026D           1062   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:199: void main (void)
+026D           1062   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:199: void main (void)
 026D           1063   ;        -----------------------------------------
 026D           1064   ;         function main
 026D           1065   ;        -----------------------------------------
 026D           1066   _main:
-026D           1067   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:203: LCD_4BIT();
+026D           1067   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:203: LCD_4BIT();
 026D 120000    1068            lcall   _LCD_4BIT
-0270           1069   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:206: LCDprint("LCD 4-bit test:", 1, 1);
-0270 759001    1070            mov     _LCDprint_PARM_2,#0x01
-0273 D200      1071            setb    _LCDprint_PARM_3
-0275 90B6F0    1072            mov     dptr,#__str_0
+0270           1069   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:206: LCDprint("LCD 4-bit test:", 1, 1);
+0270 75A801    1070            mov     _LCDprint_PARM_2,#0x01
+0273 D260      1071            setb    _LCDprint_PARM_3
+0275 90B708    1072            mov     dptr,#__str_0
 0278 75F080    1073            mov     b,#0x80
 027B 120000    1074            lcall   _LCDprint
-027E           1075   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:207: LCDprint("Hello, World!", 2, 1);
-027E 759002    1076            mov     _LCDprint_PARM_2,#0x02
-0281 D200      1077            setb    _LCDprint_PARM_3
-0283 90B730    1078            mov     dptr,#__str_1
+027E           1075   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:207: LCDprint("Hello, World!", 2, 1);
+027E 75A802    1076            mov     _LCDprint_PARM_2,#0x02
+0281 D260      1077            setb    _LCDprint_PARM_3
+0283 90B748    1078            mov     dptr,#__str_1
 0286 75F080    1079            mov     b,#0x80
 0289 120000    1080            lcall   _LCDprint
-028C           1081   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:208: while(1)
+028C           1081   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:208: while(1)
 028C           1082   L012002?:
-028C           1083   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:210: printf("Type what you want to display in line 2 (16 char max): ");
-028C 74B0      1084            mov     a,#__str_2
+028C           1083   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:210: printf("Type what you want to display in line 2 (16 char max): ");
+028C 74C8      1084            mov     a,#__str_2
 028E C0E0      1085            push    acc
 0290 74B7      1086            mov     a,#(__str_2 >> 8)
 0292 C0E0      1087            push    acc
@@ -1091,15 +1091,15 @@
 029B 1581      1091            dec     sp
 029D 1581      1092            dec     sp
 029F 1581      1093            dec     sp
-02A1           1094   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:211: getsn(buff, sizeof(buff));
-02A1 754011    1095            mov     _getsn_PARM_2,#0x11
+02A1           1094   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:211: getsn(buff, sizeof(buff));
+02A1 755811    1095            mov     _getsn_PARM_2,#0x11
 02A4 E4        1096            clr     a
-02A5 F541      1097            mov     (_getsn_PARM_2 + 1),a
-02A7 90AF30    1098            mov     dptr,#_main_buff_1_48
+02A5 F559      1097            mov     (_getsn_PARM_2 + 1),a
+02A7 90AF48    1098            mov     dptr,#_main_buff_1_48
 02AA 75F040    1099            mov     b,#0x40
 02AD 120000    1100            lcall   _getsn
-02B0           1101   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:212: printf("\n");
-02B0 7470      1102            mov     a,#__str_3
+02B0           1101   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:212: printf("\n");
+02B0 7488      1102            mov     a,#__str_3
 02B2 C0E0      1103            push    acc
 02B4 74B8      1104            mov     a,#(__str_3 >> 8)
 02B6 C0E0      1105            push    acc
@@ -1109,10 +1109,10 @@
 02BF 1581      1109            dec     sp
 02C1 1581      1110            dec     sp
 02C3 1581      1111            dec     sp
-02C5           1112   ;        C:\Users\Janit\OneDrive\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:213: LCDprint(buff, 2, 1);
-02C5 759002    1113            mov     _LCDprint_PARM_2,#0x02
-02C8 D200      1114            setb    _LCDprint_PARM_3
-02CA 90AF30    1115            mov     dptr,#_main_buff_1_48
+02C5           1112   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB4\EFM8_LCD_4bit.c:213: LCDprint(buff, 2, 1);
+02C5 75A802    1113            mov     _LCDprint_PARM_2,#0x02
+02C8 D260      1114            setb    _LCDprint_PARM_3
+02CA 90AF48    1115            mov     dptr,#_main_buff_1_48
 02CD 75F040    1116            mov     b,#0x40
 02D0 120000    1117            lcall   _LCDprint
 02D3 8000      1118            sjmp    L012002?
