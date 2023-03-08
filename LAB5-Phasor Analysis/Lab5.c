@@ -347,7 +347,7 @@ float getTimeDifference(unsigned char pin1, unsigned char pin2)
     TR0 = 1; // Starts Timer
 
 	P1_4 = 1;
-	while (Volts_at_Pin(pin2) ==0) {
+	while (Volts_at_Pin(pin2) == 0) {
        	if (TF0) {
            	TF0 = 0;
            	overflow_count++;
@@ -394,7 +394,7 @@ void main (void)
 		period = getPeriod(P0_1); //Gets Period
 
 		while (Volts_at_Pin(P0_1) != 0);
-    	while (Volts_at_Pin(P0_1) == 0);
+    	while (Volts_at_Pin(P0_1) < 0.5);
 
     	while (Volts_at_Pin(P0_1) != 0) 
 		{
@@ -409,8 +409,8 @@ void main (void)
 
 		phaseDifference = (timeDifference/period) * 360;
 		
-		//if(phaseDifference > 180)
-		//	phaseDifference = phaseDifference - 360;
+		if(phaseDifference > 180)
+			phaseDifference = phaseDifference - (360+180);
 
 		sprintf(output_buffer, "T=%0.1fms Vr=%0.1fV", period, VMax*0.7071);
 		LCDprint(output_buffer, 1, 1);	

@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by C51
 ; Version 1.0.0 #1170 (Feb 16 2022) (MSVC)
-; This file was generated Wed Mar 08 14:30:48 2023
+; This file was generated Wed Mar 08 14:42:15 2023
 ;--------------------------------------------------------
 $name Lab5
 $optc51 --model-small
@@ -1534,7 +1534,7 @@ L018001?:
 	clr	b.7 ; Clear the sign bit
 	orl	a,b
 	jz	L018001?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:345: while (Volts_at_Pin(pin1) > 1);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:345: while (Volts_at_Pin(pin1) != 0);
 L018004?:
 	mov	dpl,r2
 	push	ar2
@@ -1543,30 +1543,19 @@ L018004?:
 	mov	r4,dph
 	mov	r5,b
 	mov	r6,a
-	clr	a
-	push	acc
-	push	acc
-	mov	a,#0x80
-	push	acc
-	mov	a,#0x3F
-	push	acc
-	mov	dpl,r3
-	mov	dph,r4
-	mov	b,r5
-	mov	a,r6
-	lcall	___fsgt
-	mov	r3,dpl
-	mov	a,sp
-	add	a,#0xfc
-	mov	sp,a
 	pop	ar2
 	mov	a,r3
+	orl	a,r4
+	orl	a,r5
+	mov	b,r6
+	clr	b.7 ; Clear the sign bit
+	orl	a,b
 	jnz	L018004?
 ;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:347: TR0 = 1; // Starts Timer
 	setb	_TR0
 ;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:349: P1_4 = 1;
 	setb	_P1_4
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:350: while (Volts_at_Pin(pin2) ==0) {
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:350: while (Volts_at_Pin(pin2) == 0) {
 	mov	r2,#0x00
 	mov	r3,#0x00
 L018009?:
@@ -1792,7 +1781,7 @@ _main:
 ;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:389: InitADC();
 	lcall	_InitADC
 ;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:391: while(1)
-L019013?:
+L019015?:
 ;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:393: VMax = 0.0;
 	mov	r2,#0x00
 	mov	r3,#0x00
@@ -1842,7 +1831,7 @@ L019001?:
 	clr	b.7 ; Clear the sign bit
 	orl	a,b
 	jnz	L019001?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:397: while (Volts_at_Pin(P0_1) == 0);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:397: while (Volts_at_Pin(P0_1) < 0.5);
 L019004?:
 	mov	c,_P0_1
 	clr	a
@@ -1857,17 +1846,27 @@ L019004?:
 	mov	r7,dph
 	mov	r0,b
 	mov	r1,a
+	clr	a
+	push	acc
+	push	acc
+	push	acc
+	mov	a,#0x3F
+	push	acc
+	mov	dpl,r6
+	mov	dph,r7
+	mov	b,r0
+	mov	a,r1
+	lcall	___fslt
+	mov	r6,dpl
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
 	pop	ar5
 	pop	ar4
 	pop	ar3
 	pop	ar2
 	mov	a,r6
-	orl	a,r7
-	orl	a,r0
-	mov	b,r1
-	clr	b.7 ; Clear the sign bit
-	orl	a,b
-	jz	L019004?
+	jnz	L019004?
 ;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:399: while (Volts_at_Pin(P0_1) != 0) 
 L019009?:
 	mov	c,_P0_1
@@ -2004,7 +2003,33 @@ L019011?:
 	lcall	___fs2sint
 	mov	_main_phaseDifference_1_88,dpl
 	mov	(_main_phaseDifference_1_88 + 1),dph
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:412: if(phaseDifference > 180)
+	clr	c
+	mov	a,#0xB4
+	subb	a,_main_phaseDifference_1_88
+	clr	a
+	xrl	a,#0x80
+	mov	b,(_main_phaseDifference_1_88 + 1)
+	xrl	b,#0x80
+	subb	a,b
+	jnc	L019013?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:413: phaseDifference = phaseDifference - (360+180);
+	mov	a,_main_phaseDifference_1_88
+	add	a,#0xe4
+	mov	_main_phaseDifference_1_88,a
+	mov	a,(_main_phaseDifference_1_88 + 1)
+	addc	a,#0xfd
+	mov	(_main_phaseDifference_1_88 + 1),a
+L019013?:
 ;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:415: sprintf(output_buffer, "T=%0.1fms Vr=%0.1fV", period, VMax*0.7071);
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
 	mov	dptr,#0x0481
 	mov	b,#0x35
 	mov	a,#0x3F
@@ -2138,7 +2163,7 @@ L019011?:
 	mov	a,sp
 	add	a,#0xf3
 	mov	sp,a
-	ljmp	L019013?
+	ljmp	L019015?
 	rseg R_CSEG
 
 	rseg R_XINIT
