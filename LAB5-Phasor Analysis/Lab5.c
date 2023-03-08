@@ -1,9 +1,3 @@
-// ADC.c:  Shows how to use the 14-bit ADC.  This program
-// measures the voltage from some pins of the EFM8LB1 using the ADC.
-//
-// (c) 2008-2023, Jesus Calvino-Fraga
-//
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <EFM8LB1.h>
@@ -13,6 +7,8 @@
 #define SYSCLK 72000000L
 #define BAUDRATE 115200L
 #define SARCLK 18000000L
+
+#define VDD 3.3035 // The measured value of VDD in volts
 
 #define LCD_RS P2_6
 // #define LCD_RW Px_x // Not used in this code.  Connect to GND
@@ -24,8 +20,6 @@
 #define CHARS_PER_LINE 16
 
 unsigned char overflow_count;
-
-float getHalfPeriod();
 
 char _c51_external_startup (void)
 {
@@ -134,7 +128,6 @@ void InitADC (void)
 	ADEN=1; // Enable ADC
 }
 
-// Uses Timer3 to delay <us> micro-seconds. 
 void Timer3us(unsigned char us)
 {
 	unsigned char i;               // usec counter
@@ -161,8 +154,6 @@ void waitms (unsigned int ms)
 	for(j=0; j<ms; j++)
 		for (k=0; k<4; k++) Timer3us(250);
 }
-
-#define VDD 3.3035 // The measured value of VDD in volts
 
 void InitPinADC (unsigned char portno, unsigned char pinno)
 {
@@ -300,89 +291,69 @@ void TIMER0_Init(void)
 	TR0=0; // Stop Timer/Counter 0
 }
 
-double PtoC(double period){
-	return ((period*1000000000.0)/(3465.7359028));
+unsigned int getPeriod(unsigned char pin)
+{
+	TL0=0; // Resets timer
+	TH0=0;
+
+	while (Volts_at_Pin(pin) != 0); // Wait for signal to be zero
+	while (Volts_at_Pin(pin) == 0); // Wait for signal to be positive
+
+	TR0=1; // Starts timer
+
+	while (Volts_at_Pin(pin) !=0); // Wait for signal to be zero again
+
+	TR0=0; // Stops timer
+
+
+	printf("TH0 = %f, ", TH0);
+	printf("TL0 = %f\n", TL0);
+
+	return (TH0*256.0+TL0) * 2; // Returns period
 }
 
-void writeOutputBuffer(char *buffer, double cap){
-	char suffix = 'n';
-	if(cap < 1.5)
-	{
-		sprintf(buffer, "Insert Capacitor");
-		return;
-	}
-	if(cap > 100.0)
-	{
-		suffix = 'u';
-		cap = cap/1000.0;
-	}
-	if(cap > 100.0)
-	{
-		suffix = 'm';
-		cap = cap/1000.0;
-	}
-	if(cap > 100.0)
-	{
-		suffix = ' ';
-		cap = cap/1000.0;
-	}
-	sprintf(buffer, "C = %.4f%cF", cap, suffix);
+unsigned int getTimeDifference(unsigned char pin1, unsigned char pin2)
+{
+	
+	TL0=0; // Resets Timer
+	TH0=0;
+
+	while (Volts_at_Pin(pin1) != 0); // Wait for signal 1 to be zero
+	while (Volts_at_Pin(pin1) == 0); // Wait for signal 1 to be positive
+
+	TR0 = 1; // Starts timer
+
+	while(Volts_at_Pin(pin2) == 0); // Wait for signal 2 to be positive
+
+	TR0=0; // Stops timer
+
+	return (TH0*256.0+TL0) * 2; // Returns time difference between two signals
 }
+
 
 void main (void)
 {
-	float v[4];
-	float S1VMax = 0;
-	float S2VMax = 0;
-	double period;
-	unsigned int time = 0;
+	float VMax = 0;
+	unsigned int period;
+	unsigned int timeDifference;
+	float phaseDifference;
 
     waitms(500); // Give PuTTy a chance to start before sending
 	printf("\x1b[2J"); // Clear screen using ANSI escape sequence.
 	
-	printf ("ADC test program\n"
-	        "File: %s\n"
-	        "Compiled: %s, %s\n\n",
-	        __FILE__, __DATE__, __TIME__);
-	
-	//InitPinADC(0, 1); // Configure P1.5 as analog input
+	InitPinADC(0, 1); // Configure P0_1 as analog input
+	InitPinADC(0, 2); // Configure P0_2 as analog input
     InitADC();
 
 	while(1)
 	{
-	    
-		printf("%lf\n", getHalfPeriod());
-	 }  
+	    period = getPeriod(P0_1); // Gets the period of signal at P0_1 in millis returns when signal is 0
+		//waitms(period + period/2); // Gaits until peak
+		//VMax = Volts_at_Pin(P0_1); // Gets peak voltage
+
+		//timeDifference = getTimeDifference(P0_1, P0_2); // Gets time difference between signal 1 and 2
+		//phaseDifference = (timeDifference / period) * 360.0; // Converts time difference to phase difference
+		//printf("T=%dms\n", period);
+
+	}  
 }	
-
-float getHalfPeriod() {
-    float halfPeriod;
-    unsigned int overflow_count = 0;
-
-    // initalize timer 0
-    TR0 = 0;
-    TMOD &= 0xF0;
-    TMOD |= 0x01;
-    TH0 = 0;
-    TL0 = 0;
-    TF0 = 0;
-
-    // go to start of signal
-    while (P0_1);
-    while (!P0_1);
-
-    // measure 1/2 period
-    TR0 = 1;
-    while (P0_1) {
-        if (TF0) {
-            TF0 = 0;
-            overflow_count++;
-        }
-    }
-
-    // stop and do some calculations
-    TR0 = 0;
-    halfPeriod = (overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK)*1000000L;
-    return halfPeriod;
-}
-

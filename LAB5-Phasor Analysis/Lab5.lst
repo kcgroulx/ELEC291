@@ -1,0 +1,1661 @@
+0000              1   ;--------------------------------------------------------
+0000              2   ; File Created by C51
+0000              3   ; Version 1.0.0 #1170 (Feb 16 2022) (MSVC)
+0000              4   ; This file was generated Wed Mar 08 10:23:17 2023
+0000              5   ;--------------------------------------------------------
+                  5   $name Lab5
+                  6   $optc51 --model-small
+                  7   $printf_float
+0000              9            R_DSEG    segment data
+0000             10            R_CSEG    segment code
+0000             11            R_BSEG    segment bit
+0000             12            R_XSEG    segment xdata
+0000             13            R_PSEG    segment xdata
+0000             14            R_ISEG    segment idata
+0000             15            R_OSEG    segment data overlay
+0000             16            BIT_BANK  segment data overlay
+0000             17            R_HOME    segment code
+0000             18            R_GSINIT  segment code
+0000             19            R_IXSEG   segment xdata
+0000             20            R_CONST   segment code
+0000             21            R_XINIT   segment code
+0000             22            R_DINIT   segment code
+0000             23   
+0000             24   ;--------------------------------------------------------
+0000             25   ; Public variables in this module
+0000             26   ;--------------------------------------------------------
+0000             27            public _InitPinADC_PARM_2
+0000             28            public _main
+0000             29            public _getTimeDifference
+0000             30            public _getPeriod
+0000             31            public _TIMER0_Init
+0000             32            public _getsn
+0000             33            public _LCDprint
+0000             34            public _LCD_4BIT
+0000             35            public _WriteCommand
+0000             36            public _WriteData
+0000             37            public _LCD_byte
+0000             38            public _LCD_pulse
+0000             39            public _Volts_at_Pin
+0000             40            public _ADC_at_Pin
+0000             41            public _InitPinADC
+0000             42            public _waitms
+0000             43            public _Timer3us
+0000             44            public _InitADC
+0000             45            public __c51_external_startup
+0000             46            public _LCDprint_PARM_3
+0000             47            public _getTimeDifference_PARM_2
+0000             48            public _getsn_PARM_2
+0000             49            public _LCDprint_PARM_2
+0000             50            public _overflow_count
+0000             51   ;--------------------------------------------------------
+0000             52   ; Special Function Registers
+0000             53   ;--------------------------------------------------------
+0000             54   _ACC            DATA 0xe0
+0000             55   _ADC0ASAH       DATA 0xb6
+0000             56   _ADC0ASAL       DATA 0xb5
+0000             57   _ADC0ASCF       DATA 0xa1
+0000             58   _ADC0ASCT       DATA 0xc7
+0000             59   _ADC0CF0        DATA 0xbc
+0000             60   _ADC0CF1        DATA 0xb9
+0000             61   _ADC0CF2        DATA 0xdf
+0000             62   _ADC0CN0        DATA 0xe8
+0000             63   _ADC0CN1        DATA 0xb2
+0000             64   _ADC0CN2        DATA 0xb3
+0000             65   _ADC0GTH        DATA 0xc4
+0000             66   _ADC0GTL        DATA 0xc3
+0000             67   _ADC0H          DATA 0xbe
+0000             68   _ADC0L          DATA 0xbd
+0000             69   _ADC0LTH        DATA 0xc6
+0000             70   _ADC0LTL        DATA 0xc5
+0000             71   _ADC0MX         DATA 0xbb
+0000             72   _B              DATA 0xf0
+0000             73   _CKCON0         DATA 0x8e
+0000             74   _CKCON1         DATA 0xa6
+0000             75   _CLEN0          DATA 0xc6
+0000             76   _CLIE0          DATA 0xc7
+0000             77   _CLIF0          DATA 0xe8
+0000             78   _CLKSEL         DATA 0xa9
+0000             79   _CLOUT0         DATA 0xd1
+0000             80   _CLU0CF         DATA 0xb1
+0000             81   _CLU0FN         DATA 0xaf
+0000             82   _CLU0MX         DATA 0x84
+0000             83   _CLU1CF         DATA 0xb3
+0000             84   _CLU1FN         DATA 0xb2
+0000             85   _CLU1MX         DATA 0x85
+0000             86   _CLU2CF         DATA 0xb6
+0000             87   _CLU2FN         DATA 0xb5
+0000             88   _CLU2MX         DATA 0x91
+0000             89   _CLU3CF         DATA 0xbf
+0000             90   _CLU3FN         DATA 0xbe
+0000             91   _CLU3MX         DATA 0xae
+0000             92   _CMP0CN0        DATA 0x9b
+0000             93   _CMP0CN1        DATA 0x99
+0000             94   _CMP0MD         DATA 0x9d
+0000             95   _CMP0MX         DATA 0x9f
+0000             96   _CMP1CN0        DATA 0xbf
+0000             97   _CMP1CN1        DATA 0xac
+0000             98   _CMP1MD         DATA 0xab
+0000             99   _CMP1MX         DATA 0xaa
+0000            100   _CRC0CN0        DATA 0xce
+0000            101   _CRC0CN1        DATA 0x86
+0000            102   _CRC0CNT        DATA 0xd3
+0000            103   _CRC0DAT        DATA 0xcb
+0000            104   _CRC0FLIP       DATA 0xcf
+0000            105   _CRC0IN         DATA 0xca
+0000            106   _CRC0ST         DATA 0xd2
+0000            107   _DAC0CF0        DATA 0x91
+0000            108   _DAC0CF1        DATA 0x92
+0000            109   _DAC0H          DATA 0x85
+0000            110   _DAC0L          DATA 0x84
+0000            111   _DAC1CF0        DATA 0x93
+0000            112   _DAC1CF1        DATA 0x94
+0000            113   _DAC1H          DATA 0x8a
+0000            114   _DAC1L          DATA 0x89
+0000            115   _DAC2CF0        DATA 0x95
+0000            116   _DAC2CF1        DATA 0x96
+0000            117   _DAC2H          DATA 0x8c
+0000            118   _DAC2L          DATA 0x8b
+0000            119   _DAC3CF0        DATA 0x9a
+0000            120   _DAC3CF1        DATA 0x9c
+0000            121   _DAC3H          DATA 0x8e
+0000            122   _DAC3L          DATA 0x8d
+0000            123   _DACGCF0        DATA 0x88
+0000            124   _DACGCF1        DATA 0x98
+0000            125   _DACGCF2        DATA 0xa2
+0000            126   _DERIVID        DATA 0xad
+0000            127   _DEVICEID       DATA 0xb5
+0000            128   _DPH            DATA 0x83
+0000            129   _DPL            DATA 0x82
+0000            130   _EIE1           DATA 0xe6
+0000            131   _EIE2           DATA 0xf3
+0000            132   _EIP1           DATA 0xbb
+0000            133   _EIP1H          DATA 0xee
+0000            134   _EIP2           DATA 0xed
+0000            135   _EIP2H          DATA 0xf6
+0000            136   _EMI0CN         DATA 0xe7
+0000            137   _FLKEY          DATA 0xb7
+0000            138   _HFO0CAL        DATA 0xc7
+0000            139   _HFO1CAL        DATA 0xd6
+0000            140   _HFOCN          DATA 0xef
+0000            141   _I2C0ADM        DATA 0xff
+0000            142   _I2C0CN0        DATA 0xba
+0000            143   _I2C0DIN        DATA 0xbc
+0000            144   _I2C0DOUT       DATA 0xbb
+0000            145   _I2C0FCN0       DATA 0xad
+0000            146   _I2C0FCN1       DATA 0xab
+0000            147   _I2C0FCT        DATA 0xf5
+0000            148   _I2C0SLAD       DATA 0xbd
+0000            149   _I2C0STAT       DATA 0xb9
+0000            150   _IE             DATA 0xa8
+0000            151   _IP             DATA 0xb8
+0000            152   _IPH            DATA 0xf2
+0000            153   _IT01CF         DATA 0xe4
+0000            154   _LFO0CN         DATA 0xb1
+0000            155   _P0             DATA 0x80
+0000            156   _P0MASK         DATA 0xfe
+0000            157   _P0MAT          DATA 0xfd
+0000            158   _P0MDIN         DATA 0xf1
+0000            159   _P0MDOUT        DATA 0xa4
+0000            160   _P0SKIP         DATA 0xd4
+0000            161   _P1             DATA 0x90
+0000            162   _P1MASK         DATA 0xee
+0000            163   _P1MAT          DATA 0xed
+0000            164   _P1MDIN         DATA 0xf2
+0000            165   _P1MDOUT        DATA 0xa5
+0000            166   _P1SKIP         DATA 0xd5
+0000            167   _P2             DATA 0xa0
+0000            168   _P2MASK         DATA 0xfc
+0000            169   _P2MAT          DATA 0xfb
+0000            170   _P2MDIN         DATA 0xf3
+0000            171   _P2MDOUT        DATA 0xa6
+0000            172   _P2SKIP         DATA 0xcc
+0000            173   _P3             DATA 0xb0
+0000            174   _P3MDIN         DATA 0xf4
+0000            175   _P3MDOUT        DATA 0x9c
+0000            176   _PCA0CENT       DATA 0x9e
+0000            177   _PCA0CLR        DATA 0x9c
+0000            178   _PCA0CN0        DATA 0xd8
+0000            179   _PCA0CPH0       DATA 0xfc
+0000            180   _PCA0CPH1       DATA 0xea
+0000            181   _PCA0CPH2       DATA 0xec
+0000            182   _PCA0CPH3       DATA 0xf5
+0000            183   _PCA0CPH4       DATA 0x85
+0000            184   _PCA0CPH5       DATA 0xde
+0000            185   _PCA0CPL0       DATA 0xfb
+0000            186   _PCA0CPL1       DATA 0xe9
+0000            187   _PCA0CPL2       DATA 0xeb
+0000            188   _PCA0CPL3       DATA 0xf4
+0000            189   _PCA0CPL4       DATA 0x84
+0000            190   _PCA0CPL5       DATA 0xdd
+0000            191   _PCA0CPM0       DATA 0xda
+0000            192   _PCA0CPM1       DATA 0xdb
+0000            193   _PCA0CPM2       DATA 0xdc
+0000            194   _PCA0CPM3       DATA 0xae
+0000            195   _PCA0CPM4       DATA 0xaf
+0000            196   _PCA0CPM5       DATA 0xcc
+0000            197   _PCA0H          DATA 0xfa
+0000            198   _PCA0L          DATA 0xf9
+0000            199   _PCA0MD         DATA 0xd9
+0000            200   _PCA0POL        DATA 0x96
+0000            201   _PCA0PWM        DATA 0xf7
+0000            202   _PCON0          DATA 0x87
+0000            203   _PCON1          DATA 0xcd
+0000            204   _PFE0CN         DATA 0xc1
+0000            205   _PRTDRV         DATA 0xf6
+0000            206   _PSCTL          DATA 0x8f
+0000            207   _PSTAT0         DATA 0xaa
+0000            208   _PSW            DATA 0xd0
+0000            209   _REF0CN         DATA 0xd1
+0000            210   _REG0CN         DATA 0xc9
+0000            211   _REVID          DATA 0xb6
+0000            212   _RSTSRC         DATA 0xef
+0000            213   _SBCON1         DATA 0x94
+0000            214   _SBRLH1         DATA 0x96
+0000            215   _SBRLL1         DATA 0x95
+0000            216   _SBUF           DATA 0x99
+0000            217   _SBUF0          DATA 0x99
+0000            218   _SBUF1          DATA 0x92
+0000            219   _SCON           DATA 0x98
+0000            220   _SCON0          DATA 0x98
+0000            221   _SCON1          DATA 0xc8
+0000            222   _SFRPAGE        DATA 0xa7
+0000            223   _SFRPGCN        DATA 0xbc
+0000            224   _SFRSTACK       DATA 0xd7
+0000            225   _SMB0ADM        DATA 0xd6
+0000            226   _SMB0ADR        DATA 0xd7
+0000            227   _SMB0CF         DATA 0xc1
+0000            228   _SMB0CN0        DATA 0xc0
+0000            229   _SMB0DAT        DATA 0xc2
+0000            230   _SMB0FCN0       DATA 0xc3
+0000            231   _SMB0FCN1       DATA 0xc4
+0000            232   _SMB0FCT        DATA 0xef
+0000            233   _SMB0RXLN       DATA 0xc5
+0000            234   _SMB0TC         DATA 0xac
+0000            235   _SMOD1          DATA 0x93
+0000            236   _SP             DATA 0x81
+0000            237   _SPI0CFG        DATA 0xa1
+0000            238   _SPI0CKR        DATA 0xa2
+0000            239   _SPI0CN0        DATA 0xf8
+0000            240   _SPI0DAT        DATA 0xa3
+0000            241   _SPI0FCN0       DATA 0x9a
+0000            242   _SPI0FCN1       DATA 0x9b
+0000            243   _SPI0FCT        DATA 0xf7
+0000            244   _SPI0PCF        DATA 0xdf
+0000            245   _TCON           DATA 0x88
+0000            246   _TH0            DATA 0x8c
+0000            247   _TH1            DATA 0x8d
+0000            248   _TL0            DATA 0x8a
+0000            249   _TL1            DATA 0x8b
+0000            250   _TMOD           DATA 0x89
+0000            251   _TMR2CN0        DATA 0xc8
+0000            252   _TMR2CN1        DATA 0xfd
+0000            253   _TMR2H          DATA 0xcf
+0000            254   _TMR2L          DATA 0xce
+0000            255   _TMR2RLH        DATA 0xcb
+0000            256   _TMR2RLL        DATA 0xca
+0000            257   _TMR3CN0        DATA 0x91
+0000            258   _TMR3CN1        DATA 0xfe
+0000            259   _TMR3H          DATA 0x95
+0000            260   _TMR3L          DATA 0x94
+0000            261   _TMR3RLH        DATA 0x93
+0000            262   _TMR3RLL        DATA 0x92
+0000            263   _TMR4CN0        DATA 0x98
+0000            264   _TMR4CN1        DATA 0xff
+0000            265   _TMR4H          DATA 0xa5
+0000            266   _TMR4L          DATA 0xa4
+0000            267   _TMR4RLH        DATA 0xa3
+0000            268   _TMR4RLL        DATA 0xa2
+0000            269   _TMR5CN0        DATA 0xc0
+0000            270   _TMR5CN1        DATA 0xf1
+0000            271   _TMR5H          DATA 0xd5
+0000            272   _TMR5L          DATA 0xd4
+0000            273   _TMR5RLH        DATA 0xd3
+0000            274   _TMR5RLL        DATA 0xd2
+0000            275   _UART0PCF       DATA 0xd9
+0000            276   _UART1FCN0      DATA 0x9d
+0000            277   _UART1FCN1      DATA 0xd8
+0000            278   _UART1FCT       DATA 0xfa
+0000            279   _UART1LIN       DATA 0x9e
+0000            280   _UART1PCF       DATA 0xda
+0000            281   _VDM0CN         DATA 0xff
+0000            282   _WDTCN          DATA 0x97
+0000            283   _XBR0           DATA 0xe1
+0000            284   _XBR1           DATA 0xe2
+0000            285   _XBR2           DATA 0xe3
+0000            286   _XOSC0CN        DATA 0x86
+0000            287   _DPTR           DATA 0x8382
+0000            288   _TMR2RL         DATA 0xcbca
+0000            289   _TMR3RL         DATA 0x9392
+0000            290   _TMR4RL         DATA 0xa3a2
+0000            291   _TMR5RL         DATA 0xd3d2
+0000            292   _TMR0           DATA 0x8c8a
+0000            293   _TMR1           DATA 0x8d8b
+0000            294   _TMR2           DATA 0xcfce
+0000            295   _TMR3           DATA 0x9594
+0000            296   _TMR4           DATA 0xa5a4
+0000            297   _TMR5           DATA 0xd5d4
+0000            298   _SBRL1          DATA 0x9695
+0000            299   _PCA0           DATA 0xfaf9
+0000            300   _PCA0CP0        DATA 0xfcfb
+0000            301   _PCA0CP1        DATA 0xeae9
+0000            302   _PCA0CP2        DATA 0xeceb
+0000            303   _PCA0CP3        DATA 0xf5f4
+0000            304   _PCA0CP4        DATA 0x8584
+0000            305   _PCA0CP5        DATA 0xdedd
+0000            306   _ADC0ASA        DATA 0xb6b5
+0000            307   _ADC0GT         DATA 0xc4c3
+0000            308   _ADC0           DATA 0xbebd
+0000            309   _ADC0LT         DATA 0xc6c5
+0000            310   _DAC0           DATA 0x8584
+0000            311   _DAC1           DATA 0x8a89
+0000            312   _DAC2           DATA 0x8c8b
+0000            313   _DAC3           DATA 0x8e8d
+0000            314   ;--------------------------------------------------------
+0000            315   ; special function bits
+0000            316   ;--------------------------------------------------------
+0000            317   _ACC_0          BIT 0xe0
+0000            318   _ACC_1          BIT 0xe1
+0000            319   _ACC_2          BIT 0xe2
+0000            320   _ACC_3          BIT 0xe3
+0000            321   _ACC_4          BIT 0xe4
+0000            322   _ACC_5          BIT 0xe5
+0000            323   _ACC_6          BIT 0xe6
+0000            324   _ACC_7          BIT 0xe7
+0000            325   _TEMPE          BIT 0xe8
+0000            326   _ADGN0          BIT 0xe9
+0000            327   _ADGN1          BIT 0xea
+0000            328   _ADWINT         BIT 0xeb
+0000            329   _ADBUSY         BIT 0xec
+0000            330   _ADINT          BIT 0xed
+0000            331   _IPOEN          BIT 0xee
+0000            332   _ADEN           BIT 0xef
+0000            333   _B_0            BIT 0xf0
+0000            334   _B_1            BIT 0xf1
+0000            335   _B_2            BIT 0xf2
+0000            336   _B_3            BIT 0xf3
+0000            337   _B_4            BIT 0xf4
+0000            338   _B_5            BIT 0xf5
+0000            339   _B_6            BIT 0xf6
+0000            340   _B_7            BIT 0xf7
+0000            341   _C0FIF          BIT 0xe8
+0000            342   _C0RIF          BIT 0xe9
+0000            343   _C1FIF          BIT 0xea
+0000            344   _C1RIF          BIT 0xeb
+0000            345   _C2FIF          BIT 0xec
+0000            346   _C2RIF          BIT 0xed
+0000            347   _C3FIF          BIT 0xee
+0000            348   _C3RIF          BIT 0xef
+0000            349   _D1SRC0         BIT 0x88
+0000            350   _D1SRC1         BIT 0x89
+0000            351   _D1AMEN         BIT 0x8a
+0000            352   _D01REFSL       BIT 0x8b
+0000            353   _D3SRC0         BIT 0x8c
+0000            354   _D3SRC1         BIT 0x8d
+0000            355   _D3AMEN         BIT 0x8e
+0000            356   _D23REFSL       BIT 0x8f
+0000            357   _D0UDIS         BIT 0x98
+0000            358   _D1UDIS         BIT 0x99
+0000            359   _D2UDIS         BIT 0x9a
+0000            360   _D3UDIS         BIT 0x9b
+0000            361   _EX0            BIT 0xa8
+0000            362   _ET0            BIT 0xa9
+0000            363   _EX1            BIT 0xaa
+0000            364   _ET1            BIT 0xab
+0000            365   _ES0            BIT 0xac
+0000            366   _ET2            BIT 0xad
+0000            367   _ESPI0          BIT 0xae
+0000            368   _EA             BIT 0xaf
+0000            369   _PX0            BIT 0xb8
+0000            370   _PT0            BIT 0xb9
+0000            371   _PX1            BIT 0xba
+0000            372   _PT1            BIT 0xbb
+0000            373   _PS0            BIT 0xbc
+0000            374   _PT2            BIT 0xbd
+0000            375   _PSPI0          BIT 0xbe
+0000            376   _P0_0           BIT 0x80
+0000            377   _P0_1           BIT 0x81
+0000            378   _P0_2           BIT 0x82
+0000            379   _P0_3           BIT 0x83
+0000            380   _P0_4           BIT 0x84
+0000            381   _P0_5           BIT 0x85
+0000            382   _P0_6           BIT 0x86
+0000            383   _P0_7           BIT 0x87
+0000            384   _P1_0           BIT 0x90
+0000            385   _P1_1           BIT 0x91
+0000            386   _P1_2           BIT 0x92
+0000            387   _P1_3           BIT 0x93
+0000            388   _P1_4           BIT 0x94
+0000            389   _P1_5           BIT 0x95
+0000            390   _P1_6           BIT 0x96
+0000            391   _P1_7           BIT 0x97
+0000            392   _P2_0           BIT 0xa0
+0000            393   _P2_1           BIT 0xa1
+0000            394   _P2_2           BIT 0xa2
+0000            395   _P2_3           BIT 0xa3
+0000            396   _P2_4           BIT 0xa4
+0000            397   _P2_5           BIT 0xa5
+0000            398   _P2_6           BIT 0xa6
+0000            399   _P3_0           BIT 0xb0
+0000            400   _P3_1           BIT 0xb1
+0000            401   _P3_2           BIT 0xb2
+0000            402   _P3_3           BIT 0xb3
+0000            403   _P3_4           BIT 0xb4
+0000            404   _P3_7           BIT 0xb7
+0000            405   _CCF0           BIT 0xd8
+0000            406   _CCF1           BIT 0xd9
+0000            407   _CCF2           BIT 0xda
+0000            408   _CCF3           BIT 0xdb
+0000            409   _CCF4           BIT 0xdc
+0000            410   _CCF5           BIT 0xdd
+0000            411   _CR             BIT 0xde
+0000            412   _CF             BIT 0xdf
+0000            413   _PARITY         BIT 0xd0
+0000            414   _F1             BIT 0xd1
+0000            415   _OV             BIT 0xd2
+0000            416   _RS0            BIT 0xd3
+0000            417   _RS1            BIT 0xd4
+0000            418   _F0             BIT 0xd5
+0000            419   _AC             BIT 0xd6
+0000            420   _CY             BIT 0xd7
+0000            421   _RI             BIT 0x98
+0000            422   _TI             BIT 0x99
+0000            423   _RB8            BIT 0x9a
+0000            424   _TB8            BIT 0x9b
+0000            425   _REN            BIT 0x9c
+0000            426   _CE             BIT 0x9d
+0000            427   _SMODE          BIT 0x9e
+0000            428   _RI1            BIT 0xc8
+0000            429   _TI1            BIT 0xc9
+0000            430   _RBX1           BIT 0xca
+0000            431   _TBX1           BIT 0xcb
+0000            432   _REN1           BIT 0xcc
+0000            433   _PERR1          BIT 0xcd
+0000            434   _OVR1           BIT 0xce
+0000            435   _SI             BIT 0xc0
+0000            436   _ACK            BIT 0xc1
+0000            437   _ARBLOST        BIT 0xc2
+0000            438   _ACKRQ          BIT 0xc3
+0000            439   _STO            BIT 0xc4
+0000            440   _STA            BIT 0xc5
+0000            441   _TXMODE         BIT 0xc6
+0000            442   _MASTER         BIT 0xc7
+0000            443   _SPIEN          BIT 0xf8
+0000            444   _TXNF           BIT 0xf9
+0000            445   _NSSMD0         BIT 0xfa
+0000            446   _NSSMD1         BIT 0xfb
+0000            447   _RXOVRN         BIT 0xfc
+0000            448   _MODF           BIT 0xfd
+0000            449   _WCOL           BIT 0xfe
+0000            450   _SPIF           BIT 0xff
+0000            451   _IT0            BIT 0x88
+0000            452   _IE0            BIT 0x89
+0000            453   _IT1            BIT 0x8a
+0000            454   _IE1            BIT 0x8b
+0000            455   _TR0            BIT 0x8c
+0000            456   _TF0            BIT 0x8d
+0000            457   _TR1            BIT 0x8e
+0000            458   _TF1            BIT 0x8f
+0000            459   _T2XCLK0        BIT 0xc8
+0000            460   _T2XCLK1        BIT 0xc9
+0000            461   _TR2            BIT 0xca
+0000            462   _T2SPLIT        BIT 0xcb
+0000            463   _TF2CEN         BIT 0xcc
+0000            464   _TF2LEN         BIT 0xcd
+0000            465   _TF2L           BIT 0xce
+0000            466   _TF2H           BIT 0xcf
+0000            467   _T4XCLK0        BIT 0x98
+0000            468   _T4XCLK1        BIT 0x99
+0000            469   _TR4            BIT 0x9a
+0000            470   _T4SPLIT        BIT 0x9b
+0000            471   _TF4CEN         BIT 0x9c
+0000            472   _TF4LEN         BIT 0x9d
+0000            473   _TF4L           BIT 0x9e
+0000            474   _TF4H           BIT 0x9f
+0000            475   _T5XCLK0        BIT 0xc0
+0000            476   _T5XCLK1        BIT 0xc1
+0000            477   _TR5            BIT 0xc2
+0000            478   _T5SPLIT        BIT 0xc3
+0000            479   _TF5CEN         BIT 0xc4
+0000            480   _TF5LEN         BIT 0xc5
+0000            481   _TF5L           BIT 0xc6
+0000            482   _TF5H           BIT 0xc7
+0000            483   _RIE            BIT 0xd8
+0000            484   _RXTO0          BIT 0xd9
+0000            485   _RXTO1          BIT 0xda
+0000            486   _RFRQ           BIT 0xdb
+0000            487   _TIE            BIT 0xdc
+0000            488   _TXHOLD         BIT 0xdd
+0000            489   _TXNF1          BIT 0xde
+0000            490   _TFRQ           BIT 0xdf
+0000            491   ;--------------------------------------------------------
+0000            492   ; overlayable register banks
+0000            493   ;--------------------------------------------------------
+0000            494            rbank0 segment data overlay
+0000            495   ;--------------------------------------------------------
+0000            496   ; internal ram data
+0000            497   ;--------------------------------------------------------
+0000            498            rseg R_DSEG
+0000            499   _overflow_count:
+0000            500            ds 1
+0001            501   _LCDprint_PARM_2:
+0001            502            ds 1
+0002            503   _getsn_PARM_2:
+0002            504            ds 2
+0004            505   _getsn_buff_1_70:
+0004            506            ds 3
+0007            507   _getsn_sloc0_1_0:
+0007            508            ds 2
+0009            509   _getTimeDifference_PARM_2:
+0009            510            ds 1
+000A            511   ;--------------------------------------------------------
+000A            512   ; overlayable items in internal ram 
+000A            513   ;--------------------------------------------------------
+0000            514            rseg    R_OSEG
+0000            515            rseg    R_OSEG
+0000            516   _InitPinADC_PARM_2:
+0000            517            ds 1
+0001            518            rseg    R_OSEG
+0001            519   ;--------------------------------------------------------
+0001            520   ; indirectly addressable internal ram data
+0001            521   ;--------------------------------------------------------
+0000            522            rseg R_ISEG
+0000            523   ;--------------------------------------------------------
+0000            524   ; absolute internal ram data
+0000            525   ;--------------------------------------------------------
+0000            526            DSEG
+0000            527   ;--------------------------------------------------------
+0000            528   ; bit data
+0000            529   ;--------------------------------------------------------
+0000            530            rseg R_BSEG
+0000            531   _LCDprint_PARM_3:
+0000            532            DBIT    1
+0001            533   ;--------------------------------------------------------
+0001            534   ; paged external ram data
+0001            535   ;--------------------------------------------------------
+0000            536            rseg R_PSEG
+0000            537   ;--------------------------------------------------------
+0000            538   ; external ram data
+0000            539   ;--------------------------------------------------------
+0000            540            rseg R_XSEG
+0000            541   ;--------------------------------------------------------
+0000            542   ; absolute external ram data
+0000            543   ;--------------------------------------------------------
+0000            544            XSEG
+0000            545   ;--------------------------------------------------------
+0000            546   ; external initialized ram data
+0000            547   ;--------------------------------------------------------
+0000            548            rseg R_IXSEG
+0000            549            rseg R_HOME
+0000            550            rseg R_GSINIT
+0000            551            rseg R_CSEG
+0000            552   ;--------------------------------------------------------
+0000            553   ; Reset entry point and interrupt vectors
+0000            554   ;--------------------------------------------------------
+0000            555            CSEG at 0x0000
+0000 020000     556            ljmp    _crt0
+0003            557   ;--------------------------------------------------------
+0003            558   ; global & static initialisations
+0003            559   ;--------------------------------------------------------
+0000            560            rseg R_HOME
+0000            561            rseg R_GSINIT
+0000            562            rseg R_GSINIT
+0000            563   ;--------------------------------------------------------
+0000            564   ; data variables initialization
+0000            565   ;--------------------------------------------------------
+0000            566            rseg R_DINIT
+0000            567            ; The linker places a 'ret' at the end of segment R_DINIT.
+0000            568   ;--------------------------------------------------------
+0000            569   ; code
+0000            570   ;--------------------------------------------------------
+0000            571            rseg R_CSEG
+0000            572   ;------------------------------------------------------------
+0000            573   ;Allocation info for local variables in function '_c51_external_startup'
+0000            574   ;------------------------------------------------------------
+0000            575   ;------------------------------------------------------------
+0000            576   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:24: char _c51_external_startup (void)
+0000            577   ;        -----------------------------------------
+0000            578   ;         function _c51_external_startup
+0000            579   ;        -----------------------------------------
+0000            580   __c51_external_startup:
+0000            581            using   0
+0000            582   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:27: SFRPAGE = 0x00;
+0000 75A700     583            mov     _SFRPAGE,#0x00
+0003            584   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:28: WDTCN = 0xDE; //First key
+0003 7597DE     585            mov     _WDTCN,#0xDE
+0006            586   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:29: WDTCN = 0xAD; //Second key
+0006 7597AD     587            mov     _WDTCN,#0xAD
+0009            588   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:31: VDM0CN=0x80;       // enable VDD monitor
+0009 75FF80     589            mov     _VDM0CN,#0x80
+000C            590   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:32: RSTSRC=0x02|0x04;  // Enable reset on missing clock detector and VDD
+000C 75EF06     591            mov     _RSTSRC,#0x06
+000F            592   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:39: SFRPAGE = 0x10;
+000F 75A710     593            mov     _SFRPAGE,#0x10
+0012            594   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:40: PFE0CN  = 0x20; // SYSCLK < 75 MHz.
+0012 75C120     595            mov     _PFE0CN,#0x20
+0015            596   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:41: SFRPAGE = 0x00;
+0015 75A700     597            mov     _SFRPAGE,#0x00
+0018            598   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:62: CLKSEL = 0x00;
+0018 75A900     599            mov     _CLKSEL,#0x00
+001B            600   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:63: CLKSEL = 0x00;
+001B 75A900     601            mov     _CLKSEL,#0x00
+001E            602   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:64: while ((CLKSEL & 0x80) == 0);
+001E            603   L002001?:
+001E E5A9       604            mov     a,_CLKSEL
+0020 30E7B0     605            jnb     acc.7,L002001?
+0023            606   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:65: CLKSEL = 0x03;
+0023 75A903     607            mov     _CLKSEL,#0x03
+0026            608   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:66: CLKSEL = 0x03;
+0026 75A903     609            mov     _CLKSEL,#0x03
+0029            610   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:67: while ((CLKSEL & 0x80) == 0);
+0029            611   L002004?:
+0029 E5A9       612            mov     a,_CLKSEL
+002B 30E730     613            jnb     acc.7,L002004?
+002E            614   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:72: P0MDOUT |= 0x10; // Enable UART0 TX as push-pull output
+002E 43A410     615            orl     _P0MDOUT,#0x10
+0031            616   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:73: XBR0     = 0x01; // Enable UART0 on P0.4(TX) and P0.5(RX)                     
+0031 75E101     617            mov     _XBR0,#0x01
+0034            618   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:74: XBR1     = 0X00;
+0034 75E200     619            mov     _XBR1,#0x00
+0037            620   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:75: XBR2     = 0x40; // Enable crossbar and weak pull-ups
+0037 75E340     621            mov     _XBR2,#0x40
+003A            622   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:81: SCON0 = 0x10;
+003A 759810     623            mov     _SCON0,#0x10
+003D            624   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:82: TH1 = 0x100-((SYSCLK/BAUDRATE)/(2L*12L));
+003D 758DE6     625            mov     _TH1,#0xE6
+0040            626   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:83: TL1 = TH1;      // Init Timer1
+0040 858D8B     627            mov     _TL1,_TH1
+0043            628   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:84: TMOD &= ~0xf0;  // TMOD: timer 1 in 8-bit auto-reload
+0043 53890F     629            anl     _TMOD,#0x0F
+0046            630   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:85: TMOD |=  0x20;                       
+0046 438920     631            orl     _TMOD,#0x20
+0049            632   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:86: TR1 = 1; // START Timer1
+0049 D28E       633            setb    _TR1
+004B            634   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:87: TI = 1;  // Indicate TX0 ready
+004B D299       635            setb    _TI
+004D            636   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:89: return 0;
+004D 758200     637            mov     dpl,#0x00
+0050 22         638            ret
+0051            639   ;------------------------------------------------------------
+0051            640   ;Allocation info for local variables in function 'InitADC'
+0051            641   ;------------------------------------------------------------
+0051            642   ;------------------------------------------------------------
+0051            643   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:92: void InitADC (void)
+0051            644   ;        -----------------------------------------
+0051            645   ;         function InitADC
+0051            646   ;        -----------------------------------------
+0051            647   _InitADC:
+0051            648   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:94: SFRPAGE = 0x00;
+0051 75A700     649            mov     _SFRPAGE,#0x00
+0054            650   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:95: ADEN=0; // Disable ADC
+0054 C2EF       651            clr     _ADEN
+0056            652   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:100: (0x0 << 0) ; // Accumulate n conversions: 0x0: 1, 0x1:4, 0x2:8, 0x3:16, 0x4:32
+0056 75B280     653            mov     _ADC0CN1,#0x80
+0059            654   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:104: (0x0 << 2); // 0:SYSCLK ADCCLK = SYSCLK. 1:HFOSC0 ADCCLK = HFOSC0.
+0059 75BC20     655            mov     _ADC0CF0,#0x20
+005C            656   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:108: (0x1E << 0); // Conversion Tracking Time. Tadtk = ADTK / (Fsarclk)
+005C 75B91E     657            mov     _ADC0CF1,#0x1E
+005F            658   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:117: (0x0 << 0) ; // TEMPE. 0: Disable the Temperature Sensor. 1: Enable the Temperature Sensor.
+005F 75E800     659            mov     _ADC0CN0,#0x00
+0062            660   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:122: (0x1F << 0); // ADPWR. Power Up Delay Time. Tpwrtime = ((4 * (ADPWR + 1)) + 2) / (Fadcclk)
+0062 75DF3F     661            mov     _ADC0CF2,#0x3F
+0065            662   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:126: (0x0 << 0) ; // ADCM. 0x0: ADBUSY, 0x1: TIMER0, 0x2: TIMER2, 0x3: TIMER3, 0x4: CNVSTR, 0x5: CEX5, 0x6: TIMER4, 0x7: TIMER5, 0x8: CLU0, 0x9: CLU1, 0xA: CLU2, 0xB: CLU3
+0065 75B300     663            mov     _ADC0CN2,#0x00
+0068            664   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:128: ADEN=1; // Enable ADC
+0068 D2EF       665            setb    _ADEN
+006A 22         666            ret
+006B            667   ;------------------------------------------------------------
+006B            668   ;Allocation info for local variables in function 'Timer3us'
+006B            669   ;------------------------------------------------------------
+006B            670   ;us                        Allocated to registers r2 
+006B            671   ;i                         Allocated to registers r3 
+006B            672   ;------------------------------------------------------------
+006B            673   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:131: void Timer3us(unsigned char us)
+006B            674   ;        -----------------------------------------
+006B            675   ;         function Timer3us
+006B            676   ;        -----------------------------------------
+006B            677   _Timer3us:
+006B AA82       678            mov     r2,dpl
+006D            679   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:136: CKCON0|=0b_0100_0000;
+006D 438E40     680            orl     _CKCON0,#0x40
+0070            681   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:138: TMR3RL = (-(SYSCLK)/1000000L); // Set Timer3 to overflow in 1us.
+0070 7592B8     682            mov     _TMR3RL,#0xB8
+0073 7593FF     683            mov     (_TMR3RL >> 8),#0xFF
+0076            684   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:139: TMR3 = TMR3RL;                 // Initialize Timer3 for first overflow
+0076 859294     685            mov     _TMR3,_TMR3RL
+0079 859395     686            mov     (_TMR3 >> 8),(_TMR3RL >> 8)
+007C            687   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:141: TMR3CN0 = 0x04;                 // Sart Timer3 and clear overflow flag
+007C 759104     688            mov     _TMR3CN0,#0x04
+007F            689   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:142: for (i = 0; i < us; i++)       // Count <us> overflows
+007F 7B00       690            mov     r3,#0x00
+0081            691   L004004?:
+0081 C3         692            clr     c
+0082 EB         693            mov     a,r3
+0083 9A         694            subb    a,r2
+0084 5000       695            jnc     L004007?
+0086            696   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:144: while (!(TMR3CN0 & 0x80));  // Wait for overflow
+0086            697   L004001?:
+0086 E591       698            mov     a,_TMR3CN0
+0088 30E730     699            jnb     acc.7,L004001?
+008B            700   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:145: TMR3CN0 &= ~(0x80);         // Clear overflow indicator
+008B 53917F     701            anl     _TMR3CN0,#0x7F
+008E            702   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:142: for (i = 0; i < us; i++)       // Count <us> overflows
+008E 0B         703            inc     r3
+008F 8000       704            sjmp    L004004?
+0091            705   L004007?:
+0091            706   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:147: TMR3CN0 = 0 ;                   // Stop Timer3 and clear overflow flag
+0091 759100     707            mov     _TMR3CN0,#0x00
+0094 22         708            ret
+0095            709   ;------------------------------------------------------------
+0095            710   ;Allocation info for local variables in function 'waitms'
+0095            711   ;------------------------------------------------------------
+0095            712   ;ms                        Allocated to registers r2 r3 
+0095            713   ;j                         Allocated to registers r4 r5 
+0095            714   ;k                         Allocated to registers r6 
+0095            715   ;------------------------------------------------------------
+0095            716   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:150: void waitms (unsigned int ms)
+0095            717   ;        -----------------------------------------
+0095            718   ;         function waitms
+0095            719   ;        -----------------------------------------
+0095            720   _waitms:
+0095 AA82       721            mov     r2,dpl
+0097 AB83       722            mov     r3,dph
+0099            723   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:154: for(j=0; j<ms; j++)
+0099 7C00       724            mov     r4,#0x00
+009B 7D00       725            mov     r5,#0x00
+009D            726   L005005?:
+009D C3         727            clr     c
+009E EC         728            mov     a,r4
+009F 9A         729            subb    a,r2
+00A0 ED         730            mov     a,r5
+00A1 9B         731            subb    a,r3
+00A2 5000       732            jnc     L005009?
+00A4            733   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:155: for (k=0; k<4; k++) Timer3us(250);
+00A4 7E00       734            mov     r6,#0x00
+00A6            735   L005001?:
+00A6 BE0470     736            cjne    r6,#0x04,L005018?
+00A9            737   L005018?:
+00A9 5000       738            jnc     L005007?
+00AB 7582FA     739            mov     dpl,#0xFA
+00AE C002       740            push    ar2
+00B0 C003       741            push    ar3
+00B2 C004       742            push    ar4
+00B4 C005       743            push    ar5
+00B6 C006       744            push    ar6
+00B8 120000     745            lcall   _Timer3us
+00BB D006       746            pop     ar6
+00BD D005       747            pop     ar5
+00BF D004       748            pop     ar4
+00C1 D003       749            pop     ar3
+00C3 D002       750            pop     ar2
+00C5 0E         751            inc     r6
+00C6 8000       752            sjmp    L005001?
+00C8            753   L005007?:
+00C8            754   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:154: for(j=0; j<ms; j++)
+00C8 0C         755            inc     r4
+00C9 BC00B0     756            cjne    r4,#0x00,L005005?
+00CC 0D         757            inc     r5
+00CD 8000       758            sjmp    L005005?
+00CF            759   L005009?:
+00CF 22         760            ret
+00D0            761   ;------------------------------------------------------------
+00D0            762   ;Allocation info for local variables in function 'InitPinADC'
+00D0            763   ;------------------------------------------------------------
+00D0            764   ;pinno                     Allocated with name '_InitPinADC_PARM_2'
+00D0            765   ;portno                    Allocated to registers r2 
+00D0            766   ;mask                      Allocated to registers r3 
+00D0            767   ;------------------------------------------------------------
+00D0            768   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:158: void InitPinADC (unsigned char portno, unsigned char pinno)
+00D0            769   ;        -----------------------------------------
+00D0            770   ;         function InitPinADC
+00D0            771   ;        -----------------------------------------
+00D0            772   _InitPinADC:
+00D0 AA82       773            mov     r2,dpl
+00D2            774   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:162: mask=1<<pinno;
+00D2 85C0F0     775            mov     b,_InitPinADC_PARM_2
+00D5 05F0       776            inc     b
+00D7 7401       777            mov     a,#0x01
+00D9 8000       778            sjmp    L006013?
+00DB            779   L006011?:
+00DB 25E0       780            add     a,acc
+00DD            781   L006013?:
+00DD D5F070     782            djnz    b,L006011?
+00E0 FB         783            mov     r3,a
+00E1            784   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:164: SFRPAGE = 0x20;
+00E1 75A720     785            mov     _SFRPAGE,#0x20
+00E4            786   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:165: switch (portno)
+00E4 BA00B0     787            cjne    r2,#0x00,L006014?
+00E7 8000       788            sjmp    L006001?
+00E9            789   L006014?:
+00E9 BA0130     790            cjne    r2,#0x01,L006015?
+00EC 8000       791            sjmp    L006002?
+00EE            792   L006015?:
+00EE            793   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:167: case 0:
+00EE BA02B0     794            cjne    r2,#0x02,L006005?
+00F1 8000       795            sjmp    L006003?
+00F3            796   L006001?:
+00F3            797   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:168: P0MDIN &= (~mask); // Set pin as analog input
+00F3 EB         798            mov     a,r3
+00F4 F4         799            cpl     a
+00F5 FA         800            mov     r2,a
+00F6 52F1       801            anl     _P0MDIN,a
+00F8            802   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:169: P0SKIP |= mask; // Skip Crossbar decoding for this pin
+00F8 EB         803            mov     a,r3
+00F9 42D4       804            orl     _P0SKIP,a
+00FB            805   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:170: break;
+00FB            806   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:171: case 1:
+00FB 8000       807            sjmp    L006005?
+00FD            808   L006002?:
+00FD            809   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:172: P1MDIN &= (~mask); // Set pin as analog input
+00FD EB         810            mov     a,r3
+00FE F4         811            cpl     a
+00FF FA         812            mov     r2,a
+0100 52F2       813            anl     _P1MDIN,a
+0102            814   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:173: P1SKIP |= mask; // Skip Crossbar decoding for this pin
+0102 EB         815            mov     a,r3
+0103 42D5       816            orl     _P1SKIP,a
+0105            817   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:174: break;
+0105            818   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:175: case 2:
+0105 8000       819            sjmp    L006005?
+0107            820   L006003?:
+0107            821   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:176: P2MDIN &= (~mask); // Set pin as analog input
+0107 EB         822            mov     a,r3
+0108 F4         823            cpl     a
+0109 FA         824            mov     r2,a
+010A 52F3       825            anl     _P2MDIN,a
+010C            826   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:177: P2SKIP |= mask; // Skip Crossbar decoding for this pin
+010C EB         827            mov     a,r3
+010D 42CC       828            orl     _P2SKIP,a
+010F            829   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:181: }
+010F            830   L006005?:
+010F            831   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:182: SFRPAGE = 0x00;
+010F 75A700     832            mov     _SFRPAGE,#0x00
+0112 22         833            ret
+0113            834   ;------------------------------------------------------------
+0113            835   ;Allocation info for local variables in function 'ADC_at_Pin'
+0113            836   ;------------------------------------------------------------
+0113            837   ;pin                       Allocated to registers 
+0113            838   ;------------------------------------------------------------
+0113            839   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:185: unsigned int ADC_at_Pin(unsigned char pin)
+0113            840   ;        -----------------------------------------
+0113            841   ;         function ADC_at_Pin
+0113            842   ;        -----------------------------------------
+0113            843   _ADC_at_Pin:
+0113 8582BB     844            mov     _ADC0MX,dpl
+0116            845   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:188: ADINT = 0;
+0116 C2ED       846            clr     _ADINT
+0118            847   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:189: ADBUSY = 1;     // Convert voltage at the pin
+0118 D2EC       848            setb    _ADBUSY
+011A            849   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:190: while (!ADINT); // Wait for conversion to complete
+011A            850   L007001?:
+011A 30ED30     851            jnb     _ADINT,L007001?
+011D            852   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:191: return (ADC0);
+011D 85BD82     853            mov     dpl,_ADC0
+0120 85BE83     854            mov     dph,(_ADC0 >> 8)
+0123 22         855            ret
+0124            856   ;------------------------------------------------------------
+0124            857   ;Allocation info for local variables in function 'Volts_at_Pin'
+0124            858   ;------------------------------------------------------------
+0124            859   ;pin                       Allocated to registers r2 
+0124            860   ;------------------------------------------------------------
+0124            861   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:194: float Volts_at_Pin(unsigned char pin)
+0124            862   ;        -----------------------------------------
+0124            863   ;         function Volts_at_Pin
+0124            864   ;        -----------------------------------------
+0124            865   _Volts_at_Pin:
+0124            866   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:196: return ((ADC_at_Pin(pin)*VDD)/0b_0011_1111_1111_1111);
+0124 120000     867            lcall   _ADC_at_Pin
+0127 120000     868            lcall   ___uint2fs
+012A AA82       869            mov     r2,dpl
+012C AB83       870            mov     r3,dph
+012E ACF0       871            mov     r4,b
+0130 FD         872            mov     r5,a
+0131 C002       873            push    ar2
+0133 C003       874            push    ar3
+0135 C004       875            push    ar4
+0137 C005       876            push    ar5
+0139 906C8B     877            mov     dptr,#0x6C8B
+013C 75F053     878            mov     b,#0x53
+013F 7440       879            mov     a,#0x40
+0141 120000     880            lcall   ___fsmul
+0144 AA82       881            mov     r2,dpl
+0146 AB83       882            mov     r3,dph
+0148 ACF0       883            mov     r4,b
+014A FD         884            mov     r5,a
+014B E581       885            mov     a,sp
+014D 24FC       886            add     a,#0xfc
+014F F581       887            mov     sp,a
+0151 E4         888            clr     a
+0152 C0E0       889            push    acc
+0154 74FC       890            mov     a,#0xFC
+0156 C0E0       891            push    acc
+0158 747F       892            mov     a,#0x7F
+015A C0E0       893            push    acc
+015C 7446       894            mov     a,#0x46
+015E C0E0       895            push    acc
+0160 8A82       896            mov     dpl,r2
+0162 8B83       897            mov     dph,r3
+0164 8CF0       898            mov     b,r4
+0166 ED         899            mov     a,r5
+0167 120000     900            lcall   ___fsdiv
+016A AA82       901            mov     r2,dpl
+016C AB83       902            mov     r3,dph
+016E ACF0       903            mov     r4,b
+0170 FD         904            mov     r5,a
+0171 E581       905            mov     a,sp
+0173 24FC       906            add     a,#0xfc
+0175 F581       907            mov     sp,a
+0177 8A82       908            mov     dpl,r2
+0179 8B83       909            mov     dph,r3
+017B 8CF0       910            mov     b,r4
+017D ED         911            mov     a,r5
+017E 22         912            ret
+017F            913   ;------------------------------------------------------------
+017F            914   ;Allocation info for local variables in function 'LCD_pulse'
+017F            915   ;------------------------------------------------------------
+017F            916   ;------------------------------------------------------------
+017F            917   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:199: void LCD_pulse (void)
+017F            918   ;        -----------------------------------------
+017F            919   ;         function LCD_pulse
+017F            920   ;        -----------------------------------------
+017F            921   _LCD_pulse:
+017F            922   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:201: LCD_E=1;
+017F D2A5       923            setb    _P2_5
+0181            924   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:202: Timer3us(40);
+0181 758228     925            mov     dpl,#0x28
+0184 120000     926            lcall   _Timer3us
+0187            927   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:203: LCD_E=0;
+0187 C2A5       928            clr     _P2_5
+0189 22         929            ret
+018A            930   ;------------------------------------------------------------
+018A            931   ;Allocation info for local variables in function 'LCD_byte'
+018A            932   ;------------------------------------------------------------
+018A            933   ;x                         Allocated to registers r2 
+018A            934   ;------------------------------------------------------------
+018A            935   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:206: void LCD_byte (unsigned char x)
+018A            936   ;        -----------------------------------------
+018A            937   ;         function LCD_byte
+018A            938   ;        -----------------------------------------
+018A            939   _LCD_byte:
+018A AA82       940            mov     r2,dpl
+018C            941   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:209: ACC=x; //Send high nible
+018C 8AE0       942            mov     _ACC,r2
+018E            943   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:210: LCD_D7=ACC_7;
+018E A2E7       944            mov     c,_ACC_7
+0190 92A1       945            mov     _P2_1,c
+0192            946   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:211: LCD_D6=ACC_6;
+0192 A2E6       947            mov     c,_ACC_6
+0194 92A2       948            mov     _P2_2,c
+0196            949   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:212: LCD_D5=ACC_5;
+0196 A2E5       950            mov     c,_ACC_5
+0198 92A3       951            mov     _P2_3,c
+019A            952   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:213: LCD_D4=ACC_4;
+019A A2E4       953            mov     c,_ACC_4
+019C 92A4       954            mov     _P2_4,c
+019E            955   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:214: LCD_pulse();
+019E C002       956            push    ar2
+01A0 120000     957            lcall   _LCD_pulse
+01A3            958   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:215: Timer3us(40);
+01A3 758228     959            mov     dpl,#0x28
+01A6 120000     960            lcall   _Timer3us
+01A9 D002       961            pop     ar2
+01AB            962   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:216: ACC=x; //Send low nible
+01AB 8AE0       963            mov     _ACC,r2
+01AD            964   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:217: LCD_D7=ACC_3;
+01AD A2E3       965            mov     c,_ACC_3
+01AF 92A1       966            mov     _P2_1,c
+01B1            967   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:218: LCD_D6=ACC_2;
+01B1 A2E2       968            mov     c,_ACC_2
+01B3 92A2       969            mov     _P2_2,c
+01B5            970   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:219: LCD_D5=ACC_1;
+01B5 A2E1       971            mov     c,_ACC_1
+01B7 92A3       972            mov     _P2_3,c
+01B9            973   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:220: LCD_D4=ACC_0;
+01B9 A2E0       974            mov     c,_ACC_0
+01BB 92A4       975            mov     _P2_4,c
+01BD            976   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:221: LCD_pulse();
+01BD 020000     977            ljmp    _LCD_pulse
+01C0            978   ;------------------------------------------------------------
+01C0            979   ;Allocation info for local variables in function 'WriteData'
+01C0            980   ;------------------------------------------------------------
+01C0            981   ;x                         Allocated to registers r2 
+01C0            982   ;------------------------------------------------------------
+01C0            983   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:224: void WriteData (unsigned char x)
+01C0            984   ;        -----------------------------------------
+01C0            985   ;         function WriteData
+01C0            986   ;        -----------------------------------------
+01C0            987   _WriteData:
+01C0 AA82       988            mov     r2,dpl
+01C2            989   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:226: LCD_RS=1;
+01C2 D2A6       990            setb    _P2_6
+01C4            991   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:227: LCD_byte(x);
+01C4 8A82       992            mov     dpl,r2
+01C6 120000     993            lcall   _LCD_byte
+01C9            994   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:228: waitms(2);
+01C9 900002     995            mov     dptr,#0x0002
+01CC 020000     996            ljmp    _waitms
+01CF            997   ;------------------------------------------------------------
+01CF            998   ;Allocation info for local variables in function 'WriteCommand'
+01CF            999   ;------------------------------------------------------------
+01CF           1000   ;x                         Allocated to registers r2 
+01CF           1001   ;------------------------------------------------------------
+01CF           1002   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:231: void WriteCommand (unsigned char x)
+01CF           1003   ;        -----------------------------------------
+01CF           1004   ;         function WriteCommand
+01CF           1005   ;        -----------------------------------------
+01CF           1006   _WriteCommand:
+01CF AA82      1007            mov     r2,dpl
+01D1           1008   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:233: LCD_RS=0;
+01D1 C2A6      1009            clr     _P2_6
+01D3           1010   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:234: LCD_byte(x);
+01D3 8A82      1011            mov     dpl,r2
+01D5 120000    1012            lcall   _LCD_byte
+01D8           1013   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:235: waitms(5);
+01D8 900005    1014            mov     dptr,#0x0005
+01DB 020000    1015            ljmp    _waitms
+01DE           1016   ;------------------------------------------------------------
+01DE           1017   ;Allocation info for local variables in function 'LCD_4BIT'
+01DE           1018   ;------------------------------------------------------------
+01DE           1019   ;------------------------------------------------------------
+01DE           1020   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:238: void LCD_4BIT (void)
+01DE           1021   ;        -----------------------------------------
+01DE           1022   ;         function LCD_4BIT
+01DE           1023   ;        -----------------------------------------
+01DE           1024   _LCD_4BIT:
+01DE           1025   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:240: LCD_E=0; // Resting state of LCD's enable is zero
+01DE C2A5      1026            clr     _P2_5
+01E0           1027   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:242: waitms(20);
+01E0 900014    1028            mov     dptr,#0x0014
+01E3 120000    1029            lcall   _waitms
+01E6           1030   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:244: WriteCommand(0x33);
+01E6 758233    1031            mov     dpl,#0x33
+01E9 120000    1032            lcall   _WriteCommand
+01EC           1033   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:245: WriteCommand(0x33);
+01EC 758233    1034            mov     dpl,#0x33
+01EF 120000    1035            lcall   _WriteCommand
+01F2           1036   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:246: WriteCommand(0x32); // Change to 4-bit mode
+01F2 758232    1037            mov     dpl,#0x32
+01F5 120000    1038            lcall   _WriteCommand
+01F8           1039   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:249: WriteCommand(0x28);
+01F8 758228    1040            mov     dpl,#0x28
+01FB 120000    1041            lcall   _WriteCommand
+01FE           1042   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:250: WriteCommand(0x0c);
+01FE 75820C    1043            mov     dpl,#0x0C
+0201 120000    1044            lcall   _WriteCommand
+0204           1045   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:251: WriteCommand(0x01); // Clear screen command (takes some time)
+0204 758201    1046            mov     dpl,#0x01
+0207 120000    1047            lcall   _WriteCommand
+020A           1048   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:252: waitms(20); // Wait for clear screen command to finsih.
+020A 900014    1049            mov     dptr,#0x0014
+020D 020000    1050            ljmp    _waitms
+0210           1051   ;------------------------------------------------------------
+0210           1052   ;Allocation info for local variables in function 'LCDprint'
+0210           1053   ;------------------------------------------------------------
+0210           1054   ;line                      Allocated with name '_LCDprint_PARM_2'
+0210           1055   ;string                    Allocated to registers r2 r3 r4 
+0210           1056   ;j                         Allocated to registers r5 r6 
+0210           1057   ;------------------------------------------------------------
+0210           1058   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:255: void LCDprint(char * string, unsigned char line, bit clear)
+0210           1059   ;        -----------------------------------------
+0210           1060   ;         function LCDprint
+0210           1061   ;        -----------------------------------------
+0210           1062   _LCDprint:
+0210 AA82      1063            mov     r2,dpl
+0212 AB83      1064            mov     r3,dph
+0214 ACF0      1065            mov     r4,b
+0216           1066   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:259: WriteCommand(line==2?0xc0:0x80);
+0216 7402      1067            mov     a,#0x02
+0218 B59070    1068            cjne    a,_LCDprint_PARM_2,L014013?
+021B 7DC0      1069            mov     r5,#0xC0
+021D 8000      1070            sjmp    L014014?
+021F           1071   L014013?:
+021F 7D80      1072            mov     r5,#0x80
+0221           1073   L014014?:
+0221 8D82      1074            mov     dpl,r5
+0223 C002      1075            push    ar2
+0225 C003      1076            push    ar3
+0227 C004      1077            push    ar4
+0229 120000    1078            lcall   _WriteCommand
+022C           1079   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:260: waitms(5);
+022C 900005    1080            mov     dptr,#0x0005
+022F 120000    1081            lcall   _waitms
+0232 D004      1082            pop     ar4
+0234 D003      1083            pop     ar3
+0236 D002      1084            pop     ar2
+0238           1085   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:261: for(j=0; string[j]!=0; j++)    WriteData(string[j]);// Write the message
+0238 7D00      1086            mov     r5,#0x00
+023A 7E00      1087            mov     r6,#0x00
+023C           1088   L014003?:
+023C ED        1089            mov     a,r5
+023D 2A        1090            add     a,r2
+023E FF        1091            mov     r7,a
+023F EE        1092            mov     a,r6
+0240 3B        1093            addc    a,r3
+0241 F8        1094            mov     r0,a
+0242 8C01      1095            mov     ar1,r4
+0244 8F82      1096            mov     dpl,r7
+0246 8883      1097            mov     dph,r0
+0248 89F0      1098            mov     b,r1
+024A 120000    1099            lcall   __gptrget
+024D FF        1100            mov     r7,a
+024E 6000      1101            jz      L014006?
+0250 8F82      1102            mov     dpl,r7
+0252 C002      1103            push    ar2
+0254 C003      1104            push    ar3
+0256 C004      1105            push    ar4
+0258 C005      1106            push    ar5
+025A C006      1107            push    ar6
+025C 120000    1108            lcall   _WriteData
+025F D006      1109            pop     ar6
+0261 D005      1110            pop     ar5
+0263 D004      1111            pop     ar4
+0265 D003      1112            pop     ar3
+0267 D002      1113            pop     ar2
+0269 0D        1114            inc     r5
+026A BD00F0    1115            cjne    r5,#0x00,L014003?
+026D 0E        1116            inc     r6
+026E 8000      1117            sjmp    L014003?
+0270           1118   L014006?:
+0270           1119   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:262: if(clear) for(; j<CHARS_PER_LINE; j++) WriteData(' '); // Clear the rest of the line
+0270 30B0B0    1120            jnb     _LCDprint_PARM_3,L014011?
+0273 8D02      1121            mov     ar2,r5
+0275 8E03      1122            mov     ar3,r6
+0277           1123   L014007?:
+0277 C3        1124            clr     c
+0278 EA        1125            mov     a,r2
+0279 9410      1126            subb    a,#0x10
+027B EB        1127            mov     a,r3
+027C 6480      1128            xrl     a,#0x80
+027E 9480      1129            subb    a,#0x80
+0280 5000      1130            jnc     L014011?
+0282 758220    1131            mov     dpl,#0x20
+0285 C002      1132            push    ar2
+0287 C003      1133            push    ar3
+0289 120000    1134            lcall   _WriteData
+028C D003      1135            pop     ar3
+028E D002      1136            pop     ar2
+0290 0A        1137            inc     r2
+0291 BA00F0    1138            cjne    r2,#0x00,L014007?
+0294 0B        1139            inc     r3
+0295 8000      1140            sjmp    L014007?
+0297           1141   L014011?:
+0297 22        1142            ret
+0298           1143   ;------------------------------------------------------------
+0298           1144   ;Allocation info for local variables in function 'getsn'
+0298           1145   ;------------------------------------------------------------
+0298           1146   ;len                       Allocated with name '_getsn_PARM_2'
+0298           1147   ;buff                      Allocated with name '_getsn_buff_1_70'
+0298           1148   ;j                         Allocated with name '_getsn_sloc0_1_0'
+0298           1149   ;c                         Allocated to registers r3 
+0298           1150   ;sloc0                     Allocated with name '_getsn_sloc0_1_0'
+0298           1151   ;------------------------------------------------------------
+0298           1152   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:265: int getsn (char * buff, int len)
+0298           1153   ;        -----------------------------------------
+0298           1154   ;         function getsn
+0298           1155   ;        -----------------------------------------
+0298           1156   _getsn:
+0298 8582E0    1157            mov     _getsn_buff_1_70,dpl
+029B 8583E1    1158            mov     (_getsn_buff_1_70 + 1),dph
+029E 85F0E2    1159            mov     (_getsn_buff_1_70 + 2),b
+02A1           1160   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:270: for(j=0; j<(len-1); j++)
+02A1 E4        1161            clr     a
+02A2 F530      1162            mov     _getsn_sloc0_1_0,a
+02A4 F531      1163            mov     (_getsn_sloc0_1_0 + 1),a
+02A6 E540      1164            mov     a,_getsn_PARM_2
+02A8 24FF      1165            add     a,#0xff
+02AA FF        1166            mov     r7,a
+02AB E541      1167            mov     a,(_getsn_PARM_2 + 1)
+02AD 34FF      1168            addc    a,#0xff
+02AF F8        1169            mov     r0,a
+02B0 7900      1170            mov     r1,#0x00
+02B2 7A00      1171            mov     r2,#0x00
+02B4           1172   L015005?:
+02B4 C3        1173            clr     c
+02B5 E9        1174            mov     a,r1
+02B6 9F        1175            subb    a,r7
+02B7 EA        1176            mov     a,r2
+02B8 6480      1177            xrl     a,#0x80
+02BA 88F0      1178            mov     b,r0
+02BC 63F080    1179            xrl     b,#0x80
+02BF 95F0      1180            subb    a,b
+02C1 5000      1181            jnc     L015008?
+02C3           1182   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:272: c=getchar();
+02C3 C002      1183            push    ar2
+02C5 C007      1184            push    ar7
+02C7 C000      1185            push    ar0
+02C9 C001      1186            push    ar1
+02CB 120000    1187            lcall   _getchar
+02CE AB82      1188            mov     r3,dpl
+02D0 D001      1189            pop     ar1
+02D2 D000      1190            pop     ar0
+02D4 D007      1191            pop     ar7
+02D6 D002      1192            pop     ar2
+02D8           1193   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:273: if ( (c=='\n') || (c=='\r') )
+02D8 BB0AF0    1194            cjne    r3,#0x0A,L015015?
+02DB 8000      1195            sjmp    L015001?
+02DD           1196   L015015?:
+02DD BB0D70    1197            cjne    r3,#0x0D,L015002?
+02E0           1198   L015001?:
+02E0           1199   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:275: buff[j]=0;
+02E0 E530      1200            mov     a,_getsn_sloc0_1_0
+02E2 25E0      1201            add     a,_getsn_buff_1_70
+02E4 FC        1202            mov     r4,a
+02E5 E531      1203            mov     a,(_getsn_sloc0_1_0 + 1)
+02E7 35E1      1204            addc    a,(_getsn_buff_1_70 + 1)
+02E9 FD        1205            mov     r5,a
+02EA AEE2      1206            mov     r6,(_getsn_buff_1_70 + 2)
+02EC 8C82      1207            mov     dpl,r4
+02EE 8D83      1208            mov     dph,r5
+02F0 8EF0      1209            mov     b,r6
+02F2 E4        1210            clr     a
+02F3 120000    1211            lcall   __gptrput
+02F6           1212   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:276: return j;
+02F6 853082    1213            mov     dpl,_getsn_sloc0_1_0
+02F9 853183    1214            mov     dph,(_getsn_sloc0_1_0 + 1)
+02FC 22        1215            ret
+02FD           1216   L015002?:
+02FD           1217   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:280: buff[j]=c;
+02FD E9        1218            mov     a,r1
+02FE 25E0      1219            add     a,_getsn_buff_1_70
+0300 FC        1220            mov     r4,a
+0301 EA        1221            mov     a,r2
+0302 35E1      1222            addc    a,(_getsn_buff_1_70 + 1)
+0304 FD        1223            mov     r5,a
+0305 AEE2      1224            mov     r6,(_getsn_buff_1_70 + 2)
+0307 8C82      1225            mov     dpl,r4
+0309 8D83      1226            mov     dph,r5
+030B 8EF0      1227            mov     b,r6
+030D EB        1228            mov     a,r3
+030E 120000    1229            lcall   __gptrput
+0311           1230   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:270: for(j=0; j<(len-1); j++)
+0311 09        1231            inc     r1
+0312 B900F0    1232            cjne    r1,#0x00,L015018?
+0315 0A        1233            inc     r2
+0316           1234   L015018?:
+0316 8930      1235            mov     _getsn_sloc0_1_0,r1
+0318 8A31      1236            mov     (_getsn_sloc0_1_0 + 1),r2
+031A 8000      1237            sjmp    L015005?
+031C           1238   L015008?:
+031C           1239   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:283: buff[j]=0;
+031C E530      1240            mov     a,_getsn_sloc0_1_0
+031E 25E0      1241            add     a,_getsn_buff_1_70
+0320 FA        1242            mov     r2,a
+0321 E531      1243            mov     a,(_getsn_sloc0_1_0 + 1)
+0323 35E1      1244            addc    a,(_getsn_buff_1_70 + 1)
+0325 FB        1245            mov     r3,a
+0326 ACE2      1246            mov     r4,(_getsn_buff_1_70 + 2)
+0328 8A82      1247            mov     dpl,r2
+032A 8B83      1248            mov     dph,r3
+032C 8CF0      1249            mov     b,r4
+032E E4        1250            clr     a
+032F 120000    1251            lcall   __gptrput
+0332           1252   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:284: return len;
+0332 854082    1253            mov     dpl,_getsn_PARM_2
+0335 854183    1254            mov     dph,(_getsn_PARM_2 + 1)
+0338 22        1255            ret
+0339           1256   ;------------------------------------------------------------
+0339           1257   ;Allocation info for local variables in function 'TIMER0_Init'
+0339           1258   ;------------------------------------------------------------
+0339           1259   ;------------------------------------------------------------
+0339           1260   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:287: void TIMER0_Init(void)
+0339           1261   ;        -----------------------------------------
+0339           1262   ;         function TIMER0_Init
+0339           1263   ;        -----------------------------------------
+0339           1264   _TIMER0_Init:
+0339           1265   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:289: TMOD&=0b_1111_0000; // Set the bits of Timer/Counter 0 to zero
+0339 5389F0    1266            anl     _TMOD,#0xF0
+033C           1267   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:290: TMOD|=0b_0000_0001; // Timer/Counter 0 used as a 16-bit timer
+033C 438901    1268            orl     _TMOD,#0x01
+033F           1269   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:291: TR0=0; // Stop Timer/Counter 0
+033F C28C      1270            clr     _TR0
+0341 22        1271            ret
+0342           1272   ;------------------------------------------------------------
+0342           1273   ;Allocation info for local variables in function 'getPeriod'
+0342           1274   ;------------------------------------------------------------
+0342           1275   ;pin                       Allocated to registers r2 
+0342           1276   ;------------------------------------------------------------
+0342           1277   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:294: unsigned int getPeriod(unsigned char pin)
+0342           1278   ;        -----------------------------------------
+0342           1279   ;         function getPeriod
+0342           1280   ;        -----------------------------------------
+0342           1281   _getPeriod:
+0342 AA82      1282            mov     r2,dpl
+0344           1283   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:296: TL0=0; // Resets timer
+0344 758A00    1284            mov     _TL0,#0x00
+0347           1285   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:297: TH0=0;
+0347 758C00    1286            mov     _TH0,#0x00
+034A           1287   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:299: while (Volts_at_Pin(pin) != 0); // Wait for signal to be zero
+034A           1288   L017001?:
+034A 8A82      1289            mov     dpl,r2
+034C C002      1290            push    ar2
+034E 120000    1291            lcall   _Volts_at_Pin
+0351 AB82      1292            mov     r3,dpl
+0353 AC83      1293            mov     r4,dph
+0355 ADF0      1294            mov     r5,b
+0357 FE        1295            mov     r6,a
+0358 D002      1296            pop     ar2
+035A EB        1297            mov     a,r3
+035B 4C        1298            orl     a,r4
+035C 4D        1299            orl     a,r5
+035D 8EF0      1300            mov     b,r6
+035F C2F7      1301            clr     b.7 ; Clear the sign bit
+0361 45F0      1302            orl     a,b
+0363 7000      1303            jnz     L017001?
+0365           1304   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:300: while (Volts_at_Pin(pin) == 0); // Wait for signal to be positive
+0365           1305   L017004?:
+0365 8A82      1306            mov     dpl,r2
+0367 C002      1307            push    ar2
+0369 120000    1308            lcall   _Volts_at_Pin
+036C AB82      1309            mov     r3,dpl
+036E AC83      1310            mov     r4,dph
+0370 ADF0      1311            mov     r5,b
+0372 FE        1312            mov     r6,a
+0373 D002      1313            pop     ar2
+0375 EB        1314            mov     a,r3
+0376 4C        1315            orl     a,r4
+0377 4D        1316            orl     a,r5
+0378 8EF0      1317            mov     b,r6
+037A C2F7      1318            clr     b.7 ; Clear the sign bit
+037C 45F0      1319            orl     a,b
+037E 6000      1320            jz      L017004?
+0380           1321   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:302: TR0=1; // Starts timer
+0380 D28C      1322            setb    _TR0
+0382           1323   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:304: while (Volts_at_Pin(pin) !=0); // Wait for signal to be zero again
+0382           1324   L017007?:
+0382 8A82      1325            mov     dpl,r2
+0384 C002      1326            push    ar2
+0386 120000    1327            lcall   _Volts_at_Pin
+0389 AB82      1328            mov     r3,dpl
+038B AC83      1329            mov     r4,dph
+038D ADF0      1330            mov     r5,b
+038F FE        1331            mov     r6,a
+0390 D002      1332            pop     ar2
+0392 EB        1333            mov     a,r3
+0393 4C        1334            orl     a,r4
+0394 4D        1335            orl     a,r5
+0395 8EF0      1336            mov     b,r6
+0397 C2F7      1337            clr     b.7 ; Clear the sign bit
+0399 45F0      1338            orl     a,b
+039B 7000      1339            jnz     L017007?
+039D           1340   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:306: TR0=0; // Stops timer
+039D C28C      1341            clr     _TR0
+039F           1342   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:309: printf("TH0 = %f, ", TH0);
+039F AA8C      1343            mov     r2,_TH0
+03A1 7B00      1344            mov     r3,#0x00
+03A3 C002      1345            push    ar2
+03A5 C003      1346            push    ar3
+03A7 74F0      1347            mov     a,#__str_0
+03A9 C0E0      1348            push    acc
+03AB 74BD      1349            mov     a,#(__str_0 >> 8)
+03AD C0E0      1350            push    acc
+03AF 7480      1351            mov     a,#0x80
+03B1 C0E0      1352            push    acc
+03B3 120000    1353            lcall   _printf
+03B6 E581      1354            mov     a,sp
+03B8 24FB      1355            add     a,#0xfb
+03BA F581      1356            mov     sp,a
+03BC           1357   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:310: printf("TL0 = %f\n", TL0);
+03BC AA8A      1358            mov     r2,_TL0
+03BE 7B00      1359            mov     r3,#0x00
+03C0 C002      1360            push    ar2
+03C2 C003      1361            push    ar3
+03C4 7470      1362            mov     a,#__str_1
+03C6 C0E0      1363            push    acc
+03C8 74BE      1364            mov     a,#(__str_1 >> 8)
+03CA C0E0      1365            push    acc
+03CC 7480      1366            mov     a,#0x80
+03CE C0E0      1367            push    acc
+03D0 120000    1368            lcall   _printf
+03D3 E581      1369            mov     a,sp
+03D5 24FB      1370            add     a,#0xfb
+03D7 F581      1371            mov     sp,a
+03D9           1372   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:312: return (TH0*256.0+TL0) * 2; // Returns period
+03D9 858C82    1373            mov     dpl,_TH0
+03DC 120000    1374            lcall   ___uchar2fs
+03DF AA82      1375            mov     r2,dpl
+03E1 AB83      1376            mov     r3,dph
+03E3 ACF0      1377            mov     r4,b
+03E5 FD        1378            mov     r5,a
+03E6 C002      1379            push    ar2
+03E8 C003      1380            push    ar3
+03EA C004      1381            push    ar4
+03EC C005      1382            push    ar5
+03EE 900000    1383            mov     dptr,#0x0000
+03F1 75F080    1384            mov     b,#0x80
+03F4 7443      1385            mov     a,#0x43
+03F6 120000    1386            lcall   ___fsmul
+03F9 AA82      1387            mov     r2,dpl
+03FB AB83      1388            mov     r3,dph
+03FD ACF0      1389            mov     r4,b
+03FF FD        1390            mov     r5,a
+0400 E581      1391            mov     a,sp
+0402 24FC      1392            add     a,#0xfc
+0404 F581      1393            mov     sp,a
+0406 AE8A      1394            mov     r6,_TL0
+0408 7F00      1395            mov     r7,#0x00
+040A 8E82      1396            mov     dpl,r6
+040C 8F83      1397            mov     dph,r7
+040E C002      1398            push    ar2
+0410 C003      1399            push    ar3
+0412 C004      1400            push    ar4
+0414 C005      1401            push    ar5
+0416 120000    1402            lcall   ___sint2fs
+0419 AE82      1403            mov     r6,dpl
+041B AF83      1404            mov     r7,dph
+041D A8F0      1405            mov     r0,b
+041F F9        1406            mov     r1,a
+0420 D005      1407            pop     ar5
+0422 D004      1408            pop     ar4
+0424 D003      1409            pop     ar3
+0426 D002      1410            pop     ar2
+0428 C006      1411            push    ar6
+042A C007      1412            push    ar7
+042C C000      1413            push    ar0
+042E C001      1414            push    ar1
+0430 8A82      1415            mov     dpl,r2
+0432 8B83      1416            mov     dph,r3
+0434 8CF0      1417            mov     b,r4
+0436 ED        1418            mov     a,r5
+0437 120000    1419            lcall   ___fsadd
+043A AA82      1420            mov     r2,dpl
+043C AB83      1421            mov     r3,dph
+043E ACF0      1422            mov     r4,b
+0440 FD        1423            mov     r5,a
+0441 E581      1424            mov     a,sp
+0443 24FC      1425            add     a,#0xfc
+0445 F581      1426            mov     sp,a
+0447 C002      1427            push    ar2
+0449 C003      1428            push    ar3
+044B C004      1429            push    ar4
+044D C005      1430            push    ar5
+044F 900000    1431            mov     dptr,#(0x00&0x00ff)
+0452 E4        1432            clr     a
+0453 F5F0      1433            mov     b,a
+0455 7440      1434            mov     a,#0x40
+0457 120000    1435            lcall   ___fsmul
+045A AA82      1436            mov     r2,dpl
+045C AB83      1437            mov     r3,dph
+045E ACF0      1438            mov     r4,b
+0460 FD        1439            mov     r5,a
+0461 E581      1440            mov     a,sp
+0463 24FC      1441            add     a,#0xfc
+0465 F581      1442            mov     sp,a
+0467 8A82      1443            mov     dpl,r2
+0469 8B83      1444            mov     dph,r3
+046B 8CF0      1445            mov     b,r4
+046D ED        1446            mov     a,r5
+046E 020000    1447            ljmp    ___fs2uint
+0471           1448   ;------------------------------------------------------------
+0471           1449   ;Allocation info for local variables in function 'getTimeDifference'
+0471           1450   ;------------------------------------------------------------
+0471           1451   ;pin2                      Allocated with name '_getTimeDifference_PARM_2'
+0471           1452   ;pin1                      Allocated to registers r2 
+0471           1453   ;------------------------------------------------------------
+0471           1454   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:315: unsigned int getTimeDifference(unsigned char pin1, unsigned char pin2)
+0471           1455   ;        -----------------------------------------
+0471           1456   ;         function getTimeDifference
+0471           1457   ;        -----------------------------------------
+0471           1458   _getTimeDifference:
+0471 AA82      1459            mov     r2,dpl
+0473           1460   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:318: TL0=0; // Resets Timer
+0473 758A00    1461            mov     _TL0,#0x00
+0476           1462   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:319: TH0=0;
+0476 758C00    1463            mov     _TH0,#0x00
+0479           1464   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:321: while (Volts_at_Pin(pin1) != 0); // Wait for signal 1 to be zero
+0479           1465   L018001?:
+0479 8A82      1466            mov     dpl,r2
+047B C002      1467            push    ar2
+047D 120000    1468            lcall   _Volts_at_Pin
+0480 AB82      1469            mov     r3,dpl
+0482 AC83      1470            mov     r4,dph
+0484 ADF0      1471            mov     r5,b
+0486 FE        1472            mov     r6,a
+0487 D002      1473            pop     ar2
+0489 EB        1474            mov     a,r3
+048A 4C        1475            orl     a,r4
+048B 4D        1476            orl     a,r5
+048C 8EF0      1477            mov     b,r6
+048E C2F7      1478            clr     b.7 ; Clear the sign bit
+0490 45F0      1479            orl     a,b
+0492 7000      1480            jnz     L018001?
+0494           1481   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:322: while (Volts_at_Pin(pin1) == 0); // Wait for signal 1 to be positive
+0494           1482   L018004?:
+0494 8A82      1483            mov     dpl,r2
+0496 C002      1484            push    ar2
+0498 120000    1485            lcall   _Volts_at_Pin
+049B AB82      1486            mov     r3,dpl
+049D AC83      1487            mov     r4,dph
+049F ADF0      1488            mov     r5,b
+04A1 FE        1489            mov     r6,a
+04A2 D002      1490            pop     ar2
+04A4 EB        1491            mov     a,r3
+04A5 4C        1492            orl     a,r4
+04A6 4D        1493            orl     a,r5
+04A7 8EF0      1494            mov     b,r6
+04A9 C2F7      1495            clr     b.7 ; Clear the sign bit
+04AB 45F0      1496            orl     a,b
+04AD 6000      1497            jz      L018004?
+04AF           1498   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:324: TR0 = 1; // Starts timer
+04AF D28C      1499            setb    _TR0
+04B1           1500   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:326: while(Volts_at_Pin(pin2) == 0); // Wait for signal 2 to be positive
+04B1           1501   L018007?:
+04B1 850082    1502            mov     dpl,_getTimeDifference_PARM_2
+04B4 120000    1503            lcall   _Volts_at_Pin
+04B7 AA82      1504            mov     r2,dpl
+04B9 AB83      1505            mov     r3,dph
+04BB ACF0      1506            mov     r4,b
+04BD FD        1507            mov     r5,a
+04BE EA        1508            mov     a,r2
+04BF 4B        1509            orl     a,r3
+04C0 4C        1510            orl     a,r4
+04C1 8DF0      1511            mov     b,r5
+04C3 C2F7      1512            clr     b.7 ; Clear the sign bit
+04C5 45F0      1513            orl     a,b
+04C7 6000      1514            jz      L018007?
+04C9           1515   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:328: TR0=0; // Stops timer
+04C9 C28C      1516            clr     _TR0
+04CB           1517   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:330: return (TH0*256.0+TL0) * 2; // Returns time difference between two signals
+04CB 858C82    1518            mov     dpl,_TH0
+04CE 120000    1519            lcall   ___uchar2fs
+04D1 AA82      1520            mov     r2,dpl
+04D3 AB83      1521            mov     r3,dph
+04D5 ACF0      1522            mov     r4,b
+04D7 FD        1523            mov     r5,a
+04D8 C002      1524            push    ar2
+04DA C003      1525            push    ar3
+04DC C004      1526            push    ar4
+04DE C005      1527            push    ar5
+04E0 900000    1528            mov     dptr,#0x0000
+04E3 75F080    1529            mov     b,#0x80
+04E6 7443      1530            mov     a,#0x43
+04E8 120000    1531            lcall   ___fsmul
+04EB AA82      1532            mov     r2,dpl
+04ED AB83      1533            mov     r3,dph
+04EF ACF0      1534            mov     r4,b
+04F1 FD        1535            mov     r5,a
+04F2 E581      1536            mov     a,sp
+04F4 24FC      1537            add     a,#0xfc
+04F6 F581      1538            mov     sp,a
+04F8 AE8A      1539            mov     r6,_TL0
+04FA 7F00      1540            mov     r7,#0x00
+04FC 8E82      1541            mov     dpl,r6
+04FE 8F83      1542            mov     dph,r7
+0500 C002      1543            push    ar2
+0502 C003      1544            push    ar3
+0504 C004      1545            push    ar4
+0506 C005      1546            push    ar5
+0508 120000    1547            lcall   ___sint2fs
+050B AE82      1548            mov     r6,dpl
+050D AF83      1549            mov     r7,dph
+050F A8F0      1550            mov     r0,b
+0511 F9        1551            mov     r1,a
+0512 D005      1552            pop     ar5
+0514 D004      1553            pop     ar4
+0516 D003      1554            pop     ar3
+0518 D002      1555            pop     ar2
+051A C006      1556            push    ar6
+051C C007      1557            push    ar7
+051E C000      1558            push    ar0
+0520 C001      1559            push    ar1
+0522 8A82      1560            mov     dpl,r2
+0524 8B83      1561            mov     dph,r3
+0526 8CF0      1562            mov     b,r4
+0528 ED        1563            mov     a,r5
+0529 120000    1564            lcall   ___fsadd
+052C AA82      1565            mov     r2,dpl
+052E AB83      1566            mov     r3,dph
+0530 ACF0      1567            mov     r4,b
+0532 FD        1568            mov     r5,a
+0533 E581      1569            mov     a,sp
+0535 24FC      1570            add     a,#0xfc
+0537 F581      1571            mov     sp,a
+0539 C002      1572            push    ar2
+053B C003      1573            push    ar3
+053D C004      1574            push    ar4
+053F C005      1575            push    ar5
+0541 900000    1576            mov     dptr,#(0x00&0x00ff)
+0544 E4        1577            clr     a
+0545 F5F0      1578            mov     b,a
+0547 7440      1579            mov     a,#0x40
+0549 120000    1580            lcall   ___fsmul
+054C AA82      1581            mov     r2,dpl
+054E AB83      1582            mov     r3,dph
+0550 ACF0      1583            mov     r4,b
+0552 FD        1584            mov     r5,a
+0553 E581      1585            mov     a,sp
+0555 24FC      1586            add     a,#0xfc
+0557 F581      1587            mov     sp,a
+0559 8A82      1588            mov     dpl,r2
+055B 8B83      1589            mov     dph,r3
+055D 8CF0      1590            mov     b,r4
+055F ED        1591            mov     a,r5
+0560 020000    1592            ljmp    ___fs2uint
+0563           1593   ;------------------------------------------------------------
+0563           1594   ;Allocation info for local variables in function 'main'
+0563           1595   ;------------------------------------------------------------
+0563           1596   ;VMax                      Allocated to registers 
+0563           1597   ;period                    Allocated to registers 
+0563           1598   ;timeDifference            Allocated with name '_main_timeDifference_1_82'
+0563           1599   ;phaseDifference           Allocated with name '_main_phaseDifference_1_82'
+0563           1600   ;------------------------------------------------------------
+0563           1601   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:334: void main (void)
+0563           1602   ;        -----------------------------------------
+0563           1603   ;         function main
+0563           1604   ;        -----------------------------------------
+0563           1605   _main:
+0563           1606   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:341: waitms(500); // Give PuTTy a chance to start before sending
+0563 9001F4    1607            mov     dptr,#0x01F4
+0566 120000    1608            lcall   _waitms
+0569           1609   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:342: printf("\x1b[2J"); // Clear screen using ANSI escape sequence.
+0569 7470      1610            mov     a,#__str_2
+056B C0E0      1611            push    acc
+056D 74C0      1612            mov     a,#(__str_2 >> 8)
+056F C0E0      1613            push    acc
+0571 7480      1614            mov     a,#0x80
+0573 C0E0      1615            push    acc
+0575 120000    1616            lcall   _printf
+0578 1581      1617            dec     sp
+057A 1581      1618            dec     sp
+057C 1581      1619            dec     sp
+057E           1620   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:344: InitPinADC(0, 1); // Configure P0_1 as analog input
+057E 75C001    1621            mov     _InitPinADC_PARM_2,#0x01
+0581 758200    1622            mov     dpl,#0x00
+0584 120000    1623            lcall   _InitPinADC
+0587           1624   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:345: InitPinADC(0, 2); // Configure P0_2 as analog input
+0587 75C002    1625            mov     _InitPinADC_PARM_2,#0x02
+058A 758200    1626            mov     dpl,#0x00
+058D 120000    1627            lcall   _InitPinADC
+0590           1628   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:346: InitADC();
+0590 120000    1629            lcall   _InitADC
+0593           1630   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:348: while(1)
+0593           1631   L019002?:
+0593           1632   ;        C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:350: period = getPeriod(P0_1); // Gets the period of signal at P0_1 in millis returns when signal is 0
+0593 A281      1633            mov     c,_P0_1
+0595 E4        1634            clr     a
+0596 33        1635            rlc     a
+0597 F582      1636            mov     dpl,a
+0599 120000    1637            lcall   _getPeriod
+059C 8000      1638            sjmp    L019002?
+059E           1639            rseg R_CSEG
+059E           1640   
+0000           1641            rseg R_XINIT
+0000           1642   
+0000           1643            rseg R_CONST
+0000           1644   __str_0:
+0000 54483020  1645            db 'TH0 = %f, '
+     3D202566
+     2C20
+000A 00        1646            db 0x00
+000B           1647   __str_1:
+000B 544C3020  1648            db 'TL0 = %f'
+     3D202566
+0013 0A        1649            db 0x0A
+0014 00        1650            db 0x00
+0015           1651   __str_2:
+0015 1B        1652            db 0x1B
+0016 5B324A    1653            db '[2J'
+0019 00        1654            db 0x00
+001A           1655   
+0003           1656            CSEG
+0003           1657   
+0003           1658   end
