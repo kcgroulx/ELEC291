@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by C51
 ; Version 1.0.0 #1170 (Feb 16 2022) (MSVC)
-; This file was generated Tue Mar 07 22:04:05 2023
+; This file was generated Tue Mar 07 22:08:24 2023
 ;--------------------------------------------------------
 $name EFM8_ADC
 $optc51 --model-small
@@ -48,6 +48,7 @@ $printf_float
 	public _getsn_PARM_2
 	public _LCDprint_PARM_2
 	public _overflow_count
+	public _getHalfPeriod
 ;--------------------------------------------------------
 ; Special Function Registers
 ;--------------------------------------------------------
@@ -575,95 +576,95 @@ _LCDprint_PARM_3:
 ;Allocation info for local variables in function '_c51_external_startup'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:28: char _c51_external_startup (void)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:30: char _c51_external_startup (void)
 ;	-----------------------------------------
 ;	 function _c51_external_startup
 ;	-----------------------------------------
 __c51_external_startup:
 	using	0
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:31: SFRPAGE = 0x00;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:33: SFRPAGE = 0x00;
 	mov	_SFRPAGE,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:32: WDTCN = 0xDE; //First key
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:34: WDTCN = 0xDE; //First key
 	mov	_WDTCN,#0xDE
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:33: WDTCN = 0xAD; //Second key
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:35: WDTCN = 0xAD; //Second key
 	mov	_WDTCN,#0xAD
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:35: VDM0CN=0x80;       // enable VDD monitor
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:37: VDM0CN=0x80;       // enable VDD monitor
 	mov	_VDM0CN,#0x80
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:36: RSTSRC=0x02|0x04;  // Enable reset on missing clock detector and VDD
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:38: RSTSRC=0x02|0x04;  // Enable reset on missing clock detector and VDD
 	mov	_RSTSRC,#0x06
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:43: SFRPAGE = 0x10;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:45: SFRPAGE = 0x10;
 	mov	_SFRPAGE,#0x10
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:44: PFE0CN  = 0x20; // SYSCLK < 75 MHz.
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:46: PFE0CN  = 0x20; // SYSCLK < 75 MHz.
 	mov	_PFE0CN,#0x20
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:45: SFRPAGE = 0x00;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:47: SFRPAGE = 0x00;
 	mov	_SFRPAGE,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:66: CLKSEL = 0x00;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:68: CLKSEL = 0x00;
 	mov	_CLKSEL,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:67: CLKSEL = 0x00;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:69: CLKSEL = 0x00;
 	mov	_CLKSEL,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:68: while ((CLKSEL & 0x80) == 0);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:70: while ((CLKSEL & 0x80) == 0);
 L002001?:
 	mov	a,_CLKSEL
 	jnb	acc.7,L002001?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:69: CLKSEL = 0x03;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:71: CLKSEL = 0x03;
 	mov	_CLKSEL,#0x03
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:70: CLKSEL = 0x03;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:72: CLKSEL = 0x03;
 	mov	_CLKSEL,#0x03
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:71: while ((CLKSEL & 0x80) == 0);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:73: while ((CLKSEL & 0x80) == 0);
 L002004?:
 	mov	a,_CLKSEL
 	jnb	acc.7,L002004?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:76: P0MDOUT |= 0x10; // Enable UART0 TX as push-pull output
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:78: P0MDOUT |= 0x10; // Enable UART0 TX as push-pull output
 	orl	_P0MDOUT,#0x10
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:77: XBR0     = 0x01; // Enable UART0 on P0.4(TX) and P0.5(RX)                     
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:79: XBR0     = 0x01; // Enable UART0 on P0.4(TX) and P0.5(RX)                     
 	mov	_XBR0,#0x01
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:78: XBR1     = 0X00;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:80: XBR1     = 0X00;
 	mov	_XBR1,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:79: XBR2     = 0x40; // Enable crossbar and weak pull-ups
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:81: XBR2     = 0x40; // Enable crossbar and weak pull-ups
 	mov	_XBR2,#0x40
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:85: SCON0 = 0x10;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:87: SCON0 = 0x10;
 	mov	_SCON0,#0x10
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:86: TH1 = 0x100-((SYSCLK/BAUDRATE)/(2L*12L));
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:88: TH1 = 0x100-((SYSCLK/BAUDRATE)/(2L*12L));
 	mov	_TH1,#0xE6
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:87: TL1 = TH1;      // Init Timer1
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:89: TL1 = TH1;      // Init Timer1
 	mov	_TL1,_TH1
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:88: TMOD &= ~0xf0;  // TMOD: timer 1 in 8-bit auto-reload
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:90: TMOD &= ~0xf0;  // TMOD: timer 1 in 8-bit auto-reload
 	anl	_TMOD,#0x0F
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:89: TMOD |=  0x20;                       
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:91: TMOD |=  0x20;                       
 	orl	_TMOD,#0x20
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:90: TR1 = 1; // START Timer1
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:92: TR1 = 1; // START Timer1
 	setb	_TR1
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:91: TI = 1;  // Indicate TX0 ready
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:93: TI = 1;  // Indicate TX0 ready
 	setb	_TI
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:93: return 0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:95: return 0;
 	mov	dpl,#0x00
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'InitADC'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:96: void InitADC (void)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:98: void InitADC (void)
 ;	-----------------------------------------
 ;	 function InitADC
 ;	-----------------------------------------
 _InitADC:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:98: SFRPAGE = 0x00;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:100: SFRPAGE = 0x00;
 	mov	_SFRPAGE,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:99: ADEN=0; // Disable ADC
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:101: ADEN=0; // Disable ADC
 	clr	_ADEN
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:104: (0x0 << 0) ; // Accumulate n conversions: 0x0: 1, 0x1:4, 0x2:8, 0x3:16, 0x4:32
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:106: (0x0 << 0) ; // Accumulate n conversions: 0x0: 1, 0x1:4, 0x2:8, 0x3:16, 0x4:32
 	mov	_ADC0CN1,#0x80
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:108: (0x0 << 2); // 0:SYSCLK ADCCLK = SYSCLK. 1:HFOSC0 ADCCLK = HFOSC0.
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:110: (0x0 << 2); // 0:SYSCLK ADCCLK = SYSCLK. 1:HFOSC0 ADCCLK = HFOSC0.
 	mov	_ADC0CF0,#0x20
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:112: (0x1E << 0); // Conversion Tracking Time. Tadtk = ADTK / (Fsarclk)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:114: (0x1E << 0); // Conversion Tracking Time. Tadtk = ADTK / (Fsarclk)
 	mov	_ADC0CF1,#0x1E
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:121: (0x0 << 0) ; // TEMPE. 0: Disable the Temperature Sensor. 1: Enable the Temperature Sensor.
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:123: (0x0 << 0) ; // TEMPE. 0: Disable the Temperature Sensor. 1: Enable the Temperature Sensor.
 	mov	_ADC0CN0,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:126: (0x1F << 0); // ADPWR. Power Up Delay Time. Tpwrtime = ((4 * (ADPWR + 1)) + 2) / (Fadcclk)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:128: (0x1F << 0); // ADPWR. Power Up Delay Time. Tpwrtime = ((4 * (ADPWR + 1)) + 2) / (Fadcclk)
 	mov	_ADC0CF2,#0x3F
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:130: (0x0 << 0) ; // ADCM. 0x0: ADBUSY, 0x1: TIMER0, 0x2: TIMER2, 0x3: TIMER3, 0x4: CNVSTR, 0x5: CEX5, 0x6: TIMER4, 0x7: TIMER5, 0x8: CLU0, 0x9: CLU1, 0xA: CLU2, 0xB: CLU3
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:132: (0x0 << 0) ; // ADCM. 0x0: ADBUSY, 0x1: TIMER0, 0x2: TIMER2, 0x3: TIMER3, 0x4: CNVSTR, 0x5: CEX5, 0x6: TIMER4, 0x7: TIMER5, 0x8: CLU0, 0x9: CLU1, 0xA: CLU2, 0xB: CLU3
 	mov	_ADC0CN2,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:132: ADEN=1; // Enable ADC
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:134: ADEN=1; // Enable ADC
 	setb	_ADEN
 	ret
 ;------------------------------------------------------------
@@ -672,40 +673,40 @@ _InitADC:
 ;us                        Allocated to registers r2 
 ;i                         Allocated to registers r3 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:136: void Timer3us(unsigned char us)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:138: void Timer3us(unsigned char us)
 ;	-----------------------------------------
 ;	 function Timer3us
 ;	-----------------------------------------
 _Timer3us:
 	mov	r2,dpl
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:141: CKCON0|=0b_0100_0000;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:143: CKCON0|=0b_0100_0000;
 	orl	_CKCON0,#0x40
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:143: TMR3RL = (-(SYSCLK)/1000000L); // Set Timer3 to overflow in 1us.
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:145: TMR3RL = (-(SYSCLK)/1000000L); // Set Timer3 to overflow in 1us.
 	mov	_TMR3RL,#0xB8
 	mov	(_TMR3RL >> 8),#0xFF
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:144: TMR3 = TMR3RL;                 // Initialize Timer3 for first overflow
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:146: TMR3 = TMR3RL;                 // Initialize Timer3 for first overflow
 	mov	_TMR3,_TMR3RL
 	mov	(_TMR3 >> 8),(_TMR3RL >> 8)
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:146: TMR3CN0 = 0x04;                 // Sart Timer3 and clear overflow flag
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:148: TMR3CN0 = 0x04;                 // Sart Timer3 and clear overflow flag
 	mov	_TMR3CN0,#0x04
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:147: for (i = 0; i < us; i++)       // Count <us> overflows
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:149: for (i = 0; i < us; i++)       // Count <us> overflows
 	mov	r3,#0x00
 L004004?:
 	clr	c
 	mov	a,r3
 	subb	a,r2
 	jnc	L004007?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:149: while (!(TMR3CN0 & 0x80));  // Wait for overflow
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:151: while (!(TMR3CN0 & 0x80));  // Wait for overflow
 L004001?:
 	mov	a,_TMR3CN0
 	jnb	acc.7,L004001?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:150: TMR3CN0 &= ~(0x80);         // Clear overflow indicator
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:152: TMR3CN0 &= ~(0x80);         // Clear overflow indicator
 	anl	_TMR3CN0,#0x7F
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:147: for (i = 0; i < us; i++)       // Count <us> overflows
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:149: for (i = 0; i < us; i++)       // Count <us> overflows
 	inc	r3
 	sjmp	L004004?
 L004007?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:152: TMR3CN0 = 0 ;                   // Stop Timer3 and clear overflow flag
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:154: TMR3CN0 = 0 ;                   // Stop Timer3 and clear overflow flag
 	mov	_TMR3CN0,#0x00
 	ret
 ;------------------------------------------------------------
@@ -715,14 +716,14 @@ L004007?:
 ;j                         Allocated to registers r4 r5 
 ;k                         Allocated to registers r6 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:155: void waitms (unsigned int ms)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:157: void waitms (unsigned int ms)
 ;	-----------------------------------------
 ;	 function waitms
 ;	-----------------------------------------
 _waitms:
 	mov	r2,dpl
 	mov	r3,dph
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:159: for(j=0; j<ms; j++)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:161: for(j=0; j<ms; j++)
 	mov	r4,#0x00
 	mov	r5,#0x00
 L005005?:
@@ -732,7 +733,7 @@ L005005?:
 	mov	a,r5
 	subb	a,r3
 	jnc	L005009?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:160: for (k=0; k<4; k++) Timer3us(250);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:162: for (k=0; k<4; k++) Timer3us(250);
 	mov	r6,#0x00
 L005001?:
 	cjne	r6,#0x04,L005018?
@@ -753,7 +754,7 @@ L005018?:
 	inc	r6
 	sjmp	L005001?
 L005007?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:159: for(j=0; j<ms; j++)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:161: for(j=0; j<ms; j++)
 	inc	r4
 	cjne	r4,#0x00,L005005?
 	inc	r5
@@ -767,13 +768,13 @@ L005009?:
 ;portno                    Allocated to registers r2 
 ;mask                      Allocated to registers r3 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:165: void InitPinADC (unsigned char portno, unsigned char pinno)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:167: void InitPinADC (unsigned char portno, unsigned char pinno)
 ;	-----------------------------------------
 ;	 function InitPinADC
 ;	-----------------------------------------
 _InitPinADC:
 	mov	r2,dpl
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:169: mask=1<<pinno;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:171: mask=1<<pinno;
 	mov	b,_InitPinADC_PARM_2
 	inc	b
 	mov	a,#0x01
@@ -783,54 +784,54 @@ L006011?:
 L006013?:
 	djnz	b,L006011?
 	mov	r3,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:171: SFRPAGE = 0x20;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:173: SFRPAGE = 0x20;
 	mov	_SFRPAGE,#0x20
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:172: switch (portno)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:174: switch (portno)
 	cjne	r2,#0x00,L006014?
 	sjmp	L006001?
 L006014?:
 	cjne	r2,#0x01,L006015?
 	sjmp	L006002?
 L006015?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:174: case 0:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:176: case 0:
 	cjne	r2,#0x02,L006005?
 	sjmp	L006003?
 L006001?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:175: P0MDIN &= (~mask); // Set pin as analog input
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:177: P0MDIN &= (~mask); // Set pin as analog input
 	mov	a,r3
 	cpl	a
 	mov	r2,a
 	anl	_P0MDIN,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:176: P0SKIP |= mask; // Skip Crossbar decoding for this pin
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:178: P0SKIP |= mask; // Skip Crossbar decoding for this pin
 	mov	a,r3
 	orl	_P0SKIP,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:177: break;
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:178: case 1:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:179: break;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:180: case 1:
 	sjmp	L006005?
 L006002?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:179: P1MDIN &= (~mask); // Set pin as analog input
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:181: P1MDIN &= (~mask); // Set pin as analog input
 	mov	a,r3
 	cpl	a
 	mov	r2,a
 	anl	_P1MDIN,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:180: P1SKIP |= mask; // Skip Crossbar decoding for this pin
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:182: P1SKIP |= mask; // Skip Crossbar decoding for this pin
 	mov	a,r3
 	orl	_P1SKIP,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:181: break;
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:182: case 2:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:183: break;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:184: case 2:
 	sjmp	L006005?
 L006003?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:183: P2MDIN &= (~mask); // Set pin as analog input
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:185: P2MDIN &= (~mask); // Set pin as analog input
 	mov	a,r3
 	cpl	a
 	mov	r2,a
 	anl	_P2MDIN,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:184: P2SKIP |= mask; // Skip Crossbar decoding for this pin
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:186: P2SKIP |= mask; // Skip Crossbar decoding for this pin
 	mov	a,r3
 	orl	_P2SKIP,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:188: }
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:190: }
 L006005?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:189: SFRPAGE = 0x00;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:191: SFRPAGE = 0x00;
 	mov	_SFRPAGE,#0x00
 	ret
 ;------------------------------------------------------------
@@ -838,20 +839,20 @@ L006005?:
 ;------------------------------------------------------------
 ;pin                       Allocated to registers 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:192: unsigned int ADC_at_Pin(unsigned char pin)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:194: unsigned int ADC_at_Pin(unsigned char pin)
 ;	-----------------------------------------
 ;	 function ADC_at_Pin
 ;	-----------------------------------------
 _ADC_at_Pin:
 	mov	_ADC0MX,dpl
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:195: ADINT = 0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:197: ADINT = 0;
 	clr	_ADINT
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:196: ADBUSY = 1;     // Convert voltage at the pin
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:198: ADBUSY = 1;     // Convert voltage at the pin
 	setb	_ADBUSY
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:197: while (!ADINT); // Wait for conversion to complete
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:199: while (!ADINT); // Wait for conversion to complete
 L007001?:
 	jnb	_ADINT,L007001?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:198: return (ADC0);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:200: return (ADC0);
 	mov	dpl,_ADC0
 	mov	dph,(_ADC0 >> 8)
 	ret
@@ -860,12 +861,12 @@ L007001?:
 ;------------------------------------------------------------
 ;pin                       Allocated to registers r2 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:201: float Volts_at_Pin(unsigned char pin)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:203: float Volts_at_Pin(unsigned char pin)
 ;	-----------------------------------------
 ;	 function Volts_at_Pin
 ;	-----------------------------------------
 _Volts_at_Pin:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:203: return ((ADC_at_Pin(pin)*VDD)/0b_0011_1111_1111_1111);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:205: return ((ADC_at_Pin(pin)*VDD)/0b_0011_1111_1111_1111);
 	lcall	_ADC_at_Pin
 	lcall	___uint2fs
 	mov	r2,dpl
@@ -916,17 +917,17 @@ _Volts_at_Pin:
 ;Allocation info for local variables in function 'LCD_pulse'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:206: void LCD_pulse (void)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:208: void LCD_pulse (void)
 ;	-----------------------------------------
 ;	 function LCD_pulse
 ;	-----------------------------------------
 _LCD_pulse:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:208: LCD_E=1;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:210: LCD_E=1;
 	setb	_P2_5
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:209: Timer3us(40);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:211: Timer3us(40);
 	mov	dpl,#0x28
 	lcall	_Timer3us
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:210: LCD_E=0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:212: LCD_E=0;
 	clr	_P2_5
 	ret
 ;------------------------------------------------------------
@@ -934,66 +935,66 @@ _LCD_pulse:
 ;------------------------------------------------------------
 ;x                         Allocated to registers r2 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:213: void LCD_byte (unsigned char x)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:215: void LCD_byte (unsigned char x)
 ;	-----------------------------------------
 ;	 function LCD_byte
 ;	-----------------------------------------
 _LCD_byte:
 	mov	r2,dpl
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:216: ACC=x; //Send high nible
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:218: ACC=x; //Send high nible
 	mov	_ACC,r2
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:217: LCD_D7=ACC_7;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:219: LCD_D7=ACC_7;
 	mov	c,_ACC_7
 	mov	_P2_1,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:218: LCD_D6=ACC_6;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:220: LCD_D6=ACC_6;
 	mov	c,_ACC_6
 	mov	_P2_2,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:219: LCD_D5=ACC_5;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:221: LCD_D5=ACC_5;
 	mov	c,_ACC_5
 	mov	_P2_3,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:220: LCD_D4=ACC_4;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:222: LCD_D4=ACC_4;
 	mov	c,_ACC_4
 	mov	_P2_4,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:221: LCD_pulse();
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:223: LCD_pulse();
 	push	ar2
 	lcall	_LCD_pulse
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:222: Timer3us(40);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:224: Timer3us(40);
 	mov	dpl,#0x28
 	lcall	_Timer3us
 	pop	ar2
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:223: ACC=x; //Send low nible
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:225: ACC=x; //Send low nible
 	mov	_ACC,r2
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:224: LCD_D7=ACC_3;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:226: LCD_D7=ACC_3;
 	mov	c,_ACC_3
 	mov	_P2_1,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:225: LCD_D6=ACC_2;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:227: LCD_D6=ACC_2;
 	mov	c,_ACC_2
 	mov	_P2_2,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:226: LCD_D5=ACC_1;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:228: LCD_D5=ACC_1;
 	mov	c,_ACC_1
 	mov	_P2_3,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:227: LCD_D4=ACC_0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:229: LCD_D4=ACC_0;
 	mov	c,_ACC_0
 	mov	_P2_4,c
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:228: LCD_pulse();
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:230: LCD_pulse();
 	ljmp	_LCD_pulse
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'WriteData'
 ;------------------------------------------------------------
 ;x                         Allocated to registers r2 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:231: void WriteData (unsigned char x)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:233: void WriteData (unsigned char x)
 ;	-----------------------------------------
 ;	 function WriteData
 ;	-----------------------------------------
 _WriteData:
 	mov	r2,dpl
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:233: LCD_RS=1;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:235: LCD_RS=1;
 	setb	_P2_6
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:234: LCD_byte(x);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:236: LCD_byte(x);
 	mov	dpl,r2
 	lcall	_LCD_byte
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:235: waitms(2);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:237: waitms(2);
 	mov	dptr,#0x0002
 	ljmp	_waitms
 ;------------------------------------------------------------
@@ -1001,53 +1002,53 @@ _WriteData:
 ;------------------------------------------------------------
 ;x                         Allocated to registers r2 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:238: void WriteCommand (unsigned char x)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:240: void WriteCommand (unsigned char x)
 ;	-----------------------------------------
 ;	 function WriteCommand
 ;	-----------------------------------------
 _WriteCommand:
 	mov	r2,dpl
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:240: LCD_RS=0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:242: LCD_RS=0;
 	clr	_P2_6
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:241: LCD_byte(x);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:243: LCD_byte(x);
 	mov	dpl,r2
 	lcall	_LCD_byte
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:242: waitms(5);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:244: waitms(5);
 	mov	dptr,#0x0005
 	ljmp	_waitms
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'LCD_4BIT'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:245: void LCD_4BIT (void)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:247: void LCD_4BIT (void)
 ;	-----------------------------------------
 ;	 function LCD_4BIT
 ;	-----------------------------------------
 _LCD_4BIT:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:247: LCD_E=0; // Resting state of LCD's enable is zero
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:249: LCD_E=0; // Resting state of LCD's enable is zero
 	clr	_P2_5
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:249: waitms(20);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:251: waitms(20);
 	mov	dptr,#0x0014
 	lcall	_waitms
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:251: WriteCommand(0x33);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:253: WriteCommand(0x33);
 	mov	dpl,#0x33
 	lcall	_WriteCommand
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:252: WriteCommand(0x33);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:254: WriteCommand(0x33);
 	mov	dpl,#0x33
 	lcall	_WriteCommand
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:253: WriteCommand(0x32); // Change to 4-bit mode
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:255: WriteCommand(0x32); // Change to 4-bit mode
 	mov	dpl,#0x32
 	lcall	_WriteCommand
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:256: WriteCommand(0x28);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:258: WriteCommand(0x28);
 	mov	dpl,#0x28
 	lcall	_WriteCommand
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:257: WriteCommand(0x0c);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:259: WriteCommand(0x0c);
 	mov	dpl,#0x0C
 	lcall	_WriteCommand
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:258: WriteCommand(0x01); // Clear screen command (takes some time)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:260: WriteCommand(0x01); // Clear screen command (takes some time)
 	mov	dpl,#0x01
 	lcall	_WriteCommand
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:259: waitms(20); // Wait for clear screen command to finsih.
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:261: waitms(20); // Wait for clear screen command to finsih.
 	mov	dptr,#0x0014
 	ljmp	_waitms
 ;------------------------------------------------------------
@@ -1057,7 +1058,7 @@ _LCD_4BIT:
 ;string                    Allocated to registers r2 r3 r4 
 ;j                         Allocated to registers r5 r6 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:262: void LCDprint(char * string, unsigned char line, bit clear)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:264: void LCDprint(char * string, unsigned char line, bit clear)
 ;	-----------------------------------------
 ;	 function LCDprint
 ;	-----------------------------------------
@@ -1065,7 +1066,7 @@ _LCDprint:
 	mov	r2,dpl
 	mov	r3,dph
 	mov	r4,b
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:266: WriteCommand(line==2?0xc0:0x80);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:268: WriteCommand(line==2?0xc0:0x80);
 	mov	a,#0x02
 	cjne	a,_LCDprint_PARM_2,L014013?
 	mov	r5,#0xC0
@@ -1078,13 +1079,13 @@ L014014?:
 	push	ar3
 	push	ar4
 	lcall	_WriteCommand
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:267: waitms(5);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:269: waitms(5);
 	mov	dptr,#0x0005
 	lcall	_waitms
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:268: for(j=0; string[j]!=0; j++)	WriteData(string[j]);// Write the message
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:270: for(j=0; string[j]!=0; j++)	WriteData(string[j]);// Write the message
 	mov	r5,#0x00
 	mov	r6,#0x00
 L014003?:
@@ -1118,7 +1119,7 @@ L014003?:
 	inc	r6
 	sjmp	L014003?
 L014006?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:269: if(clear) for(; j<CHARS_PER_LINE; j++) WriteData(' '); // Clear the rest of the line
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:271: if(clear) for(; j<CHARS_PER_LINE; j++) WriteData(' '); // Clear the rest of the line
 	jnb	_LCDprint_PARM_3,L014011?
 	mov	ar2,r5
 	mov	ar3,r6
@@ -1151,7 +1152,7 @@ L014011?:
 ;c                         Allocated to registers r3 
 ;sloc0                     Allocated with name '_getsn_sloc0_1_0'
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:272: int getsn (char * buff, int len)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:274: int getsn (char * buff, int len)
 ;	-----------------------------------------
 ;	 function getsn
 ;	-----------------------------------------
@@ -1159,7 +1160,7 @@ _getsn:
 	mov	_getsn_buff_1_70,dpl
 	mov	(_getsn_buff_1_70 + 1),dph
 	mov	(_getsn_buff_1_70 + 2),b
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:277: for(j=0; j<(len-1); j++)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:279: for(j=0; j<(len-1); j++)
 	clr	a
 	mov	_getsn_sloc0_1_0,a
 	mov	(_getsn_sloc0_1_0 + 1),a
@@ -1181,7 +1182,7 @@ L015005?:
 	xrl	b,#0x80
 	subb	a,b
 	jnc	L015008?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:279: c=getchar();
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:281: c=getchar();
 	push	ar2
 	push	ar7
 	push	ar0
@@ -1192,13 +1193,13 @@ L015005?:
 	pop	ar0
 	pop	ar7
 	pop	ar2
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:280: if ( (c=='\n') || (c=='\r') )
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:282: if ( (c=='\n') || (c=='\r') )
 	cjne	r3,#0x0A,L015015?
 	sjmp	L015001?
 L015015?:
 	cjne	r3,#0x0D,L015002?
 L015001?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:282: buff[j]=0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:284: buff[j]=0;
 	mov	a,_getsn_sloc0_1_0
 	add	a,_getsn_buff_1_70
 	mov	r4,a
@@ -1211,12 +1212,12 @@ L015001?:
 	mov	b,r6
 	clr	a
 	lcall	__gptrput
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:283: return j;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:285: return j;
 	mov	dpl,_getsn_sloc0_1_0
 	mov	dph,(_getsn_sloc0_1_0 + 1)
 	ret
 L015002?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:287: buff[j]=c;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:289: buff[j]=c;
 	mov	a,r1
 	add	a,_getsn_buff_1_70
 	mov	r4,a
@@ -1229,7 +1230,7 @@ L015002?:
 	mov	b,r6
 	mov	a,r3
 	lcall	__gptrput
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:277: for(j=0; j<(len-1); j++)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:279: for(j=0; j<(len-1); j++)
 	inc	r1
 	cjne	r1,#0x00,L015018?
 	inc	r2
@@ -1238,7 +1239,7 @@ L015018?:
 	mov	(_getsn_sloc0_1_0 + 1),r2
 	sjmp	L015005?
 L015008?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:290: buff[j]=0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:292: buff[j]=0;
 	mov	a,_getsn_sloc0_1_0
 	add	a,_getsn_buff_1_70
 	mov	r2,a
@@ -1251,7 +1252,7 @@ L015008?:
 	mov	b,r4
 	clr	a
 	lcall	__gptrput
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:291: return len;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:293: return len;
 	mov	dpl,_getsn_PARM_2
 	mov	dph,(_getsn_PARM_2 + 1)
 	ret
@@ -1259,16 +1260,16 @@ L015008?:
 ;Allocation info for local variables in function 'TIMER0_Init'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:294: void TIMER0_Init(void)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:296: void TIMER0_Init(void)
 ;	-----------------------------------------
 ;	 function TIMER0_Init
 ;	-----------------------------------------
 _TIMER0_Init:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:296: TMOD&=0b_1111_0000; // Set the bits of Timer/Counter 0 to zero
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:298: TMOD&=0b_1111_0000; // Set the bits of Timer/Counter 0 to zero
 	anl	_TMOD,#0xF0
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:297: TMOD|=0b_0000_0001; // Timer/Counter 0 used as a 16-bit timer
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:299: TMOD|=0b_0000_0001; // Timer/Counter 0 used as a 16-bit timer
 	orl	_TMOD,#0x01
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:298: TR0=0; // Stop Timer/Counter 0
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:300: TR0=0; // Stop Timer/Counter 0
 	clr	_TR0
 	ret
 ;------------------------------------------------------------
@@ -1276,7 +1277,7 @@ _TIMER0_Init:
 ;------------------------------------------------------------
 ;period                    Allocated to registers r2 r3 r4 r5 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:301: double PtoC(double period){
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:303: double PtoC(double period){
 ;	-----------------------------------------
 ;	 function PtoC
 ;	-----------------------------------------
@@ -1285,7 +1286,7 @@ _PtoC:
 	mov	r3,dph
 	mov	r4,b
 	mov	r5,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:302: return ((period*1000000000.0)/(3465.7359028));
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:304: return ((period*1000000000.0)/(3465.7359028));
 	push	ar2
 	push	ar3
 	push	ar4
@@ -1333,7 +1334,7 @@ _PtoC:
 ;buffer                    Allocated to registers r2 r3 r4 
 ;suffix                    Allocated to registers r5 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:305: void writeOutputBuffer(char *buffer, double cap){
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:307: void writeOutputBuffer(char *buffer, double cap){
 ;	-----------------------------------------
 ;	 function writeOutputBuffer
 ;	-----------------------------------------
@@ -1341,9 +1342,9 @@ _writeOutputBuffer:
 	mov	r2,dpl
 	mov	r3,dph
 	mov	r4,b
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:306: char suffix = 'n';
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:308: char suffix = 'n';
 	mov	r5,#0x6E
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:307: if(cap < 1.5)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:309: if(cap < 1.5)
 	push	ar2
 	push	ar3
 	push	ar4
@@ -1370,7 +1371,7 @@ _writeOutputBuffer:
 	pop	ar2
 	mov	a,r6
 	jz	L018002?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:309: sprintf(buffer, "Insert Capacitor");
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:311: sprintf(buffer, "Insert Capacitor");
 	mov	a,#__str_0
 	push	acc
 	mov	a,#(__str_0 >> 8)
@@ -1384,10 +1385,10 @@ _writeOutputBuffer:
 	mov	a,sp
 	add	a,#0xfa
 	mov	sp,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:310: return;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:312: return;
 	ret
 L018002?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:312: if(cap > 100.0)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:314: if(cap > 100.0)
 	push	ar2
 	push	ar3
 	push	ar4
@@ -1414,9 +1415,9 @@ L018002?:
 	pop	ar2
 	mov	a,r6
 	jz	L018004?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:314: suffix = 'u';
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:316: suffix = 'u';
 	mov	r5,#0x75
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:315: cap = cap/1000.0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:317: cap = cap/1000.0;
 	push	ar2
 	push	ar3
 	push	ar4
@@ -1445,7 +1446,7 @@ L018002?:
 	pop	ar3
 	pop	ar2
 L018004?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:317: if(cap > 100.0)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:319: if(cap > 100.0)
 	push	ar2
 	push	ar3
 	push	ar4
@@ -1472,9 +1473,9 @@ L018004?:
 	pop	ar2
 	mov	a,r6
 	jz	L018006?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:319: suffix = 'm';
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:321: suffix = 'm';
 	mov	r5,#0x6D
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:320: cap = cap/1000.0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:322: cap = cap/1000.0;
 	push	ar2
 	push	ar3
 	push	ar4
@@ -1503,7 +1504,7 @@ L018004?:
 	pop	ar3
 	pop	ar2
 L018006?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:322: if(cap > 100.0)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:324: if(cap > 100.0)
 	push	ar2
 	push	ar3
 	push	ar4
@@ -1530,9 +1531,9 @@ L018006?:
 	pop	ar2
 	mov	a,r6
 	jz	L018008?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:324: suffix = ' ';
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:326: suffix = ' ';
 	mov	r5,#0x20
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:325: cap = cap/1000.0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:327: cap = cap/1000.0;
 	push	ar2
 	push	ar3
 	push	ar4
@@ -1561,7 +1562,7 @@ L018006?:
 	pop	ar3
 	pop	ar2
 L018008?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:327: sprintf(buffer, "C = %.4f%cF", cap, suffix);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:329: sprintf(buffer, "C = %.4f%cF", cap, suffix);
 	mov	a,r5
 	rlc	a
 	subb	a,acc
@@ -1592,18 +1593,18 @@ L018008?:
 ;v                         Allocated with name '_main_v_1_86'
 ;S1VMax                    Allocated to registers 
 ;S2VMax                    Allocated to registers 
-;period                    Allocated to registers r2 r3 r4 r5 
+;period                    Allocated with name '_main_period_1_86'
 ;time                      Allocated to registers 
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:330: void main (void)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:332: void main (void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:338: waitms(500); // Give PuTTy a chance to start before sending
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:340: waitms(500); // Give PuTTy a chance to start before sending
 	mov	dptr,#0x01F4
 	lcall	_waitms
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:339: printf("\x1b[2J"); // Clear screen using ANSI escape sequence.
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:341: printf("\x1b[2J"); // Clear screen using ANSI escape sequence.
 	mov	a,#__str_2
 	push	acc
 	mov	a,#(__str_2 >> 8)
@@ -1614,8 +1615,8 @@ _main:
 	dec	sp
 	dec	sp
 	dec	sp
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:344: __FILE__, __DATE__, __TIME__);
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:343: "Compiled: %s, %s\n\n",
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:346: __FILE__, __DATE__, __TIME__);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:345: "Compiled: %s, %s\n\n",
 	mov	a,#__str_6
 	push	acc
 	mov	a,#(__str_6 >> 8)
@@ -1644,54 +1645,84 @@ _main:
 	mov	a,sp
 	add	a,#0xf4
 	mov	sp,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:347: InitADC();
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:349: InitADC();
 	lcall	_InitADC
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:349: while(1)
-L019018?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:358: TL0=0; 
-	mov	_TL0,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:359: TH0=0;
-	mov	_TH0,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:360: TF0=0;
-	clr	_TF0
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:361: overflow_count=0;
-	mov	_overflow_count,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:363: while(P0_1!=0); // Wait for the signal to be zero
-L019001?:
-	jb	_P0_1,L019001?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:364: while(P0_1!=1); // Wait for the signal to be one
-L019004?:
-	jnb	_P0_1,L019004?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:365: TR0=1; // Start the timer
-	setb	_TR0
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:366: while(P0_1!=0) // Wait for the signal to be zero
-L019009?:
-	jnb	_P0_1,L019014?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:368: if(TF0==1) // Did the 16-bit timer overflow?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:370: TF0=0;
-	jbc	_TF0,L019035?
-	sjmp	L019009?
-L019035?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:371: overflow_count++;
-	inc	_overflow_count
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:374: while(P0_1!=1) // Wait for the signal to be one
-	sjmp	L019009?
-L019014?:
-	jb	_P0_1,L019016?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:376: if(TF0==1) // Did the 16-bit timer overflow?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:378: TF0=0;
-	jbc	_TF0,L019037?
-	sjmp	L019014?
-L019037?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:379: overflow_count++;
-	inc	_overflow_count
-	sjmp	L019014?
-L019016?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:382: TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period!
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:351: while(1)
+L019002?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:354: printf("%lf\n", getHalfPeriod());
+	lcall	_getHalfPeriod
+	mov	r2,dpl
+	mov	r3,dph
+	mov	r4,b
+	mov	r5,a
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	mov	a,#__str_7
+	push	acc
+	mov	a,#(__str_7 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xf9
+	mov	sp,a
+	sjmp	L019002?
+;------------------------------------------------------------
+;Allocation info for local variables in function 'getHalfPeriod'
+;------------------------------------------------------------
+;halfPeriod                Allocated to registers r2 r3 r4 r5 
+;overflow_count            Allocated to registers r2 r3 
+;------------------------------------------------------------
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:358: float getHalfPeriod() {
+;	-----------------------------------------
+;	 function getHalfPeriod
+;	-----------------------------------------
+_getHalfPeriod:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:363: TR0 = 0;
 	clr	_TR0
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:384: period=(overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK)*(0.1248);
-	mov	dpl,_overflow_count
-	lcall	___uchar2fs
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:364: TMOD &= 0xF0;
+	anl	_TMOD,#0xF0
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:365: TMOD |= 0x01;
+	orl	_TMOD,#0x01
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:366: TH0 = 0;
+	mov	_TH0,#0x00
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:367: TL0 = 0;
+	mov	_TL0,#0x00
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:368: TF0 = 0;
+	clr	_TF0
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:371: while (P0_1);
+L020001?:
+	jb	_P0_1,L020001?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:372: while (!P0_1);
+L020004?:
+	jnb	_P0_1,L020004?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:375: TR0 = 1;
+	setb	_TR0
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:376: while (P0_1) {
+	mov	r2,#0x00
+	mov	r3,#0x00
+L020009?:
+	jnb	_P0_1,L020011?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:377: if (TF0) {
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:378: TF0 = 0;
+	jbc	_TF0,L020024?
+	sjmp	L020009?
+L020024?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:379: overflow_count++;
+	inc	r2
+	cjne	r2,#0x00,L020009?
+	inc	r3
+	sjmp	L020009?
+L020011?:
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:384: TR0 = 0;
+	clr	_TR0
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:385: halfPeriod = (overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK)*1000000L;
+	mov	dpl,r2
+	mov	dph,r3
+	lcall	___uint2fs
 	mov	r2,dpl
 	mov	r3,dph
 	mov	r4,b
@@ -1793,9 +1824,9 @@ L019016?:
 	push	ar3
 	push	ar4
 	push	ar5
-	mov	dptr,#0xABAF
-	mov	b,#0xB2
-	mov	a,#0x32
+	mov	dptr,#0xAAAB
+	mov	b,#0x2A
+	mov	a,#0x3E
 	lcall	___fsmul
 	mov	r2,dpl
 	mov	r3,dph
@@ -1804,22 +1835,12 @@ L019016?:
 	mov	a,sp
 	add	a,#0xfc
 	mov	sp,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:385: printf("%lf\n", period);
-	push	ar2
-	push	ar3
-	push	ar4
-	push	ar5
-	mov	a,#__str_7
-	push	acc
-	mov	a,#(__str_7 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	mov	a,sp
-	add	a,#0xf9
-	mov	sp,a
-	ljmp	L019018?
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\EFM8_ADC.c:386: return halfPeriod;
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	mov	a,r5
+	ret
 	rseg R_CSEG
 
 	rseg R_XINIT
@@ -1865,7 +1886,7 @@ __str_5:
 	db 'Mar  7 2023'
 	db 0x00
 __str_6:
-	db '22:04:05'
+	db '22:08:23'
 	db 0x00
 __str_7:
 	db '%lf'

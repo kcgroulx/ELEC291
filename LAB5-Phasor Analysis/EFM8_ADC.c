@@ -25,6 +25,8 @@
 
 unsigned char overflow_count;
 
+float getHalfPeriod();
+
 char _c51_external_startup (void)
 {
 	// Disable Watchdog with key sequence
@@ -348,41 +350,39 @@ void main (void)
 
 	while(1)
 	{
-	    // Read 14-bit value from the pins configured as analog inputs
-		//v[0] = Volts_at_Pin(QFP32_MUX_P1_5);
-		//if (v[0] > S1VMax)
-		//	S1VMax = v[0];
-		//printf("Cur = %fV, S1VMax = %f\n", v[0], S1VMax);
-
-		// Reset the counter
-		TL0=0; 
-		TH0=0;
-		TF0=0;
-		overflow_count=0;
-		
-		while(P0_1!=0); // Wait for the signal to be zero
-		while(P0_1!=1); // Wait for the signal to be one
-		TR0=1; // Start the timer
-		while(P0_1!=0) // Wait for the signal to be zero
-		{
-			if(TF0==1) // Did the 16-bit timer overflow?
-			{
-				TF0=0;
-				overflow_count++;
-			}
-		}
-		while(P0_1!=1) // Wait for the signal to be one
-		{
-			if(TF0==1) // Did the 16-bit timer overflow?
-			{
-				TF0=0;
-				overflow_count++;
-			}
-		}
-		TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period!
-		//period=(overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK);
-		period=(overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK)*(0.1248);
-		printf("%lf\n", period);
+	    
+		printf("%lf\n", getHalfPeriod());
 	 }  
 }	
+
+float getHalfPeriod() {
+    float halfPeriod;
+    unsigned int overflow_count = 0;
+
+    // initalize timer 0
+    TR0 = 0;
+    TMOD &= 0xF0;
+    TMOD |= 0x01;
+    TH0 = 0;
+    TL0 = 0;
+    TF0 = 0;
+
+    // go to start of signal
+    while (P0_1);
+    while (!P0_1);
+
+    // measure 1/2 period
+    TR0 = 1;
+    while (P0_1) {
+        if (TF0) {
+            TF0 = 0;
+            overflow_count++;
+        }
+    }
+
+    // stop and do some calculations
+    TR0 = 0;
+    halfPeriod = (overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK)*1000000L;
+    return halfPeriod;
+}
 
