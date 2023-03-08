@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <EFM8LB1.h>
@@ -7,6 +8,11 @@
 #define SYSCLK 72000000L
 #define BAUDRATE 115200L
 #define SARCLK 18000000L
+
+#define ANALOG_0 LQFP32_MUX_P1_4 // REF
+#define ANALOG_1 LQFP32_MUX_P1_5 // TEST
+#define DIGITAL_0 P2_4 // REF zero cross
+#define DIGITAL_1 P2_3 // TEST zero cross
 
 #define VDD 3.3035 // The measured value of VDD in volts
 
@@ -291,69 +297,127 @@ void TIMER0_Init(void)
 	TR0=0; // Stop Timer/Counter 0
 }
 
-unsigned int getPeriod(unsigned char pin)
+float getPeriod(unsigned char pin) 
 {
-	TL0=0; // Resets timer
-	TH0=0;
+    unsigned int overflow_count = 0;
 
-	while (Volts_at_Pin(pin) != 0); // Wait for signal to be zero
-	while (Volts_at_Pin(pin) == 0); // Wait for signal to be positive
+    // initalize timer 0
+    TR0 = 0;
+    TMOD &= 0xF0;
+    TMOD |= 0x01;
+    TH0 = 0;
+    TL0 = 0;
+    TF0 = 0;
 
-	TR0=1; // Starts timer
+    // go to start of signal
+    while (Volts_at_Pin(pin) != 0);
+    while (Volts_at_Pin(pin) == 0);
 
-	while (Volts_at_Pin(pin) !=0); // Wait for signal to be zero again
+    // measure 1/2 period
+    TR0 = 1;
+    while (Volts_at_Pin(pin) != 0) {
+        if (TF0) {
+            TF0 = 0;
+            overflow_count++;
+        }
+    }
 
-	TR0=0; // Stops timer
-
-
-	printf("TH0 = %f, ", TH0);
-	printf("TL0 = %f\n", TL0);
-
-	return (TH0*256.0+TL0) * 2; // Returns period
+    // stop and do some calculations
+    TR0 = 0;
+    return (overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK)*2008;
 }
 
-unsigned int getTimeDifference(unsigned char pin1, unsigned char pin2)
+float getTimeDifference(unsigned char pin1, unsigned char pin2)
 {
 	
-	TL0=0; // Resets Timer
-	TH0=0;
+	unsigned int overflow_count = 0;
 
-	while (Volts_at_Pin(pin1) != 0); // Wait for signal 1 to be zero
-	while (Volts_at_Pin(pin1) == 0); // Wait for signal 1 to be positive
+    // initalize timer 0
+    TR0 = 0;
+    TMOD &= 0xF0;
+    TMOD |= 0x01;
+    TH0 = 0;
+    TL0 = 0;
+    TF0 = 0;
 
-	TR0 = 1; // Starts timer
+    // Go to start of signal 1
+    while (Volts_at_Pin(pin1) == 0);
+    while (Volts_at_Pin(pin1) != 0);
 
-	while(Volts_at_Pin(pin2) == 0); // Wait for signal 2 to be positive
+    TR0 = 1; // Starts Timer
 
-	TR0=0; // Stops timer
+	P1_4 = 1;
+	while (Volts_at_Pin(pin2) ==0) {
+       	if (TF0) {
+           	TF0 = 0;
+           	overflow_count++;
+       	}
+    }
+	
+    while (Volts_at_Pin(pin2) != 0) {
+        if (TF0) {
+            TF0 = 0;
+            overflow_count++;
+        }
+    }
 
-	return (TH0*256.0+TL0) * 2; // Returns time difference between two signals
+	P1_4 = 0;
+    TR0 = 0; // Stops timer
+
+    return (overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK)*1004;
+
+
 }
 
 
 void main (void)
 {
 	float VMax = 0;
-	unsigned int period;
-	unsigned int timeDifference;
-	float phaseDifference;
+	float period;
+	float timeDifference;
+	int phaseDifference;
+	char output_buffer[20];
+
+	TIMER0_Init();
+	LCD_4BIT();
 
     waitms(500); // Give PuTTy a chance to start before sending
 	printf("\x1b[2J"); // Clear screen using ANSI escape sequence.
 	
 	InitPinADC(0, 1); // Configure P0_1 as analog input
-	InitPinADC(0, 2); // Configure P0_2 as analog input
+	//InitPinADC(0, 2); // Configure P0_2 as analog input
     InitADC();
 
 	while(1)
 	{
-	    period = getPeriod(P0_1); // Gets the period of signal at P0_1 in millis returns when signal is 0
-		//waitms(period + period/2); // Gaits until peak
-		//VMax = Volts_at_Pin(P0_1); // Gets peak voltage
+		VMax = 0.0;
+		period = getPeriod(P0_1); //Gets Period
 
-		//timeDifference = getTimeDifference(P0_1, P0_2); // Gets time difference between signal 1 and 2
-		//phaseDifference = (timeDifference / period) * 360.0; // Converts time difference to phase difference
-		//printf("T=%dms\n", period);
+		while (Volts_at_Pin(P0_1) != 0);
+    	while (Volts_at_Pin(P0_1) == 0);
+
+    	while (Volts_at_Pin(P0_1) != 0) 
+		{
+			if(Volts_at_Pin(P0_1) > VMax)
+				VMax = Volts_at_Pin(P0_1);
+    	}
+		
+		timeDifference = getTimeDifference(P0_1, P0_2);
+
+		//printf("%f\n", Volts_at_Pin(P1_4));
+		//printf("%f", Volts_at_Pin(P0_1));
+
+		phaseDifference = (timeDifference/period) * 360;
+		
+		//if(phaseDifference > 180)
+		//	phaseDifference = phaseDifference - 360;
+
+		sprintf(output_buffer, "T=%0.1fms Vr=%0.1fV", period, VMax*0.7071);
+		LCDprint(output_buffer, 1, 1);	
+		sprintf(output_buffer, "P=%d f=%0.1fHz", phaseDifference, 1/(period/1000));
+		LCDprint(output_buffer, 2, 1);	
+
+		printf("T=%f, Vr=%f, P=%d\n", period, VMax*0.7071, phaseDifference);
 
 	}  
 }	
