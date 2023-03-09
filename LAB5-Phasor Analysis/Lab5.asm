@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by C51
 ; Version 1.0.0 #1170 (Feb 16 2022) (MSVC)
-; This file was generated Wed Mar 08 14:42:15 2023
+; This file was generated Wed Mar 08 14:58:01 2023
 ;--------------------------------------------------------
 $name Lab5
 $optc51 --model-small
@@ -1751,19 +1751,19 @@ L018016?:
 ;phaseDifference           Allocated with name '_main_phaseDifference_1_88'
 ;output_buffer             Allocated with name '_main_output_buffer_1_88'
 ;------------------------------------------------------------
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:373: void main (void)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:374: void main (void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:381: TIMER0_Init();
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:382: TIMER0_Init();
 	lcall	_TIMER0_Init
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:382: LCD_4BIT();
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:383: LCD_4BIT();
 	lcall	_LCD_4BIT
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:384: waitms(500); // Give PuTTy a chance to start before sending
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:385: waitms(500); // Give PuTTy a chance to start before sending
 	mov	dptr,#0x01F4
 	lcall	_waitms
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:385: printf("\x1b[2J"); // Clear screen using ANSI escape sequence.
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:386: printf("\x1b[2J"); // Clear screen using ANSI escape sequence.
 	mov	a,#__str_0
 	push	acc
 	mov	a,#(__str_0 >> 8)
@@ -1774,20 +1774,20 @@ _main:
 	dec	sp
 	dec	sp
 	dec	sp
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:387: InitPinADC(0, 1); // Configure P0_1 as analog input
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:388: InitPinADC(0, 1); // Configure P0_1 as analog input
 	mov	_InitPinADC_PARM_2,#0x01
 	mov	dpl,#0x00
 	lcall	_InitPinADC
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:389: InitADC();
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:390: InitADC();
 	lcall	_InitADC
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:391: while(1)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:392: while(1)
 L019015?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:393: VMax = 0.0;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:394: VMax = 0.0;
 	mov	r2,#0x00
 	mov	r3,#0x00
 	mov	r4,#0x00
 	mov	r5,#0x00
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:394: period = getPeriod(P0_1); //Gets Period
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:395: period = getPeriod(P0_1); //Gets Period
 	mov	c,_P0_1
 	clr	a
 	rlc	a
@@ -1805,7 +1805,7 @@ L019015?:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:396: while (Volts_at_Pin(P0_1) != 0);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:397: while (Volts_at_Pin(P0_1) != 0);
 L019001?:
 	mov	c,_P0_1
 	clr	a
@@ -1831,7 +1831,7 @@ L019001?:
 	clr	b.7 ; Clear the sign bit
 	orl	a,b
 	jnz	L019001?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:397: while (Volts_at_Pin(P0_1) < 0.5);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:398: while (Volts_at_Pin(P0_1) < 0.5);
 L019004?:
 	mov	c,_P0_1
 	clr	a
@@ -1867,7 +1867,7 @@ L019004?:
 	pop	ar2
 	mov	a,r6
 	jnz	L019004?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:399: while (Volts_at_Pin(P0_1) != 0) 
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:400: while (Volts_at_Pin(P0_1) != 0) 
 L019009?:
 	mov	c,_P0_1
 	clr	a
@@ -1893,7 +1893,7 @@ L019009?:
 	clr	b.7 ; Clear the sign bit
 	orl	a,b
 	jz	L019011?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:401: if(Volts_at_Pin(P0_1) > VMax)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:402: if(Volts_at_Pin(P0_1) > VMax)
 	mov	c,_P0_1
 	clr	a
 	rlc	a
@@ -1934,7 +1934,7 @@ L019009?:
 	pop	ar2
 	mov	a,r6
 	jz	L019009?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:402: VMax = Volts_at_Pin(P0_1);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:403: VMax = Volts_at_Pin(P0_1);
 	mov	c,_P0_1
 	clr	a
 	rlc	a
@@ -1946,7 +1946,7 @@ L019009?:
 	mov	r5,a
 	ljmp	L019009?
 L019011?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:405: timeDifference = getTimeDifference(P0_1, P0_2);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:406: timeDifference = getTimeDifference(P0_1, P0_2);
 	mov	c,_P0_1
 	clr	a
 	rlc	a
@@ -1964,7 +1964,7 @@ L019011?:
 	mov	r7,dph
 	mov	r0,b
 	mov	r1,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:410: phaseDifference = (timeDifference/period) * 360;
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:411: phaseDifference = (timeDifference/period) * 360;
 	push	_main_period_1_88
 	push	(_main_period_1_88 + 1)
 	push	(_main_period_1_88 + 2)
@@ -2007,7 +2007,7 @@ L019011?:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:412: if(phaseDifference > 180)
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:413: if(phaseDifference > 180)
 	clr	c
 	mov	a,#0xB4
 	subb	a,_main_phaseDifference_1_88
@@ -2017,15 +2017,15 @@ L019011?:
 	xrl	b,#0x80
 	subb	a,b
 	jnc	L019013?
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:413: phaseDifference = phaseDifference - (360+180);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:414: phaseDifference = phaseDifference - (360+90);
 	mov	a,_main_phaseDifference_1_88
-	add	a,#0xe4
+	add	a,#0x3e
 	mov	_main_phaseDifference_1_88,a
 	mov	a,(_main_phaseDifference_1_88 + 1)
-	addc	a,#0xfd
+	addc	a,#0xfe
 	mov	(_main_phaseDifference_1_88 + 1),a
 L019013?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:415: sprintf(output_buffer, "T=%0.1fms Vr=%0.1fV", period, VMax*0.7071);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:416: sprintf(output_buffer, "T=%0.1fms Vr=%0.1fV", period, VMax*0.7071);
 	push	ar2
 	push	ar3
 	push	ar4
@@ -2069,13 +2069,13 @@ L019013?:
 	mov	a,sp
 	add	a,#0xf2
 	mov	sp,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:416: LCDprint(output_buffer, 1, 1);	
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:417: LCDprint(output_buffer, 1, 1);	
 	mov	_LCDprint_PARM_2,#0x01
 	setb	_LCDprint_PARM_3
 	mov	dptr,#_main_output_buffer_1_88
 	mov	b,#0x40
 	lcall	_LCDprint
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:417: sprintf(output_buffer, "P=%d f=%0.1fHz", phaseDifference, 1/(period/1000));
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:418: sprintf(output_buffer, "P=%d f=%0.1fHz", phaseDifference, 1/(period/1000));
 	clr	a
 	push	acc
 	push	acc
@@ -2132,7 +2132,7 @@ L019013?:
 	mov	a,sp
 	add	a,#0xf4
 	mov	sp,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:418: LCDprint(output_buffer, 2, 1);	
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:419: LCDprint(output_buffer, 2, 1);	
 	mov	_LCDprint_PARM_2,#0x02
 	setb	_LCDprint_PARM_3
 	mov	dptr,#_main_output_buffer_1_88
@@ -2142,7 +2142,7 @@ L019013?:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:420: printf("T=%f, Vr=%f, P=%d\n", period, VMax*0.7071, phaseDifference);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:421: printf("T=%f, Vr=%f, P=%d\n", period, VMax*0.7071, phaseDifference);
 	push	_main_phaseDifference_1_88
 	push	(_main_phaseDifference_1_88 + 1)
 	push	ar2

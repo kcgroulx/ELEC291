@@ -370,6 +370,7 @@ float getTimeDifference(unsigned char pin1, unsigned char pin2)
 }
 
 
+
 void main (void)
 {
 	float VMax = 0;
@@ -410,7 +411,7 @@ void main (void)
 		phaseDifference = (timeDifference/period) * 360;
 		
 		if(phaseDifference > 180)
-			phaseDifference = phaseDifference - (360+180);
+			phaseDifference = phaseDifference - (360+90);
 
 		sprintf(output_buffer, "T=%0.1fms Vr=%0.1fV", period, VMax*0.7071);
 		LCDprint(output_buffer, 1, 1);	
