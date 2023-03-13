@@ -412,6 +412,7 @@ void main (void)
 		
 		if(phaseDifference > 180)
 			phaseDifference = phaseDifference - (360+90);
+		phaseDifference *= -1;
 
 		sprintf(output_buffer, "T=%0.1fms Vr=%0.1fV", period, VMax*0.7071);
 		LCDprint(output_buffer, 1, 1);	

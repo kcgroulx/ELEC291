@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by C51
 ; Version 1.0.0 #1170 (Feb 16 2022) (MSVC)
-; This file was generated Wed Mar 08 14:58:01 2023
+; This file was generated Mon Mar 13 12:14:17 2023
 ;--------------------------------------------------------
 $name Lab5
 $optc51 --model-small
@@ -2025,7 +2025,15 @@ L019011?:
 	addc	a,#0xfe
 	mov	(_main_phaseDifference_1_88 + 1),a
 L019013?:
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:416: sprintf(output_buffer, "T=%0.1fms Vr=%0.1fV", period, VMax*0.7071);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:415: phaseDifference *= -1;
+	clr	c
+	clr	a
+	subb	a,_main_phaseDifference_1_88
+	mov	_main_phaseDifference_1_88,a
+	clr	a
+	subb	a,(_main_phaseDifference_1_88 + 1)
+	mov	(_main_phaseDifference_1_88 + 1),a
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:417: sprintf(output_buffer, "T=%0.1fms Vr=%0.1fV", period, VMax*0.7071);
 	push	ar2
 	push	ar3
 	push	ar4
@@ -2069,13 +2077,13 @@ L019013?:
 	mov	a,sp
 	add	a,#0xf2
 	mov	sp,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:417: LCDprint(output_buffer, 1, 1);	
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:418: LCDprint(output_buffer, 1, 1);	
 	mov	_LCDprint_PARM_2,#0x01
 	setb	_LCDprint_PARM_3
 	mov	dptr,#_main_output_buffer_1_88
 	mov	b,#0x40
 	lcall	_LCDprint
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:418: sprintf(output_buffer, "P=%d f=%0.1fHz", phaseDifference, 1/(period/1000));
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:419: sprintf(output_buffer, "P=%d f=%0.1fHz", phaseDifference, 1/(period/1000));
 	clr	a
 	push	acc
 	push	acc
@@ -2132,7 +2140,7 @@ L019013?:
 	mov	a,sp
 	add	a,#0xf4
 	mov	sp,a
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:419: LCDprint(output_buffer, 2, 1);	
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:420: LCDprint(output_buffer, 2, 1);	
 	mov	_LCDprint_PARM_2,#0x02
 	setb	_LCDprint_PARM_3
 	mov	dptr,#_main_output_buffer_1_88
@@ -2142,7 +2150,7 @@ L019013?:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:421: printf("T=%f, Vr=%f, P=%d\n", period, VMax*0.7071, phaseDifference);
+;	C:\Users\kcgro\Documents\GitHub\ELEC291\LAB5-Phasor Analysis\Lab5.c:422: printf("T=%f, Vr=%f, P=%d\n", period, VMax*0.7071, phaseDifference);
 	push	_main_phaseDifference_1_88
 	push	(_main_phaseDifference_1_88 + 1)
 	push	ar2

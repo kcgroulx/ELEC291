@@ -25,7 +25,7 @@ R_IXSEG,xdata,0000,NO
 R_ISEG,idata,0000,NO
 R_HOME,code,0000,NO
 R_XINIT,code,0000,NO
-R_CSEG,code,0953,NO
+R_CSEG,code,095E,NO
 </SEGMENTS>
 
 <LOCALS>
@@ -1200,6 +1200,13 @@ E5 data8(_main_phaseDifference_1_88;)
 F5 data8(_main_phaseDifference_1_88;)
 E5 data8(_main_phaseDifference_1_88;0x0001;+;)
 34 FE
+F5 data8(_main_phaseDifference_1_88;0x0001;+;)
+C3
+E4
+95 data8(_main_phaseDifference_1_88;)
+F5 data8(_main_phaseDifference_1_88;)
+E4
+95 data8(_main_phaseDifference_1_88;0x0001;+;)
 F5 data8(_main_phaseDifference_1_88;0x0001;+;)
 C0 02
 C0 03
